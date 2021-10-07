@@ -6,14 +6,15 @@ import {
   CSSReset
 } from '@chakra-ui/core';
 import ThemeToggler from './Components/ThemeToggler';
+import LoginForm from './LoginForm';
 export default function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <ColorModeProvider>
-        <CSSReset />
-        <h1>test</h1>
-        <ThemeToggler />
-      </ColorModeProvider>
-    </ThemeProvider>
-  );
-}
+    return (
+      <ThemeProvider theme={theme}>
+        <ColorModeProvider>
+          <CSSReset />
+          <ThemeToggler />
+          <LoginForm />
+        </ColorModeProvider>
+      </ThemeProvider>
+    );
+  }
