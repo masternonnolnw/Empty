@@ -15,6 +15,7 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import {
+  ArrowDownIcon,
   ArrowUpIcon,
   CheckIcon,
   SearchIcon,
@@ -62,6 +63,16 @@ export default function Content() {
       title: `${pos.title}`,
       body: `${pos.body}`,
       like: pos.like + 1,
+    });
+    const { data } = await axios.get(`${baseURL}`);
+    setPost(data);
+  }
+
+  async function downLike(pos) {
+    await axios.put(`${baseURL}/${pos.id}`, {
+      title: `${pos.title}`,
+      body: `${pos.body}`,
+      like: pos.like - 1,
     });
     const { data } = await axios.get(`${baseURL}`);
     setPost(data);
@@ -148,6 +159,15 @@ export default function Content() {
                 marginLeft="3"
                 onClick={() => upLike(pos)}
                 icon={<ArrowUpIcon />}
+                isRound
+              />
+              <IconButton
+                colorScheme="blue"
+                aria-label="Search database"
+                marginTop="3"
+                marginLeft="3"
+                onClick={() => downLike(pos)}
+                icon={<ArrowDownIcon />}
                 isRound
               />
               <Text marginTop="3" marginLeft="3" fontSize="2xl">
