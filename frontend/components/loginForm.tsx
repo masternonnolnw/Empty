@@ -22,7 +22,7 @@ export default function LoginForm() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      await userLogin({ email, password });
+      const res = await userLogin({ email, password });
       setIsLoggedIn(true);
       setIsLoading(false);
       setShowPassword(false);

@@ -5,4 +5,4 @@ import Login from "./login";
 const IndexPage = () => <Login />;
 
 export default IndexPage;
-//npx json-server -p 3500 -w pages/data.json
+//npx json-server -p 3500 -w frontend/pages/data.json
