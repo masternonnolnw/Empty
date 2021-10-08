@@ -11,10 +11,12 @@ import ThemeToggler from "../components/ThemeToggler";
 
 export default function MyApp() {
   return (
-    <MainContent />
+    <>
+      <ThemeToggler />
+      <MainContent />
+    </>
 
     // <Flex h="100vh" flexDir="column" overflow="hidden" w="100%">
-    //   <ThemeToggler />
     //   {/* Body */}
     //   <Flex h="100%" flexDir="row" overflow="hidden">
     //     {/* SideBar */}

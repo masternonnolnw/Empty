@@ -26,6 +26,7 @@ export default function LoginForm() {
       setIsLoggedIn(true);
       setIsLoading(false);
       setShowPassword(false);
+      window.location.href = "/app";
     } catch (error) {
       setError("Invalid username or password");
       setIsLoading(false);
@@ -52,7 +53,7 @@ export default function LoginForm() {
             <FormControl isRequired>
               <FormLabel>Email</FormLabel>
               <Input
-                type="email"
+                type="text"
                 placeholder="test@test.com"
                 size="lg"
                 onChange={(event) => setEmail(event.currentTarget.value)}
