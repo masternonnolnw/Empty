@@ -1,6 +1,9 @@
 import {Flex,Input,Text,IconButton,Link,ChakraProvider  } from "@chakra-ui/react";
 import React from "react";
 import MainContent from './content'
+import { extendTheme } from "@chakra-ui/react"
+import theme from "./theme"
+import { ColorModeScript } from "@chakra-ui/react"
 
 export default function MyApp() {
   return (

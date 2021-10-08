@@ -3,7 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react"
 import App from './app'
 import Login from './login'
 const IndexPage = () => (
-  <Login />
+  <App />
 )
 
 export default IndexPage

@@ -11,7 +11,7 @@ export default function App() {
     return (
       <ThemeProvider theme={theme}>
         <ColorModeProvider>
-          <CSSReset />
+          {/* <CSSReset /> */}
           <ThemeToggler />
           <LoginForm />
         </ColorModeProvider>
