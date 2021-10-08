@@ -1,61 +1,30 @@
-import {Flex,Input,Text,IconButton,Link,ChakraProvider  } from "@chakra-ui/react";
-import React from "react";
-import MainContent from './content'
-import { extendTheme } from "@chakra-ui/react"
-import theme from "./theme"
-import { ColorModeScript } from "@chakra-ui/react"
+import {
+  Flex,
+  Input,
+  Text,
+  IconButton,
+  Link,
+  ChakraProvider,
+} from "@chakra-ui/react";
+import MainContent from "./content";
+import ThemeToggler from "../components/ThemeToggler";
 
 export default function MyApp() {
   return (
-    <ChakraProvider>
-      <Flex
-        h = "100vh"
-        flexDir = "column"
-        overflow = "hidden"
-        w = "100%"
-      >
-        {/* NavBar */}
-        <Flex
-          h = "5vh"
-          flexDir = "row"
-          w = "100%"
-          backgroundColor = "gray"
-        >
-          <Link href = '/login'>login</Link>
-        </Flex>
+    <MainContent />
 
-        {/* Body */}
-        <Flex
-          h = "100%"
-          flexDir = "row"
-          overflow = "hidden"
-        >
+    // <Flex h="100vh" flexDir="column" overflow="hidden" w="100%">
+    //   <ThemeToggler />
+    //   {/* Body */}
+    //   <Flex h="100%" flexDir="row" overflow="hidden">
+    //     {/* SideBar */}
+    //     <Flex w="20%" flexDir="column" alignItems="center"></Flex>
 
-          {/* SideBar */}
-          <Flex
-            w = "20%"
-            flexDir = "column"
-            alignItems = "center"
-            backgroundColor = "black"
-          >
-            
-          </Flex>
+    //     {/* Content */}
 
-          {/* Content */}
-          <MainContent />
-
-          {/* Last */}
-          <Flex
-            w = "30%"
-            flexDir = "column"
-            alignItems = "center"
-            backgroundColor = "pink"
-          >
-            
-          </Flex>
-
-        </Flex>
-      </Flex>
-  </ChakraProvider>
-  )
+    //     {/* Last */}
+    //     <Flex w="30%" flexDir="column" alignItems="center"></Flex>
+    //   </Flex>
+    // </Flex>
+  );
 }
