@@ -2,9 +2,9 @@
   "name": "api-server-starter",
   "version": "1.0.0",
   "description": "A lightweight starter kit for building a Node-based API server",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

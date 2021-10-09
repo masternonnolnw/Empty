@@ -10,7 +10,7 @@ import { userLogin } from "../utils/mockApi";
 import ErrorMessage from "./ErrorMessage";
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
+  const [username, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +22,7 @@ export default function LoginForm() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      await userLogin({ email, password });
+      await userLogin({ username, password });
       if (typeof window !== "undefined") {
         console.log("we are running on the client");
         localStorage.setItem("token", "123456");

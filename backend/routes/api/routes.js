@@ -5,8 +5,10 @@ const path = require('path')
 const { json } = require('body-parser');
 const userRoutes = require('./users');
 
-dir = path.join(process.cwd(), '/data/users.json')
+dir = path.join('../..', '/data/users.json')
 const json_data = require(dir)
+
+//console.log(json_data)
 
 const appRouter = (app, fs) => {
 

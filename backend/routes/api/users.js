@@ -1,5 +1,5 @@
 path = require('path')
-dir = path.join(process.cwd(), '/data/users.json')
+dir = path.join('../..', '/data/users.json')
 const json_data = require(dir)
 
 const userRoutes = (app, fs) => {
