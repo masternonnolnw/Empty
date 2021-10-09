@@ -23,6 +23,12 @@ export default function LoginForm() {
     setIsLoading(true);
     try {
       const res = await userLogin({ email, password });
+      if (typeof window !== "undefined") {
+        console.log("we are running on the client");
+        localStorage.setItem("token", "123456");
+      } else {
+        console.log("we are running on the server");
+      }
       setIsLoggedIn(true);
       setIsLoading(false);
       setShowPassword(false);

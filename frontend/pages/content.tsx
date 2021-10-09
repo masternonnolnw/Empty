@@ -108,6 +108,8 @@ export default function Content() {
       alignItems="center"
       overflow="hidden"
     >
+      <Heading>{localStorage.getItem("token")}</Heading>
+
       <Flex w="70%" flexDir="column" alignItems="center" marginTop="7">
         <form onSubmit={handleSubmit}>
           <FormControl id="Tiltle" isRequired>
@@ -148,7 +150,7 @@ export default function Content() {
         marginTop="5" /*divider={<StackDivider borderColor="gray.200" />}*/
       >
         {post.map((pos) => (
-          <Box p={5} shadow="md" borderWidth="1px">
+          <Box p={5} shadow="md" borderWidth="1px" borderRadius="3xl">
             <Heading fontSize="xl">{pos.title}</Heading>
             <Text mt={4}>{pos.body}</Text>
             <Flex>

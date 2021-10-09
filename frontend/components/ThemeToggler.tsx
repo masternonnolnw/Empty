@@ -7,7 +7,7 @@ export default function ThemeToggler() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box textAlign="right" py={4} mr={12}>
+    <Box textAlign="right" p={4} mr={3}>
       <IconButton
         aria-label="Color Mode"
         icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}

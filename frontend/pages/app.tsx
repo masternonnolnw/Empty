@@ -6,13 +6,21 @@ import {
   Link,
   ChakraProvider,
 } from "@chakra-ui/react";
+import { Spacer } from "@chakra-ui/layout";
 import MainContent from "./content";
 import ThemeToggler from "../components/ThemeToggler";
+import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 
 export default function MyApp() {
   return (
     <>
-      <ThemeToggler />
+      <Flex>
+        <Link href="/login" ml="7" mt="5">
+          Login
+        </Link>
+        <Spacer />
+        <ThemeToggler />
+      </Flex>
       <MainContent />
     </>
 
