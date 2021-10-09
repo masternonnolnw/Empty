@@ -7,6 +7,6 @@ app.get("/", (req, res) => {
   res.send(data);
 });
 
-app.listen(3500, () => {
-  console.log("Start server at port 3500.");
+app.listen(3000, () => {
+  console.log("Start server at port 3000.");
 });
