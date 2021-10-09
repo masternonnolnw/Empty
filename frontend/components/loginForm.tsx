@@ -22,7 +22,7 @@ export default function LoginForm() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const res = await userLogin({ email, password });
+      await userLogin({ email, password });
       if (typeof window !== "undefined") {
         console.log("we are running on the client");
         localStorage.setItem("token", "123456");
