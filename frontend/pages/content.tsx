@@ -106,7 +106,7 @@ export default function Content() {
       w="100%"
       flexDir="column"
       alignItems="center"
-      overflow="hidden"
+      overflow="scroll"
     >
       <Heading>{localStorage.getItem("token")}</Heading>
 
@@ -150,31 +150,38 @@ export default function Content() {
         marginTop="5" /*divider={<StackDivider borderColor="gray.200" />}*/
       >
         {post.map((pos) => (
-          <Box p={5} shadow="md" borderWidth="1px" borderRadius="3xl">
-            <Heading fontSize="xl">{pos.title}</Heading>
-            <Text mt={4}>{pos.body}</Text>
+          <Box p={5} shadow="md" borderWidth="1px" borderRadius="xl">
             <Flex>
-              <IconButton
-                colorScheme="blue"
-                aria-label="Search database"
-                marginTop="3"
-                marginLeft="3"
-                onClick={() => upLike(pos)}
-                icon={<ArrowUpIcon />}
-                isRound
-              />
-              <IconButton
-                colorScheme="blue"
-                aria-label="Search database"
-                marginTop="3"
-                marginLeft="3"
-                onClick={() => downLike(pos)}
-                icon={<ArrowDownIcon />}
-                isRound
-              />
-              <Text marginTop="3" marginLeft="3" fontSize="2xl">
-                {pos.like}
-              </Text>
+              <Flex flexDir="column" alignItems="center" marginRight="10">
+                <IconButton
+                  colorScheme="blue"
+                  aria-label="Search database"
+                  marginTop="3"
+                  marginLeft="3"
+                  onClick={() => upLike(pos)}
+                  icon={<ArrowUpIcon />}
+                  isRound
+                />
+
+                <Text marginTop="3" marginLeft="3" fontSize="2xl">
+                  {pos.like}
+                </Text>
+
+                <IconButton
+                  colorScheme="blue"
+                  aria-label="Search database"
+                  marginTop="3"
+                  marginLeft="3"
+                  onClick={() => downLike(pos)}
+                  icon={<ArrowDownIcon />}
+                  isRound
+                />
+              </Flex>
+              <Flex flexDir="row">
+                <Heading fontSize="xl">{pos.title}</Heading>
+                <Text mt={4}>{pos.body}</Text>
+              </Flex>
+
               <IconButton
                 colorScheme="red"
                 aria-label="Search database"
