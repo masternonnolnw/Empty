@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Node API Server Starter Kit
 This starter kit contains everything you'll need to create your very own Node-based API server, using Express JS and configured to serve JSON files for data. 
 
@@ -51,3 +52,6 @@ This starter kit is really designed as a kick off point for your own API adventu
 
 
 
+=======
+npx json-server -p 3500 -w backend/data.json
+>>>>>>> 727512529b29f8b6a2495cd245049dfa660578bf
