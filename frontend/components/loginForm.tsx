@@ -22,19 +22,30 @@ export default function LoginForm() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      await userLogin({ username, password });
-      if (typeof window !== "undefined") {
-        console.log("we are running on the client");
-        localStorage.setItem("token", "123456");
+      const token = await userLogin({ username, password });
+      console.log(token);
+      console.log(token.data);
+      console.log(typeof token.data);
+      if (typeof token.data == typeof "asd") {
+        setError("Invalid username or password");
+        setIsLoading(false);
+        setEmail("");
+        setPassword("");
+        setShowPassword(false);
       } else {
-        console.log("we are running on the server");
+        if (typeof window !== "undefined") {
+          console.log("we are running on the client");
+          localStorage.setItem("token", `${token.data}`);
+        } else {
+          console.log("we are running on the server");
+        }
+        setIsLoggedIn(true);
+        setIsLoading(false);
+        setShowPassword(false);
+        window.location.href = "/app";
       }
-      setIsLoggedIn(true);
-      setIsLoading(false);
-      setShowPassword(false);
-      window.location.href = "/app";
     } catch (error) {
-      setError("Invalid username or password");
+      setError("Error");
       setIsLoading(false);
       setEmail("");
       setPassword("");
