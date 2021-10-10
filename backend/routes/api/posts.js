@@ -1,14 +1,12 @@
 path = require("path");
-dir = path.join("../..", "/data/post.json");
+
 
 moment = require('moment') //date&time
 
-const json_data = require(dir);
 
 const postRoutes = (app, fs) => {
   // variables
   const dataPath = "./data/post.json";
-
   // helper methods
   const readFile = (
     callback,
@@ -71,18 +69,30 @@ const postRoutes = (app, fs) => {
   // READ
   app.get("/posts", (req, res) => {
     /* ต้องการ user_id และ viewtype (hot/top/new) โดยเก็บเป็น json ใน body */
+
     fs.readFile(dataPath, "utf8", (err, post) => {
       if (err) {
         throw err;
       }
       // algorithm begin here
+      const userid = req.body.userid;
+
+      // 1. check if user_id is correct
+      const userdata = require('../../data/users.json');
+      const userExists = userdata.hasOwnProperty(userid);
+      if (!userExists) {
+        res.status(402).send("You don't have permission");
+        return;
+      }
+
+      // create json file of posts
       post_list = JSON.parse(post).data;
       if (sortPost(post_list, req.body.viewtype) == -1) {
         res.status(401).send("Wrong viewtype");
+        return;
       }
 
       // add status for each post (like/dislike/unlike by userid)
-      const userid = req.body.userid;
       for(key in post_list) {
         var thisStatus = 0
         const isLiked = post_list[key].likelist.includes(userid);

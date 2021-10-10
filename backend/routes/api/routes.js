@@ -29,13 +29,13 @@ const appRouter = (app, fs) => {
         json_data[key].username == username &&
         json_data[key].password == password
       ) {
-        res.send(key);
+        res.status(201).send(key);
         login_success = true;
         break;
       }
     }
 
-    if (!login_success) res.send("Wrong username or passsword");
+    if (!login_success) res.status(401).send("Wrong username or passsword");
   });
 
   // // other routes
