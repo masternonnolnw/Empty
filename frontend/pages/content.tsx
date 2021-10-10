@@ -1,26 +1,12 @@
-import {
-  Flex,
-  Input,
-  Text,
-  IconButton,
-  Stack,
-  HStack,
-  VStack,
-  Box,
-  Heading,
-  StackDivider,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from "@chakra-ui/react";
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  CheckIcon,
-  SearchIcon,
-  SmallCloseIcon,
-} from "@chakra-ui/icons";
+import { Avatar } from "@chakra-ui/avatar";
+import { Button, IconButton } from "@chakra-ui/button";
+import { FormControl } from "@chakra-ui/form-control";
+import { ArrowDownIcon, ArrowUpIcon, WarningTwoIcon } from "@chakra-ui/icons";
+import { Input } from "@chakra-ui/input";
+import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/layout";
+import { MenuButton } from "@chakra-ui/menu";
+import { Select } from "@chakra-ui/select";
+import { Tag } from "@chakra-ui/tag";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -34,6 +20,8 @@ export default function Content() {
   const handleChangeBody = (event) => setBody(event.target.value);
 
   const [post, setPost] = useState(null);
+
+  const username = "MaStEr";
 
   useEffect(() => {
     axios.get(`${baseURL}`).then((response) => {
@@ -106,44 +94,92 @@ export default function Content() {
       w="100%"
       flexDir="column"
       alignItems="center"
-      overflow="scroll"
+      overflowY="auto"
+      css={{
+        "&::-webkit-scrollbar": {
+          width: "4px",
+        },
+        "&::-webkit-scrollbar-track": {
+          width: "6px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "#fff",
+          borderRadius: "24px",
+        },
+      }}
     >
-      <Heading>{localStorage.getItem("token")}</Heading>
-
+      {/*  ===================== Post Part =====================  */}
       <Flex w="70%" flexDir="column" alignItems="center" marginTop="7">
-        <form onSubmit={handleSubmit}>
-          <FormControl id="Tiltle" isRequired>
-            <FormLabel>Title</FormLabel>
-            <Input
-              placeholder="Title"
-              size="lg"
-              w="80%"
-              value={title}
-              onChange={handleChangeTitle}
-            />
-          </FormControl>
+        <Box p={5} shadow="md" borderWidth="1px" borderRadius="2xl" w="100%">
+          <form onSubmit={handleSubmit}>
+            <Flex marginBottom="8">
+              <Avatar
+                name="Dan Abrahmov"
+                src="https://bit.ly/dan-abramov"
+                marginRight="2"
+              />
+              <Text marginRight="5" alignSelf="center">
+                {username}
+              </Text>
+              <FormControl id="Tiltle" isRequired>
+                <Select
+                  w="100%"
+                  placeholder="Title"
+                  size="lg"
+                  onChange={handleChangeTitle}
+                  value={title}
+                  borderRadius="xl"
+                >
+                  <option value="study">Study</option>
+                  <option value="food">Food</option>
+                  <option value="facilities">Facilities</option>
+                  <option value="people">People</option>
+                </Select>
+              </FormControl>
+            </Flex>
+            <FormControl id="Body" isRequired>
+              <Input
+                placeholder="Body"
+                padding="5"
+                borderRadius="full"
+                size="md"
+                w="100%"
+                h="60px"
+                value={body}
+                onChange={handleChangeBody}
+              />
+            </FormControl>
 
-          <FormControl id="Body" isRequired>
-            <FormLabel>Body</FormLabel>
-            <Input
-              placeholder="Body"
-              size="lg"
-              w="80%"
-              value={body}
-              onChange={handleChangeBody}
-            />
-          </FormControl>
-
-          <IconButton
-            colorScheme="blue"
-            aria-label="Search database"
-            marginLeft="10"
-            type="submit"
-            icon={<CheckIcon />}
-          />
-        </form>
+            {/* <IconButton
+              colorScheme="blue"
+              aria-label="Search database"
+              marginLeft="10"
+              type="submit"
+              icon={<CheckIcon />}
+            /> */}
+          </form>
+        </Box>
       </Flex>
+      {/* ===================== End Post Part =====================  */}
+      {/* ===================== Sort Seleted =====================  */}
+      <Box
+        p={5}
+        marginTop="5"
+        shadow="md"
+        borderWidth="1px"
+        borderRadius="xl"
+        w="80%"
+      >
+        <Flex FlexDir="rows" alignItems="center">
+          <>
+            <WarningTwoIcon />
+            <Text marginLeft="2">Hot</Text>
+          </>
+        </Flex>
+      </Box>
+      {/* ===================== End Sort Seleted =====================  */}
 
+      {/* ===================== Box =====================  */}
       <Stack
         spacing={8}
         w="90%"
@@ -152,49 +188,83 @@ export default function Content() {
         {post.map((pos) => (
           <Box p={5} shadow="md" borderWidth="1px" borderRadius="xl">
             <Flex>
-              <Flex flexDir="column" alignItems="center" marginRight="10">
+              {/* =========================== Heading ======================== */}
+              <Flex
+                flexDir="column"
+                alignItems="center"
+                marginRight="10"
+                alignSelf="center"
+              >
                 <IconButton
-                  colorScheme="blue"
+                  variant="ghost"
                   aria-label="Search database"
                   marginTop="3"
                   marginLeft="3"
                   onClick={() => upLike(pos)}
                   icon={<ArrowUpIcon />}
                   isRound
+                  fontSize="3xl"
                 />
 
                 <Text marginTop="3" marginLeft="3" fontSize="2xl">
                   {pos.like}
                 </Text>
-
                 <IconButton
-                  colorScheme="blue"
+                  variant="ghost"
                   aria-label="Search database"
                   marginTop="3"
                   marginLeft="3"
-                  onClick={() => downLike(pos)}
+                  onClick={() => upLike(pos)}
                   icon={<ArrowDownIcon />}
                   isRound
+                  fontSize="3xl"
                 />
               </Flex>
-              <Flex flexDir="row">
-                <Heading fontSize="xl">{pos.title}</Heading>
-                <Text mt={4}>{pos.body}</Text>
-              </Flex>
 
-              <IconButton
-                colorScheme="red"
-                aria-label="Search database"
-                marginTop="3"
-                marginLeft="3"
-                onClick={() => deletePost(pos.id)}
-                icon={<SmallCloseIcon />}
-                isRound
-              />
+              <Flex flexDir="column" w="100%">
+                <Flex flexDir="row" marginBottom="5">
+                  <Avatar
+                    name="Dan Abrahmov"
+                    src="https://bit.ly/dan-abramov"
+                    marginRight="5"
+                    size="md"
+                  />
+                  <Text marginRight="5" alignSelf="center">
+                    {username}
+                  </Text>
+                </Flex>
+                {/* =========================== End Heading ======================== */}
+                {/* =========================== Body ======================== */}
+                <Flex flexDir="column" w="100%">
+                  <Tag w="max">{pos.title}</Tag>
+                  <Flex
+                    flexDir="row"
+                    w="100%"
+                    borderWidth="0px"
+                    paddingLeft="10"
+                    marginTop="2"
+                  >
+                    <Text fontSize="xl">{pos.body}</Text>
+                  </Flex>
+                </Flex>
+
+                {/* <IconButton
+                  colorScheme="red"
+                  aria-label="Search database"
+                  marginTop="3"
+                  marginLeft="3"
+                  onClick={() => deletePost(pos.id)}
+                  icon={<SmallCloseIcon />}
+                  isRound
+                  w="10px"
+                /> */}
+              </Flex>
+              {/* =========================== End Body ======================== */}
             </Flex>
           </Box>
         ))}
       </Stack>
+      {/* ===================== End Box =====================  */}
     </Flex>
   );
 }

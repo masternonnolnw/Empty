@@ -68,12 +68,13 @@ export default function LoginForm() {
           <form onSubmit={handleSubmit}>
             {error && <ErrorMessage message={error} />}
             <FormControl isRequired>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Username</FormLabel>
               <Input
                 type="text"
                 placeholder="test@test.com"
                 size="lg"
                 onChange={(event) => setEmail(event.currentTarget.value)}
+                value={username}
               />
             </FormControl>
             <FormControl isRequired mt={6}>
@@ -84,6 +85,7 @@ export default function LoginForm() {
                   placeholder="*******"
                   size="lg"
                   onChange={(event) => setPassword(event.currentTarget.value)}
+                  value={password}
                 />
               </InputGroup>
             </FormControl>

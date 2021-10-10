@@ -22,11 +22,11 @@ export default function MyApp() {
         <ThemeToggler />
       </Flex>
       <Flex>
-        <Flex w="17%" h="90vh" border="1px"></Flex>
-        <Flex w="58%" h="90vh" border="1px" padding="8">
+        <Flex w="17%" h="90vh"></Flex>
+        <Flex w="58%" h="90vh">
           <MainContent />
         </Flex>
-        <Flex w="25%" h="90vh" border="1px"></Flex>
+        <Flex w="25%" h="90vh"></Flex>
       </Flex>
     </>
 
