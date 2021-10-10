@@ -27,9 +27,13 @@
   "homepage": "https://github.com/bpk68/api-server-starter#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4"
   },
   "devDependencies": {
     "nodemon": "2.0.12"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
