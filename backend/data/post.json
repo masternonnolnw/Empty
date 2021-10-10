@@ -2,34 +2,58 @@
   "lastId": 5,
   "data": [
     {
-      "title": "study",
-      "body": "qewqqfqf",
+      "title": "post1",
+      "body": "hello",
+      "date" : "2021-10-09T16:51:21+07:00",
       "like": 20,
-      "id": 1
+      "dislike": 5,
+      "totallike": 5,
+      "id": 1,
+      "likelist" : [
+          "10001",
+          "10004",
+          "10010"
+      ],
+      "dislikelist" : [
+          "10002",
+          "10006"
+      ]
     },
     {
-      "title": "food",
-      "body": "masdbvhevbvlbbdfa;ksa",
+      "title": "post2",
+      "body": "most like",
+      "date" : "2021-10-09T14:51:21+07:00",
       "like": 0,
-      "id": 2
+      "dislike": 8,
+      "totallike": -8,
+      "id": 2,
+      "likelist" : [
+          "10001",
+          "10004",
+          "10010"
+      ],
+      "dislikelist" : [
+          "10002",
+          "10006"
+      ]
     },
     {
-      "title": "people",
-      "body": "asbbsvv[b;,vdv,s",
-      "like": 0,
-      "id": 3
-    },
-    {
-      "title": "facilities",
-      "body": ",vssavvvbsbsbvvd",
-      "like": 1,
-      "id": 4
-    },
-    {
-      "title": "food",
-      "body": "bad",
-      "like": 1,
-      "id": 5
+      "title": "post3",
+      "body": "newest",
+      "date" : "2021-10-01T18:51:21+07:00",
+      "like": 30,
+      "dislike": 5,
+      "totallike": 25,
+      "id": 2,
+      "likelist" : [
+          "10001",
+          "10004",
+          "10010"
+      ],
+      "dislikelist" : [
+          "10002",
+          "10006"
+      ]
     }
   ]
 }

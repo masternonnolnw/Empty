@@ -1,5 +1,8 @@
 path = require("path");
 dir = path.join("../..", "/data/post.json");
+
+moment = require('moment') //date&time
+
 const json_data = require(dir);
 
 const postRoutes = (app, fs) => {
@@ -37,16 +40,55 @@ const postRoutes = (app, fs) => {
     });
   };
 
+  function sortPost(post_list, keywordtype) {
+    if (keywordtype == "top") {
+      console.log("Viewing by Top");
+      post_list.sort((x,y) => parseInt(y.totallike) - parseInt(x.totallike));
+    }
+    else if (keywordtype == "new") {
+      console.log("Viewing by New");
+      post_list.sort((x,y) => (moment(y.date).diff(moment(x.date), 'seconds')));
+    }
+    else if (keywordtype == "hot") {
+      console.log("Viewing by Hot");
+
+      post_list.sort((x,y) => {
+        x_time = moment().diff(moment(x.date), 'seconds');
+        avgLike_x = parseInt(x.totallike) / x_time;
+
+        y_time = moment().diff(moment(y.date), 'seconds');
+        avgLike_y = parseInt(y.totallike) / y_time;
+
+        return avgLike_y - avgLike_x;
+      });
+    }
+    else {
+      console.log("Wrong viewtype");
+      return -1;
+    }
+  }
+
   // READ
   app.get("/posts", (req, res) => {
+    /* ต้องการ user_id และ viewtype (hot/top/new) */
     fs.readFile(dataPath, "utf8", (err, post) => {
       if (err) {
         throw err;
       }
+      // algorithm begin here
+      post_list = JSON.parse(post).data;
+      if (sortPost(post_list, req.body.viewtype) == -1) {
+        res.status(401).send("Wrong viewtype");
+      }
 
-      res.send(JSON.parse(post).data);
+      for(key in post_list) {
+        console.log(post_list[key]);
+      } 
+
+      res.send(post_list);
     });
   });
+
 
   // CREATE
   app.post("/posts", (req, res) => {
