@@ -90,7 +90,7 @@ export default function LoginForm() {
               </InputGroup>
             </FormControl>
             <Button
-              variantColor="teal"
+              colorScheme="teal"
               variant="outline"
               type="submit"
               width="full"
