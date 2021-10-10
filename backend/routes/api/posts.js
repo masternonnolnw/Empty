@@ -70,7 +70,7 @@ const postRoutes = (app, fs) => {
 
   // READ
   app.get("/posts", (req, res) => {
-    /* ต้องการ user_id และ viewtype (hot/top/new) */
+    /* ต้องการ user_id และ viewtype (hot/top/new) โดยเก็บเป็น json ใน body */
     fs.readFile(dataPath, "utf8", (err, post) => {
       if (err) {
         throw err;
@@ -81,10 +81,27 @@ const postRoutes = (app, fs) => {
         res.status(401).send("Wrong viewtype");
       }
 
+      // add status for each post (like/dislike/unlike by userid)
+      const userid = req.body.userid;
       for(key in post_list) {
-        console.log(post_list[key]);
-      } 
+        var thisStatus = 0
+        const isLiked = post_list[key].likelist.includes(userid);
+        const isDisliked = post_list[key].dislikelist.includes(userid);
+        if (isLiked) {
+          thisStatus = 1
+        }
+        if (isDisliked) {
+          thisStatus = -1
+        }
+        post_list[key]["status"] = thisStatus;
+      }
 
+      // printing for checking
+      /*for(key in post_list) {
+        console.log(post_list[key]);
+      } */
+
+      // respond
       res.send(post_list);
     });
   });
