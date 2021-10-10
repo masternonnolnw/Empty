@@ -10,7 +10,7 @@ import { Tag } from "@chakra-ui/tag";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const baseURL = "http://localhost:3500/arr";
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
 // "https://jsonplaceholder.typicode.com/posts"
 export default function Content() {
   const [title, setTitle] = useState(null);
@@ -24,7 +24,7 @@ export default function Content() {
   const username = "MaStEr";
 
   useEffect(() => {
-    axios.get(`${baseURL}`).then((response) => {
+    axios.get(`${baseURL}/posts`).then((response) => {
       setPost(response.data);
       // console.log(response.data)
     });
@@ -34,7 +34,7 @@ export default function Content() {
     event.preventDefault();
     try {
       if (title && body) {
-        await axios.post(`${baseURL}`, {
+        await axios.post(`${baseURL}/posts`, {
           title: `${title}`,
           body: `${body}`,
           like: 0,
@@ -47,7 +47,7 @@ export default function Content() {
     } catch (error) {}
   };
   async function upLike(pos) {
-    await axios.put(`${baseURL}/${pos.id}`, {
+    await axios.put(`${baseURL}/posts/${pos.id}`, {
       title: `${pos.title}`,
       body: `${pos.body}`,
       like: pos.like + 1,
@@ -57,7 +57,7 @@ export default function Content() {
   }
 
   async function downLike(pos) {
-    await axios.put(`${baseURL}/${pos.id}`, {
+    await axios.put(`${baseURL}/posts/${pos.id}`, {
       title: `${pos.title}`,
       body: `${pos.body}`,
       like: pos.like - 1,

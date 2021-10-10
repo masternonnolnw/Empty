@@ -4,6 +4,7 @@ const path = require("path");
 
 const { json } = require("body-parser");
 const userRoutes = require("./users");
+const postRoutes = require("./posts");
 
 dir = path.join("../..", "/data/users.json");
 const json_data = require(dir);
@@ -39,6 +40,7 @@ const appRouter = (app, fs) => {
 
   // // other routes
   userRoutes(app, fs);
+  postRoutes(app, fs);
 };
 
 module.exports = appRouter;
