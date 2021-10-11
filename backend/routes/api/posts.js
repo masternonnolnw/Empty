@@ -67,16 +67,16 @@ const postRoutes = (app, fs) => {
   }
 
   // READ
-  app.get("/posts", (req, res) => {
-    /* ต้องการ user_id และ viewtype (hot/top/new) โดยเก็บเป็น json ใน body */
-
+  app.get("/posts/:userid/:viewtype", (req, res) => {
+    /* ต้องการ user_id และ viewtype (hot/top/new) โดยส่งมาเป็น params */
+    
     fs.readFile(dataPath, "utf8", (err, post) => {
       if (err) {
         throw err;
       }
       // algorithm begin here
-      const userid = req.body.userid;
-
+      const userid = req.params.userid;
+      
       // 1. check if user_id is correct
       const userdata = require('../../data/users.json');
       const userExists = userdata.hasOwnProperty(userid);
@@ -87,7 +87,7 @@ const postRoutes = (app, fs) => {
 
       // create json file of posts
       post_list = JSON.parse(post).data;
-      if (sortPost(post_list, req.body.viewtype) == -1) {
+      if (sortPost(post_list, req.params.viewtype) == -1) {
         res.status(401).send("Wrong viewtype");
         return;
       }
