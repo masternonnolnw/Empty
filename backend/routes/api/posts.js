@@ -105,6 +105,15 @@ const postRoutes = (app, fs) => {
         }
         post_list[key]["status"] = thisStatus;
       }
+      // !just for testing
+        var cnt = 0;
+        for (key in post_list) {
+          if(cnt == 0) post_list[key]["status"] = 1;
+          else if(cnt == 2) post_list[key]["status"] = -1;
+          else post_list[key]["status"] = 0;
+          cnt++;
+        }
+      //end
 
       // printing for checking
       /*for(key in post_list) {
