@@ -1,59 +1,39 @@
 {
-  "lastId": 5,
-  "data": [
-    {
-      "title": "post1",
-      "body": "hello",
-      "date" : "2021-10-09T16:51:21+07:00",
-      "like": 20,
-      "dislike": 5,
-      "totallike": 15,
-      "id": 1,
-      "likelist" : [
-          "10001",
-          "10004",
-          "10010"
-      ],
-      "dislikelist" : [
-          "10002",
-          "10006"
-      ]
-    },
-    {
-      "title": "post2",
-      "body": "world",
-      "date" : "2021-10-09T14:51:21+07:00",
-      "like": 0,
-      "dislike": 8,
-      "totallike": -8,
-      "id": 2,
-      "likelist" : [
-          "10001",
-          "10004",
-          "10010"
-      ],
-      "dislikelist" : [
-          "10002",
-          "10006"
-      ]
-    },
-    {
-      "title": "post3",
-      "body": "most like",
-      "date" : "2021-10-01T18:51:21+07:00",
-      "like": 35,
-      "dislike": 5,
-      "totallike": 30,
-      "id": 2,
-      "likelist" : [
-          "10001",
-          "10004",
-          "10010"
-      ],
-      "dislikelist" : [
-          "10002",
-          "10006"
-      ]
-    }
-  ]
+	"lastId": 5,
+	"data": [
+		{
+			"title": "post1",
+			"body": "hello",
+			"date": "2021-10-09T16:51:21+07:00",
+			"like": 0,
+			"dislike": 0,
+			"totallike": 0,
+			"id": 1,
+			"likelist": [],
+			"dislikelist": [],
+			"status": 0
+		},
+		{
+			"title": "post2",
+			"body": "world",
+			"date": "2021-10-09T14:51:21+07:00",
+			"like": 0,
+			"dislike": 0,
+			"totallike": 0,
+			"id": 2,
+			"likelist": [],
+			"dislikelist": []
+		},
+		{
+			"title": "post3",
+			"body": "most like",
+			"date": "2021-10-01T18:51:21+07:00",
+			"like": 0,
+			"dislike": 0,
+			"totallike": 0,
+			"id": 2,
+			"likelist": [],
+			"dislikelist": []
+		}
+	]
 }

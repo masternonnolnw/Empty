@@ -1,8 +1,7 @@
 path = require("path");
 
-
 moment = require('moment') //date&time
-
+var tools = require('./myfunction.js');
 
 const postRoutes = (app, fs) => {
   // variables
@@ -66,6 +65,63 @@ const postRoutes = (app, fs) => {
     }
   }
 
+  function getpost(req, res, post) {
+    // รับ userid, viewtype มา แล้วลิสต์ post ทุกอันที่จะเห็นตามลำดับ return เป็น json array
+    // ฟังก์ชั่นนี้ทำการเช็ค permission แล้ว (userid, viewtype) + sort แล้ว + add status แล้ว
+
+    // algorithm begin here
+    const userid = req.params.userid;
+      
+    // 1. check if user_id is correct
+    const userdata = require('../../data/users.json');
+    const userExists = userdata.hasOwnProperty(userid);
+    if (!userExists) {
+      res.status(402).send("You don't have permission");
+      return;
+    }
+
+    // create json file of posts
+    post_list = JSON.parse(post).data;
+    if (sortPost(post_list, req.params.viewtype) == -1) {
+      res.status(401).send("Wrong viewtype");
+      return;
+    }
+
+    // add status for each post (like/dislike/unlike by userid)
+    for(key in post_list) {
+      var thisStatus = 0
+      const isLiked = post_list[key].likelist.includes(userid);
+      const isDisliked = post_list[key].dislikelist.includes(userid);
+      if (isLiked) {
+        thisStatus = 1
+      }
+      if (isDisliked) {
+        thisStatus = -1
+      }
+      post_list[key]["status"] = thisStatus;
+    }
+    // !just for testing
+      var cnt = 0;
+      for (key in post_list) {
+        if(cnt == 0) post_list[key]["status"] = 1;
+        else if(cnt == 2) post_list[key]["status"] = -1;
+        else post_list[key]["status"] = 0;
+        cnt++;
+      }
+    //end
+
+    // printing for checking
+    /*for(key in post_list) {
+      console.log(post_list[key]);
+    } */
+
+    // respond
+    //res.send(post_list);
+    return post_list;
+  }
+  //end of getpost function
+
+
   // READ
   app.get("/posts/:userid/:viewtype", (req, res) => {
     /* ต้องการ user_id และ viewtype (hot/top/new) โดยส่งมาเป็น params */
@@ -74,57 +130,50 @@ const postRoutes = (app, fs) => {
       if (err) {
         throw err;
       }
-      // algorithm begin here
-      const userid = req.params.userid;
-      
-      // 1. check if user_id is correct
-      const userdata = require('../../data/users.json');
-      const userExists = userdata.hasOwnProperty(userid);
-      if (!userExists) {
-        res.status(402).send("You don't have permission");
-        return;
-      }
-
-      // create json file of posts
-      post_list = JSON.parse(post).data;
-      if (sortPost(post_list, req.params.viewtype) == -1) {
-        res.status(401).send("Wrong viewtype");
-        return;
-      }
-
-      // add status for each post (like/dislike/unlike by userid)
-      for(key in post_list) {
-        var thisStatus = 0
-        const isLiked = post_list[key].likelist.includes(userid);
-        const isDisliked = post_list[key].dislikelist.includes(userid);
-        if (isLiked) {
-          thisStatus = 1
-        }
-        if (isDisliked) {
-          thisStatus = -1
-        }
-        post_list[key]["status"] = thisStatus;
-      }
-      // !just for testing
-        var cnt = 0;
-        for (key in post_list) {
-          if(cnt == 0) post_list[key]["status"] = 1;
-          else if(cnt == 2) post_list[key]["status"] = -1;
-          else post_list[key]["status"] = 0;
-          cnt++;
-        }
-      //end
-
-      // printing for checking
-      /*for(key in post_list) {
-        console.log(post_list[key]);
-      } */
-
-      // respond
+      // getpost
+      post_list = getpost(req, res, post);
       res.send(post_list);
     });
   });
 
+  // like & dislike method
+  app.put("/posts/:userid/:viewtype/:postid/:liketype", (req,res) => {
+    // liketype = 1 : upLike, -1 : disLike
+    // ถ้ากดซ้ำจะยกเลิก ถ้ากดอันใหม่จะยึดตามอันใหม่
+    // จะไปอัพเดทไฟล์ post.json
+    
+    fs.readFile(dataPath, "utf8", (err, post) => {
+      if (err) {
+        throw err;
+      }
+      // algorithm begin here
+  
+      const userid = req.params.userid;
+      const viewtype = req.params.viewtype;
+      const postid = req.params.postid;
+      const liketype = req.params.liketype;
+      if (liketype != "1" && liketype != "-1") res.status(405).send("Wrong Liketype");
+      
+      postjson = JSON.parse(post);
+      //console.log(typeof postjson);
+
+
+      
+      for(var key in postjson.data) {
+        if (postjson.data[key].id == postid) {
+          if (liketype == 1) tools.upLikePost(postjson.data[key], userid);
+          else tools.downLikePost(postjson.data[key], userid);
+        }
+      }
+      //console.log(postjson);
+
+      fs.writeFile('./data/post.json', JSON.stringify(postjson, null, '\t'), (error) => {
+        if (error) throw error;
+      });
+
+      res.status(201).send("Success");
+    });
+  })
 
   // CREATE
   app.post("/posts", (req, res) => {
