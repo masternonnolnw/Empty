@@ -137,11 +137,10 @@ const postRoutes = (app, fs) => {
   });
 
   // like & dislike method
-  app.put("/posts/:userid/:viewtype/:postid/:liketype", (req,res) => {
-    // liketype = 1 : upLike, -1 : disLike
-    // ถ้ากดซ้ำจะยกเลิก ถ้ากดอันใหม่จะยึดตามอันใหม่
+  app.put("/posts/:userid/:postid/:past/:cur", (req,res) => {
+    // past กับ cur คือสเตตัสของ user ว่า like(1) / dislike(-1) / none(0)
     // จะไปอัพเดทไฟล์ post.json
-    
+
     fs.readFile(dataPath, "utf8", (err, post) => {
       if (err) {
         throw err;
@@ -149,20 +148,29 @@ const postRoutes = (app, fs) => {
       // algorithm begin here
   
       const userid = req.params.userid;
-      const viewtype = req.params.viewtype;
       const postid = req.params.postid;
-      const liketype = req.params.liketype;
-      if (liketype != "1" && liketype != "-1") res.status(405).send("Wrong Liketype");
+      const past = req.params.past;
+      const cur = req.params.cur;
       
+      if (past != "1" && past != "-1" && past != "0") {
+        res.status(405).send("Wrong Liketype (past)");
+        return;
+      }
+      if (cur != "1" && cur != "-1" && cur != "0") {
+        res.status(405).send("Wrong Liketype (cur)");
+        return;
+      }
+
       postjson = JSON.parse(post);
+      //console.log(postjson);
       //console.log(typeof postjson);
-
-
       
       for(var key in postjson.data) {
         if (postjson.data[key].id == postid) {
-          if (liketype == 1) tools.upLikePost(postjson.data[key], userid);
-          else tools.downLikePost(postjson.data[key], userid);
+          if (tools.pastAndCurLike(postjson.data[key], userid, past, cur, res) == -1) {
+            res.status(222).send("past status doesn't match post.json");
+            return;
+          }
         }
       }
       //console.log(postjson);

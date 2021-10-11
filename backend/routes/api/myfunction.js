@@ -1,6 +1,7 @@
 module.exports = {
     upLikePost
     ,downLikePost
+    ,pastAndCurLike
 };
 
 function removeItem(arr, val) {
@@ -10,6 +11,13 @@ function removeItem(arr, val) {
             return;
         }
     }
+}
+
+function indexItem(arr, val) {
+    for(var i = 0; i < arr.length; i++) {
+        if (arr[i] == val) return i;
+    }
+    return -1;
 }
 
 function upLikePost(post, userid) {
@@ -64,4 +72,47 @@ function downLikePost(post, userid) {
         post.dislikelist.push(userid);
         post.status = -1;
     }    
+}
+
+function pastAndCurLike(post, userid, past, cur, res) {
+
+    //console.log(past);
+    //console.log(typeof past);
+    var idx = 0;
+    if (past == "1") idx = indexItem(post.likelist, userid);
+    else if (past == "-1") idx = indexItem(post.dislikelist, userid);
+    else {
+        if (indexItem(post.likelist, userid) != -1
+            || indexItem(post.dislikelist, userid) != -1) {
+            
+            return -1;
+        }
+        console.log(idx);
+    }
+
+    if (idx == "-1") {
+        //res.status(222).send("past status doesn't match post.json");
+        return -1;
+    }
+
+    if (past == "1") {
+        removeItem(post.likelist, userid);
+        post.like--;
+    }
+    else if (past == "-1") {
+        removeItem(post.dislikelist, userid);
+        post.dislike--;
+    }
+
+    if (cur == "1") {
+        post.likelist.push(userid);
+        post.like++;
+    }
+    else if (cur == "-1") {
+        post.dislikelist.push(userid);
+        post.dislike++;
+    }
+    post.totallike = post.like - post.dislike;
+    post.status = parseInt(cur);
+    return 1;
 }

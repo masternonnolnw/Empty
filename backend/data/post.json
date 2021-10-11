@@ -22,7 +22,8 @@
 			"totallike": 0,
 			"id": 2,
 			"likelist": [],
-			"dislikelist": []
+			"dislikelist": [],
+			"status": 0
 		},
 		{
 			"title": "post3",
@@ -33,7 +34,8 @@
 			"totallike": 0,
 			"id": 2,
 			"likelist": [],
-			"dislikelist": []
+			"dislikelist": [],
+			"status": 0
 		}
 	]
 }
