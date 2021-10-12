@@ -3,14 +3,15 @@
 	"data": [
 		{
 			"title": "post1",
-			"body": "Tempor consectetur non aliqua proident. Quis dolore esse exercitation officia quis occaecat. Eu elit dolore anim deserunt ullamco quis. Cillum do laborum dolor fugiat est consectetur excepteur do incididunt. Sunt excepteur do nulla et Lorem labore. Eiusmod irure aute sint ullamco culpa velit magna aute proident excepteur. Culpa aliquip officia consectetur mollit excepteur esse sint sunt laborum incididunt nostrud sit nulla id.sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+			"body": "asdfasdf",
 			"date": "2021-10-09T16:51:21+07:00",
 			"like": 0,
 			"dislike": 0,
 			"totallike": 0,
 			"id": 1,
 			"likelist": [],
-			"dislikelist": []
+			"dislikelist": [],
+			"status": 0
 		},
 		{
 			"title": "post2",
@@ -21,7 +22,8 @@
 			"totallike": 0,
 			"id": 2,
 			"likelist": [],
-			"dislikelist": []
+			"dislikelist": [],
+			"status": 0
 		},
 		{
 			"title": "post3",
@@ -34,7 +36,8 @@
 			"likelist": [
 				"1633769155834"
 			],
-			"dislikelist": []
+			"dislikelist": [],
+			"status": 1
 		}
 	]
 }

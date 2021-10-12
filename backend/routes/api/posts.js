@@ -131,8 +131,19 @@ const postRoutes = (app, fs) => {
         throw err;
       }
       // getpost
+      lastuserID = JSON.parse(post).lastId;
       post_list = getpost(req, res, post);
-      post_real = post_list;
+      
+      var post_real = {};
+      post_real['lastId'] = lastuserID;
+      post_real['data'] = post_list;
+
+      fs.writeFile('./data/post.json', JSON.stringify(post_real, null, '\t'), (error) => {
+        if (error) {
+          throw(error); return;
+        }
+      });
+
       res.send(post_list);
     });
   });
