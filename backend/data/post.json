@@ -11,7 +11,7 @@
 			"id": 1,
 			"likelist": [],
 			"dislikelist": [],
-			"status": 0
+			"status": 99
 		},
 		{
 			"title": "post2",
@@ -23,7 +23,7 @@
 			"id": 2,
 			"likelist": [],
 			"dislikelist": [],
-			"status": 0
+			"status": 99
 		},
 		{
 			"title": "post3",
@@ -37,7 +37,7 @@
 				"1633769155834"
 			],
 			"dislikelist": [],
-			"status": 1
+			"status": 99
 		}
 	]
 }
