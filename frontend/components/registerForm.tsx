@@ -5,9 +5,8 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { Box, Flex, Heading } from "@chakra-ui/layout";
 import { CircularProgress } from "@chakra-ui/progress";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useState } from "react";
-import { userLogin } from "../utils/Api";
 import ErrorMessage from "./ErrorMessage";
 
 export default function registerForm() {
@@ -42,13 +41,17 @@ export default function registerForm() {
         // console.log(typeof token.data);else {
         window.location.href = "/login";
       } catch (error) {
-        setError(error);
-        setIsLoading(false);
-        setEmail("");
-        setPassword("");
-        setShowPassword(false);
-        setCheckPassword("");
-        setShowCheckPassword(false);
+        const err = error as AxiosError;
+        if (err.response) {
+          setError(err.response.data);
+          setIsLoading(false);
+          setEmail("");
+          setPassword("");
+          setCheckPassword("");
+          setShowPassword(false);
+          setShowCheckPassword(false);
+        }
+        this.handleAxiosError(error);
       }
     }
   };

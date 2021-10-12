@@ -1,32 +1,22 @@
 {
-	"1633769155834": {
-		"username": "non007",
-		"password": "1234"
-	},
-	"1633769236171": {
-		"username": "non008",
-		"password": "1234"
-	},
-	"1633779518242": {
-		"username": "non005",
-		"password": "1234"
-	},
-	"1633780071041": {
-		"username": "non001",
-		"password": "1234"
-	},
-<<<<<<< HEAD
-	"1634031606744": {
-		"username": "master",
-		"password": "12"
-	},
-	"1634031823306": {
-		"username": "master1",
-		"password": "12"
-=======
-	"1634031559477": {
-		"username": "master",
-		"password": "1234"
->>>>>>> b6e406004c31268ffc5706a6020364a8850da933
-	}
+  "1633769155834": {
+    "username": "non007",
+    "password": "1234"
+  },
+  "1633769236171": {
+    "username": "non008",
+    "password": "1234"
+  },
+  "1633779518242": {
+    "username": "non005",
+    "password": "1234"
+  },
+  "1633780071041": {
+    "username": "non001",
+    "password": "1234"
+  },
+  "1634032483870": {
+    "username": "master",
+    "password": "12"
+  }
 }

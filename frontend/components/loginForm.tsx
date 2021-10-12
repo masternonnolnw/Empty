@@ -5,8 +5,8 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { Box, Flex, Heading } from "@chakra-ui/layout";
 import { CircularProgress } from "@chakra-ui/progress";
+import axios, { AxiosError } from "axios";
 import { useState } from "react";
-import { userLogin } from "../utils/Api";
 import ErrorMessage from "./ErrorMessage";
 
 export default function LoginForm() {
@@ -22,35 +22,39 @@ export default function LoginForm() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const token = await userLogin({ username, password });
-      // console.log(token);
-      // console.log(token.data);
-      // console.log(typeof token.data);
-      if (typeof token.data == typeof "string") {
-        setError("Invalid username or password");
+      const baseURL = process.env.NEXT_PUBLIC_API_URL;
+      const token = await axios.post(`${baseURL}/login`, {
+        username,
+        password,
+      });
+      if (typeof window !== "undefined") {
+        console.log("we are running on the client");
+        localStorage.setItem("token", `${token.data}`);
+      } else {
+        console.log("we are running on the server");
+      }
+      setIsLoggedIn(true);
+      setIsLoading(false);
+      setShowPassword(false);
+      window.location.href = "/app";
+    } catch (error) {
+      const err = error as AxiosError;
+      if (err.response) {
+        setError(err.response.data);
         setIsLoading(false);
         setEmail("");
         setPassword("");
         setShowPassword(false);
-      } else {
-        if (typeof window !== "undefined") {
-          console.log("we are running on the client");
-          localStorage.setItem("token", `${token.data}`);
-        } else {
-          console.log("we are running on the server");
-        }
-        setIsLoggedIn(true);
-        setIsLoading(false);
-        setShowPassword(false);
-        window.location.href = "/app";
       }
-    } catch (error) {
-      setError("Error");
-      setIsLoading(false);
-      setEmail("");
-      setPassword("");
-      setShowPassword(false);
     }
+    // catch (error) {
+    // console.log(error);
+    // setError("Error");
+    // setIsLoading(false);
+    // setEmail("");
+    // setPassword("");
+    // setShowPassword(false);
+    // }
   };
   return (
     <Flex width="full" align="center" justifyContent="center">
