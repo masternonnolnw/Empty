@@ -61,8 +61,9 @@ export default function Content() {
       curStatus = 1;
     }
     try {
+      console.log(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
       const newPost = await axios.put(
-        `${baseURL}/posts/${token}/${pos.id}/${pos.status}/${curStatus}`
+        `${baseURL}/posts/${token}/${pos.id}/${curStatus}`
       );
       setPost(newPost.data);
       console.log(newPost.data);
@@ -80,7 +81,7 @@ export default function Content() {
     }
     try {
       const newPost = await axios.put(
-        `${baseURL}/posts/${token}/${pos.id}/${pos.status}/${curStatus}`
+        `${baseURL}/posts/${token}/${pos.id}/${curStatus}`
       );
       setPost(newPost.data);
       console.log(newPost.data);

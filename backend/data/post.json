@@ -6,33 +6,39 @@
 			"body": "hello",
 			"date": "2021-10-09T16:51:21+07:00",
 			"like": 0,
-			"dislike": 0,
-			"totallike": 0,
+			"dislike": 1,
+			"totallike": -1,
 			"id": 1,
 			"likelist": [],
-			"dislikelist": []
+			"dislikelist": [
+				"1633769155834"
+			]
 		},
 		{
 			"title": "post2",
 			"body": "world",
 			"date": "2021-10-09T14:51:21+07:00",
 			"like": 0,
-			"dislike": 0,
-			"totallike": 0,
+			"dislike": 1,
+			"totallike": -1,
 			"id": 2,
 			"likelist": [],
-			"dislikelist": []
+			"dislikelist": [
+				"1633769155834"
+			]
 		},
 		{
 			"title": "post3",
 			"body": "most like",
 			"date": "2021-10-01T18:51:21+07:00",
 			"like": 0,
-			"dislike": 0,
-			"totallike": 0,
+			"dislike": 1,
+			"totallike": -1,
 			"id": 3,
 			"likelist": [],
-			"dislikelist": []
+			"dislikelist": [
+				"1633769155834"
+			]
 		}
 	]
 }
