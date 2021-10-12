@@ -3,7 +3,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import App from "./app";
 import Login from "./login";
 export default function IndexPage() {
-  window.location.href = "/app";
   return (
     <>
       <App />

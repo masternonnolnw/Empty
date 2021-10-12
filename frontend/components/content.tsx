@@ -12,6 +12,7 @@ import { Tag } from "@chakra-ui/tag";
 import { Textarea } from "@chakra-ui/textarea";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import moment from "moment";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 // "https://jsonplaceholder.typicode.com/posts"
@@ -291,6 +292,16 @@ export default function Content() {
                 />
                 <Text marginRight="5" alignSelf="center">
                   {username}
+                </Text>
+                <Text marginRight="5" alignSelf="center">
+                  {moment(moment()).diff(pos.date, "minutes") <= 10
+                    ? "posted " +
+                      moment(moment()).diff(pos.date, "minutes") +
+                      " minutes ago"
+                    : moment(pos.date).format("DD/MM/YYYY, h:mm:ss a")}
+                  {/* {moment(moment(pos.date).diff(moment(), "minutes"))
+                    .utc()
+                    .format("MM/DD/YYYY, h:mm:ss a")} */}
                 </Text>
               </Flex>
               {/* =========================== End Heading ======================== */}
