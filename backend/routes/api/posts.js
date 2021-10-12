@@ -153,11 +153,11 @@ const postRoutes = (app, fs) => {
       const cur = req.params.cur;
       
       if (past != "1" && past != "-1" && past != "0") {
-        res.status(222).send("Wrong Liketype (past)");
+        res.status(410).send("Wrong Liketype (past)");
         return;
       }
       if (cur != "1" && cur != "-1" && cur != "0") {
-        res.status(222).send("Wrong Liketype (cur)");
+        res.status(410).send("Wrong Liketype (cur)");
         return;
       }
 
@@ -168,7 +168,7 @@ const postRoutes = (app, fs) => {
       for(var key in postjson.data) {
         if (postjson.data[key].id == postid) {
           if (tools.pastAndCurLike(postjson.data[key], userid, past, cur, res) == -1) {
-            res.status(222).send("past status doesn't match post.json");
+            res.status(420).send("past status doesn't match post.json");
             return;
           }
         }
