@@ -51,7 +51,6 @@ export default function registerForm() {
           setShowPassword(false);
           setShowCheckPassword(false);
         }
-        this.handleAxiosError(error);
       }
     }
   };

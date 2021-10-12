@@ -264,7 +264,7 @@ export default function Content() {
               </Text>
               <IconButton
                 variant="ghost"
-                colorScheme={pos.status == -1 ? "green" : "white"}
+                colorScheme={pos.status == -1 ? "red" : "white"}
                 aria-label="Search database"
                 marginTop="3"
                 marginLeft="3"
@@ -272,6 +272,12 @@ export default function Content() {
                 icon={<ArrowDownIcon />}
                 isRound
                 fontSize="3xl"
+                _focus={{
+                  outline: "none",
+                }}
+                _active={{
+                  bg: "none",
+                }}
               />
             </Flex>
 
