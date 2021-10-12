@@ -79,13 +79,11 @@ export default function Content() {
       curStatus = -1;
     }
     try {
-      await axios.put(
+      const newPost = await axios.put(
         `${baseURL}/posts/${token}/${pos.id}/${pos.status}/${curStatus}`
       );
-      axios.get(`${baseURL}/posts/${token}/${viewType}`).then((response) => {
-        setPost(response.data);
-        console.log(response.data);
-      });
+      setPost(newPost.data);
+      console.log(newPost.data);
     } catch {
       console.log(Error);
     }
