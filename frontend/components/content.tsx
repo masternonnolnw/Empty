@@ -2,7 +2,12 @@ import { Avatar } from "@chakra-ui/avatar";
 import { Button, IconButton } from "@chakra-ui/button";
 import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import { FormControl } from "@chakra-ui/form-control";
-import { ArrowDownIcon, ArrowUpIcon, WarningTwoIcon } from "@chakra-ui/icons";
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  CheckIcon,
+  WarningTwoIcon,
+} from "@chakra-ui/icons";
 import { Input } from "@chakra-ui/input";
 import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/layout";
 import { MenuButton } from "@chakra-ui/menu";
@@ -47,10 +52,9 @@ export default function Content() {
     event.preventDefault();
     try {
       if (title && body) {
-        await axios.post(`${baseURL}/posts`, {
+        await axios.post(`${baseURL}/posts/${token}`, {
           title: `${title}`,
           body: `${body}`,
-          like: 0,
         });
         const { data } = await axios.get(`${baseURL}`);
         setPost(data);
@@ -95,6 +99,15 @@ export default function Content() {
     } catch {
       console.log(Error);
     }
+  }
+
+  async function typeLoad(type: string) {
+    viewType = type;
+    console.log(`${baseURL}/posts/${token}/${viewType}`);
+    axios.get(`${baseURL}/posts/${token}/${viewType}`).then((response) => {
+      setPost(response.data);
+      console.log(response.data);
+    });
   }
 
   async function deletePost(id) {
@@ -158,6 +171,7 @@ export default function Content() {
                   placeholder="Title"
                   size="lg"
                   onChange={handleChangeTitle}
+                  isDisabled={post[0].status == 99}
                   value={title}
                   borderRadius="xl"
                   _focus={{
@@ -175,6 +189,7 @@ export default function Content() {
               <Textarea
                 value={body}
                 onChange={handleChangeBody}
+                isDisabled={post[0].status == 99}
                 placeholder="Body"
                 size="lg"
                 overflowY="auto"
@@ -204,13 +219,21 @@ export default function Content() {
               /> */}
             </FormControl>
 
-            {/* <IconButton
+            <Button
               colorScheme="blue"
-              aria-label="Search database"
+              aria-label="Post"
               marginLeft="10"
               type="submit"
-              icon={<CheckIcon />}
-            /> */}
+              mt="15px"
+              _focus={{
+                outline: "none",
+              }}
+              _active={{
+                bg: "none",
+              }}
+            >
+              <Text>post</Text>
+            </Button>
           </form>
         </Box>
       </Flex>
@@ -225,8 +248,44 @@ export default function Content() {
         w="80%"
       >
         <Flex alignItems="center">
-          <WarningTwoIcon />
-          <Text marginLeft="2">Hot</Text>
+          <Button
+            _focus={{
+              outline: "none",
+            }}
+            _active={{
+              bg: "none",
+            }}
+            onClick={() => typeLoad("hot")}
+          >
+            <WarningTwoIcon />
+            <Text marginLeft="2">Hot</Text>
+          </Button>
+          <Button
+            _focus={{
+              outline: "none",
+            }}
+            _active={{
+              bg: "none",
+            }}
+            onClick={() => typeLoad("top")}
+            ml="10px"
+          >
+            <WarningTwoIcon />
+            <Text marginLeft="2">Top</Text>
+          </Button>
+          <Button
+            _focus={{
+              outline: "none",
+            }}
+            _active={{
+              bg: "none",
+            }}
+            onClick={() => typeLoad("new")}
+            ml="10px"
+          >
+            <WarningTwoIcon />
+            <Text marginLeft="2">New</Text>
+          </Button>
         </Flex>
       </Box>
       {/* ===================== End Sort Seleted =====================  */}
