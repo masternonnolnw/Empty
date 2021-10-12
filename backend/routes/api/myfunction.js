@@ -113,6 +113,5 @@ function pastAndCurLike(post, userid, past, cur, res) {
         post.dislike++;
     }
     post.totallike = post.like - post.dislike;
-    post.status = parseInt(cur);
     return 1;
 }
