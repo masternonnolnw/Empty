@@ -137,8 +137,9 @@ const postRoutes = (app, fs) => {
   });
 
   // like & dislike method
-  app.put("/posts/:userid/:postid/:past/:cur", (req,res) => {
+  app.put("/posts/:userid/:postid/:cur", (req,res) => {
     // past กับ cur คือสเตตัสของ user ว่า like(1) / dislike(-1) / none(0)
+    // ลบ past ออกไปแล้ว
     // จะไปอัพเดทไฟล์ post.json
 
     fs.readFile(dataPath, "utf8", (err, post) => {
@@ -149,13 +150,8 @@ const postRoutes = (app, fs) => {
   
       const userid = req.params.userid;
       const postid = req.params.postid;
-      const past = req.params.past;
       const cur = req.params.cur;
       
-      if (past != "1" && past != "-1" && past != "0") {
-        res.status(410).send("Wrong Liketype (past)");
-        return;
-      }
       if (cur != "1" && cur != "-1" && cur != "0") {
         res.status(410).send("Wrong Liketype (cur)");
         return;
@@ -167,10 +163,8 @@ const postRoutes = (app, fs) => {
       
       for(var key in postjson.data) {
         if (postjson.data[key].id == postid) {
-          if (tools.pastAndCurLike(postjson.data[key], userid, past, cur, res) == -1) {
-            res.status(420).send("past status doesn't match post.json");
-            return;
-          }
+          if (cur == "1") tools.upLikePost(postjson.data[key], userid);
+          else if (cur == "-1") tools.downLikePost(postjson.data[key], userid);
         }
       }
 

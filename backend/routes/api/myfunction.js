@@ -30,7 +30,7 @@ function upLikePost(post, userid) {
         post.like -= 1;
         post.totallike -= 1;
         removeItem(post.likelist, userid);
-        post.status = 0;
+        //post.status = 0;
     }
     else if (isDisLiked) {
         // stop dislike and like
@@ -39,13 +39,13 @@ function upLikePost(post, userid) {
         post.totallike += 2;
         removeItem(post.dislikelist, userid);
         post.likelist.push(userid);
-        post.status = 1;
+        //post.status = 1;
     }
     else {
         // just like
         post.like += 1; post.totallike += 1;
         post.likelist.push(userid);
-        post.status = 1;
+        //post.status = 1;
     }
 }
 
@@ -57,20 +57,20 @@ function downLikePost(post, userid) {
         post.dislike -= 1;
         post.totallike += 1;
         removeItem(post.dislikelist, userid);
-        post.status = 0;
+        //post.status = 0;
     }
     else if (isLiked) {
         // change like to dislike
         post.like -= 1; post.dislike += 1;
         post.totallike -= 2;
         removeItem(post.likelist, userid); post.dislikelist.push(userid);
-        post.status = -1;
+        //post.status = -1;
     }
     else {
         // just dislike
         post.dislike += 1; post.totallike -= 1;
         post.dislikelist.push(userid);
-        post.status = -1;
+        //post.status = -1;
     }    
 }
 
