@@ -205,15 +205,35 @@ const postRoutes = (app, fs) => {
   })
 
   // CREATE
-  app.post("/posts", (req, res) => {
+  app.post("/posts/:userid", (req, res) => {
+    const userid = req.params.userid;
+    const userPath = '../../data/users.json'
+    var userData = require(userPath);
+    if (!userData.hasOwnProperty(userid)) {
+      res.status(405).send("Permission required");
+      return;
+    }
     readFile((post) => {
       const nextId = post.lastId + 1;
       post.data.push({
         id: nextId,
+        like: 0,
+        dislike: 0,
+        totallike : 0,
+        date : moment().format(),
+        likelist : [],
+        dislikelist : [],
         ...req.body,
       });
+
+      var temp = post.data[nextId - 1];
+      for (var i = nextId - 1; i > 0; i--) {
+        post.data[i] = post.data[i-1];
+      }
+      post.data[0] = temp;
+
       post.lastId = nextId;
-      writeFile(JSON.stringify(post, null, 2), () => {
+      writeFile(JSON.stringify(post, null, '\t'), () => {
         res.status(201).send(`Success`);
       });
     }, true);
