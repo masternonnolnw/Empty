@@ -132,6 +132,7 @@ const postRoutes = (app, fs) => {
       }
       // getpost
       post_list = getpost(req, res, post);
+      post_real = post_list;
       res.send(post_list);
     });
   });

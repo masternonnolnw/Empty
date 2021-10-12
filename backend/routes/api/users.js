@@ -1,6 +1,4 @@
 path = require('path')
-dir = path.join('../..', '/data/users.json')
-const json_data = require(dir)
 
 const userRoutes = (app, fs) => {
 
@@ -42,23 +40,24 @@ const userRoutes = (app, fs) => {
 
     // CREATE
     app.post('/users', (req, res) => {
-        for(var key in json_data) {
-            if(json_data[key].username == req.body.username) {
-                res.status(400).send("user existed");
-                return;
-            }
-        }
+        // รับเป็น json body ประกอบด้วย username, password
         readFile(data => {
             // Note: this isn't ideal for production use. 
             // ideally, use something like a UUID or other GUID for a unique ID value
             const newUserId = Date.now().toString();
-            //console.log(req.body.username)
-            
 
+            req.body.username = req.body.username.toLowerCase();
+
+            for (var key in data) {
+                if (data[key].username == req.body.username) {
+                    res.status(444).send("account already existed");
+                    return;
+                }
+            }
             // add the new user
             data[newUserId.toString()] = req.body;
 
-            writeFile(JSON.stringify(data, null, 2), () => {
+            writeFile(JSON.stringify(data, null, '\t'), () => {
                 res.status(200).send('new user added');
             });
         },
