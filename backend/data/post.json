@@ -53,7 +53,11 @@
 			"id": 2,
 			"likelist": [],
 			"dislikelist": [],
+<<<<<<< HEAD
 			"status": 99
+=======
+			"status": 0
+>>>>>>> b885a09ee8f80bfd9c114673bf2f5bd276253417
 		}
 	]
 }

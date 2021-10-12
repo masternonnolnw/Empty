@@ -74,7 +74,7 @@ const postRoutes = (app, fs) => {
       
     // 1. check if user_id is correct
     const userdata = require('../../data/users.json');
-    const userExists = userdata.hasOwnProperty(userid);
+    const userExists = userdata.hasOwnProperty(userid) && userid != "0";
 /*    if (!userExists) {
       res.status(402).send("You don't have permission");
       return;
