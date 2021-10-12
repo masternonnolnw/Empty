@@ -243,7 +243,7 @@ const postRoutes = (app, fs) => {
         res.status(201).send(`Success`);
       });
 
-      res.status(206).send(post);
+      res.status(206).send(post.data);
     }, true);
   });
 };
