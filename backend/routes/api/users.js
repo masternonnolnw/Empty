@@ -52,9 +52,7 @@ const userRoutes = (app, fs) => {
 
             for (var key in data) {
                 if (data[key].username == req.body.username) {
-                    //res.status(444).send("account already existed");
-                    res.send("Account already existed");
-                    throw("Account already existed");
+                    res.status(444).send("account already existed");
                     return;
                 }
             }
