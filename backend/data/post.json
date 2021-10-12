@@ -15,7 +15,21 @@
 			"dislikelist": [
 				"1634033397427"
 			],
-			"status": 0
+			"status": 99
+		},
+		{
+			"title": "post3",
+			"body": "most like",
+			"date": "2021-10-01T18:51:21+07:00",
+			"like": 1,
+			"dislike": 0,
+			"totallike": 1,
+			"id": 3,
+			"likelist": [
+				"1633769155834"
+			],
+			"dislikelist": [],
+			"status": 99
 		},
 		{
 			"title": "post3",
@@ -39,25 +53,7 @@
 			"id": 2,
 			"likelist": [],
 			"dislikelist": [],
-<<<<<<< HEAD
-			"status": 0
-=======
 			"status": 99
-		},
-		{
-			"title": "post3",
-			"body": "most like",
-			"date": "2021-10-01T18:51:21+07:00",
-			"like": 1,
-			"dislike": 0,
-			"totallike": 1,
-			"id": 3,
-			"likelist": [
-				"1633769155834"
-			],
-			"dislikelist": [],
-			"status": 99
->>>>>>> af76a70912bf74adef3b0e91e3aa611c23c24eb5
 		}
 	]
 }

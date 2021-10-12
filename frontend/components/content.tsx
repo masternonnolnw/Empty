@@ -32,7 +32,12 @@ export default function Content() {
     token = localStorage.getItem("token") as string;
   }
   useEffect(() => {
-    axios.get(`${baseURL}/posts/${token}/${viewType}`).then((response) => {
+    var ttoken = token;
+    if (ttoken == "") {
+      ttoken = "0";
+    }
+    console.log(ttoken);
+    axios.get(`${baseURL}/posts/${ttoken}/${viewType}`).then((response) => {
       setPost(response.data);
       console.log(response.data);
     });
@@ -219,7 +224,7 @@ export default function Content() {
         borderRadius="xl"
         w="80%"
       >
-        <Flex FlexDir="rows" alignItems="center">
+        <Flex alignItems="center">
           <WarningTwoIcon />
           <Text marginLeft="2">Hot</Text>
         </Flex>
