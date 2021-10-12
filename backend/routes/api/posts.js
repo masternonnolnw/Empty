@@ -163,8 +163,9 @@ const postRoutes = (app, fs) => {
       
       for(var key in postjson.data) {
         if (postjson.data[key].id == postid) {
-          if (cur == "1") tools.upLikePost(postjson.data[key], userid);
-          else if (cur == "-1") tools.downLikePost(postjson.data[key], userid);
+          if (cur == "1") tools.justUpLike(postjson.data[key], userid);
+          else if (cur == "-1") tools.justDownLike(postjson.data[key], userid);
+          else tools.justNoLike(postjson.data[key], userid);
         }
       }
 

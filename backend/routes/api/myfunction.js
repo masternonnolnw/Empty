@@ -2,6 +2,9 @@ module.exports = {
     upLikePost
     ,downLikePost
     ,pastAndCurLike
+    ,justDownLike
+    ,justNoLike
+    ,justUpLike
 };
 
 function removeItem(arr, val) {
@@ -114,4 +117,39 @@ function pastAndCurLike(post, userid, past, cur, res) {
     }
     post.totallike = post.like - post.dislike;
     return 1;
+}
+
+function justUpLike(post, userid) {
+    if (post.likelist.includes(userid)) return;
+    if (post.dislikelist.includes(userid)) {
+        removeItem(post.dislikelist, userid);
+        post.dislike--;
+    }
+
+    post.likelist.push(userid); 
+    post.like += 1;
+    post.totallike = post.like - post.dislike;
+}
+
+function justDownLike(post, userid) {
+    if (post.dislikelist.includes(userid)) return;
+    if (post.likelist.includes(userid)) {
+        removeItem(post.likelist, userid);
+        post.like--;
+    }
+    post.dislikelist.push(userid);
+    post.dislike += 1;
+    post.totallike = post.like - post.dislike;
+}
+
+function justNoLike(post, userid) {
+    if (post.likelist.includes(userid)) {
+        removeItem(post.likelist, userid);
+        post.like--;
+    }
+    if (post.dislikelist.includes(userid)) {
+        removeItem(post.dislikelist, userid);
+        post.dislike--;
+    }
+    post.totallike = post.like - post.dislike;
 }
