@@ -7,7 +7,7 @@ import {
   ChakraProvider,
 } from "@chakra-ui/react";
 import { Box, Spacer } from "@chakra-ui/layout";
-import MainContent from "./content";
+import MainContent from "../components/content";
 import ThemeToggler from "../components/ThemeToggler";
 import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 

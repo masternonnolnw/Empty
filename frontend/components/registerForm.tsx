@@ -9,47 +9,57 @@ import { useState } from "react";
 import { userLogin } from "../utils/Api";
 import ErrorMessage from "./ErrorMessage";
 
-export default function LoginForm() {
+export default function registerForm() {
   const [username, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handlePasswordVisibility = () => setShowPassword(!showPassword);
+  const [showCheckPassword, setShowCheckPassword] = useState(false);
+  const handleCheckPasswordVisibility = () =>
+    setShowCheckPassword(!showPassword);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-    try {
-      const token = await userLogin({ username, password });
-      console.log(token);
-      console.log(token.data);
-      console.log(typeof token.data);
-      if (typeof token.data == typeof "asd") {
-        setError("Invalid username or password");
+    if (password != checkPassword) {
+      setError("password not match");
+      setIsLoading(false);
+      setShowPassword(false);
+    } else {
+      try {
+        const token = await userLogin({ username, password });
+        console.log(token);
+        console.log(token.data);
+        console.log(typeof token.data);
+        if (typeof token.data == typeof "asd") {
+          setError("Invalid username or password");
+          setIsLoading(false);
+          setEmail("");
+          setPassword("");
+          setShowPassword(false);
+        } else {
+          if (typeof window !== "undefined") {
+            console.log("we are running on the client");
+            localStorage.setItem("token", `${token.data}`);
+          } else {
+            console.log("we are running on the server");
+          }
+          setIsLoggedIn(true);
+          setIsLoading(false);
+          setShowPassword(false);
+          window.location.href = "/app";
+        }
+      } catch (error) {
+        setError("Error");
         setIsLoading(false);
         setEmail("");
         setPassword("");
         setShowPassword(false);
-      } else {
-        if (typeof window !== "undefined") {
-          console.log("we are running on the client");
-          localStorage.setItem("token", `${token.data}`);
-        } else {
-          console.log("we are running on the server");
-        }
-        setIsLoggedIn(true);
-        setIsLoading(false);
-        setShowPassword(false);
-        window.location.href = "/app";
       }
-    } catch (error) {
-      setError("Error");
-      setIsLoading(false);
-      setEmail("");
-      setPassword("");
-      setShowPassword(false);
     }
   };
   return (
@@ -62,7 +72,7 @@ export default function LoginForm() {
         boxShadow="lg"
       >
         <Box textAlign="center">
-          <Heading>Login</Heading>
+          <Heading>Register</Heading>
         </Box>
         <Box my={4} textAlign="left">
           <form onSubmit={handleSubmit}>
@@ -82,7 +92,7 @@ export default function LoginForm() {
               <InputGroup>
                 <Input
                   type={showPassword ? "text" : "password"}
-                  placeholder="*******"
+                  placeholder="password"
                   size="lg"
                   onChange={(event) => setPassword(event.currentTarget.value)}
                   value={password}
@@ -94,6 +104,28 @@ export default function LoginForm() {
                     onClick={handlePasswordVisibility}
                   >
                     {showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <FormControl isRequired mt={6}>
+              <InputGroup>
+                <Input
+                  type={showCheckPassword ? "text" : "password"}
+                  placeholder="Confirm password"
+                  size="lg"
+                  onChange={(event) =>
+                    setCheckPassword(event.currentTarget.value)
+                  }
+                  value={checkPassword}
+                />
+                <InputRightElement alignSelf="center" mr="8px">
+                  <Button
+                    h="1.5rem"
+                    size="sm"
+                    onClick={handleCheckPasswordVisibility}
+                  >
+                    {showCheckPassword ? <ViewOffIcon /> : <ViewIcon />}
                   </Button>
                 </InputRightElement>
               </InputGroup>

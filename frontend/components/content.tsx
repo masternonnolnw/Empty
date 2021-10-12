@@ -1,11 +1,13 @@
 import { Avatar } from "@chakra-ui/avatar";
 import { Button, IconButton } from "@chakra-ui/button";
+import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import { FormControl } from "@chakra-ui/form-control";
 import { ArrowDownIcon, ArrowUpIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import { Input } from "@chakra-ui/input";
 import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/layout";
 import { MenuButton } from "@chakra-ui/menu";
 import { Select } from "@chakra-ui/select";
+import { tokenToCSSVar } from "@chakra-ui/styled-system";
 import { Tag } from "@chakra-ui/tag";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -22,11 +24,15 @@ export default function Content() {
   const [post, setPost] = useState(null);
 
   const username = "MaStEr";
-
+  var token = "0";
+  var viewType = "top";
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token") as string;
+  }
   useEffect(() => {
-    axios.get(`${baseURL}/posts`).then((response) => {
+    axios.get(`${baseURL}/posts/${token}/${viewType}`).then((response) => {
       setPost(response.data);
-      // console.log(response.data)
+      console.log(response.data);
     });
   }, []);
 
@@ -46,12 +52,17 @@ export default function Content() {
       }
     } catch (error) {}
   };
+  // app.put("/posts/:userid/:postid/:past/:cur"
   async function upLike(pos) {
-    await axios.put(`${baseURL}/posts/${pos.id}`, {
-      title: `${pos.title}`,
-      body: `${pos.body}`,
-      like: pos.like + 1,
-    });
+    var curStatus = 0;
+    if (pos.status == 1) {
+      curStatus = 0;
+    } else {
+      curStatus = 1;
+    }
+    await axios.put(
+      `${baseURL}/posts/${token}/${pos.id}/${pos.status}/${curStatus}`
+    );
     const { data } = await axios.get(`${baseURL}`);
     setPost(data);
   }
@@ -103,7 +114,7 @@ export default function Content() {
           width: "6px",
         },
         "&::-webkit-scrollbar-thumb": {
-          background: "#fff",
+          background: "#C9C9C9",
           borderRadius: "24px",
         },
       }}
@@ -197,6 +208,7 @@ export default function Content() {
               >
                 <IconButton
                   variant="ghost"
+                  colorScheme={pos.status == 1 ? "green" : "white"}
                   aria-label="Search database"
                   marginTop="3"
                   marginLeft="3"
@@ -207,10 +219,11 @@ export default function Content() {
                 />
 
                 <Text marginTop="3" marginLeft="3" fontSize="2xl">
-                  {pos.like}
+                  {pos.totallike}
                 </Text>
                 <IconButton
                   variant="ghost"
+                  colorScheme={pos.status == -1 ? "green" : "white"}
                   aria-label="Search database"
                   marginTop="3"
                   marginLeft="3"
