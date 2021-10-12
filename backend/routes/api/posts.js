@@ -181,7 +181,7 @@ const postRoutes = (app, fs) => {
         }
       });
 
-      res.status(201).send(postjson);
+      res.status(201).send(postjson.data);
       //res.status(201).send("Success");
     });
   })
