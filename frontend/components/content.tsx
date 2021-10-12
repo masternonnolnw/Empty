@@ -254,6 +254,7 @@ export default function Content() {
                 marginTop="3"
                 marginLeft="3"
                 onClick={() => upLike(pos)}
+                isDisabled={pos.status == 99}
                 icon={<ArrowUpIcon />}
                 isRound
                 fontSize="3xl"
@@ -275,6 +276,7 @@ export default function Content() {
                 marginTop="3"
                 marginLeft="3"
                 onClick={() => downLike(pos)}
+                isDisabled={pos.status == 99}
                 icon={<ArrowDownIcon />}
                 isRound
                 fontSize="3xl"
