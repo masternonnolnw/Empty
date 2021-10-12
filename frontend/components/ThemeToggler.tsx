@@ -9,6 +9,15 @@ export default function ThemeToggler() {
   return (
     <Box textAlign="right" p={4} mr={3}>
       <IconButton
+        _focus={{
+          outline: "none",
+        }}
+        _hover={{
+          bg: "none",
+        }}
+        _active={{
+          bg: "none",
+        }}
         aria-label="Color Mode"
         icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         onClick={toggleColorMode}

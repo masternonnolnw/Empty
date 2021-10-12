@@ -15,7 +15,14 @@ export default function MyApp() {
   return (
     <>
       <Flex h="10vh">
-        <Link href="/login" ml="7" mt="5">
+        <Link
+          href="/login"
+          ml="7"
+          mt="5"
+          _focus={{
+            outline: "none",
+          }}
+        >
           Login
         </Link>
         <Spacer />

@@ -9,6 +9,7 @@ import { MenuButton } from "@chakra-ui/menu";
 import { Select } from "@chakra-ui/select";
 import { tokenToCSSVar } from "@chakra-ui/styled-system";
 import { Tag } from "@chakra-ui/tag";
+import { Textarea } from "@chakra-ui/textarea";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -61,8 +62,9 @@ export default function Content() {
       curStatus = 1;
     }
     try {
+      console.log(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
       const newPost = await axios.put(
-        `${baseURL}/posts/${token}/${pos.id}/${pos.status}/${curStatus}`
+        `${baseURL}/posts/${token}/${pos.id}/${curStatus}`
       );
       setPost(newPost.data);
       console.log(newPost.data);
@@ -80,7 +82,7 @@ export default function Content() {
     }
     try {
       const newPost = await axios.put(
-        `${baseURL}/posts/${token}/${pos.id}/${pos.status}/${curStatus}`
+        `${baseURL}/posts/${token}/${pos.id}/${curStatus}`
       );
       setPost(newPost.data);
       console.log(newPost.data);
@@ -123,7 +125,7 @@ export default function Content() {
           width: "4px",
         },
         "&::-webkit-scrollbar-track": {
-          width: "6px",
+          width: "4px",
         },
         "&::-webkit-scrollbar-thumb": {
           background: "#C9C9C9",
@@ -152,6 +154,9 @@ export default function Content() {
                   onChange={handleChangeTitle}
                   value={title}
                   borderRadius="xl"
+                  _focus={{
+                    outline: "none",
+                  }}
                 >
                   <option value="study">Study</option>
                   <option value="food">Food</option>
@@ -161,7 +166,27 @@ export default function Content() {
               </FormControl>
             </Flex>
             <FormControl id="Body" isRequired>
-              <Input
+              <Textarea
+                value={body}
+                onChange={handleChangeBody}
+                placeholder="Body"
+                size="lg"
+                overflowY="auto"
+                padding="2"
+                css={{
+                  "&::-webkit-scrollbar": {
+                    width: "5px",
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    width: "5px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    background: "#C9C9C9",
+                    borderRadius: "24px",
+                  },
+                }}
+              />
+              {/* <Input
                 placeholder="Body"
                 padding="5"
                 borderRadius="full"
@@ -170,7 +195,7 @@ export default function Content() {
                 h="60px"
                 value={body}
                 onChange={handleChangeBody}
-              />
+              /> */}
             </FormControl>
 
             {/* <IconButton
@@ -194,10 +219,8 @@ export default function Content() {
         w="80%"
       >
         <Flex FlexDir="rows" alignItems="center">
-          <>
-            <WarningTwoIcon />
-            <Text marginLeft="2">Hot</Text>
-          </>
+          <WarningTwoIcon />
+          <Text marginLeft="2">Hot</Text>
         </Flex>
       </Box>
       {/* ===================== End Sort Seleted =====================  */}
@@ -207,73 +230,78 @@ export default function Content() {
         spacing={8}
         w="90%"
         marginTop="5" /*divider={<StackDivider borderColor="gray.200" />}*/
+        marginBottom="8"
       >
         {post.map((pos) => (
-          <Box p={5} shadow="md" borderWidth="1px" borderRadius="xl">
-            <Flex>
-              {/* =========================== Heading ======================== */}
-              <Flex
-                flexDir="column"
-                alignItems="center"
-                marginRight="10"
-                alignSelf="center"
-              >
-                <IconButton
-                  variant="ghost"
-                  colorScheme={pos.status == 1 ? "green" : "white"}
-                  aria-label="Search database"
-                  marginTop="3"
-                  marginLeft="3"
-                  onClick={() => upLike(pos)}
-                  icon={<ArrowUpIcon />}
-                  isRound
-                  fontSize="3xl"
-                />
+          <Flex p={5} shadow="md" borderWidth="1px" borderRadius="xl" w="100%">
+            {/* =========================== Heading ======================== */}
+            <Flex
+              flexDir="column"
+              alignItems="center"
+              marginRight="10"
+              alignSelf="center"
+            >
+              <IconButton
+                variant="ghost"
+                colorScheme={pos.status == 1 ? "green" : "white"}
+                aria-label="Search database"
+                marginTop="3"
+                marginLeft="3"
+                onClick={() => upLike(pos)}
+                icon={<ArrowUpIcon />}
+                isRound
+                fontSize="3xl"
+                _focus={{
+                  outline: "none",
+                }}
+                _active={{
+                  bg: "none",
+                }}
+              />
 
-                <Text marginTop="3" marginLeft="3" fontSize="2xl">
-                  {pos.totallike}
-                </Text>
-                <IconButton
-                  variant="ghost"
-                  colorScheme={pos.status == -1 ? "green" : "white"}
-                  aria-label="Search database"
-                  marginTop="3"
-                  marginLeft="3"
-                  onClick={() => downLike(pos)}
-                  icon={<ArrowDownIcon />}
-                  isRound
-                  fontSize="3xl"
+              <Text marginTop="3" marginLeft="3" fontSize="2xl">
+                {pos.totallike}
+              </Text>
+              <IconButton
+                variant="ghost"
+                colorScheme={pos.status == -1 ? "green" : "white"}
+                aria-label="Search database"
+                marginTop="3"
+                marginLeft="3"
+                onClick={() => downLike(pos)}
+                icon={<ArrowDownIcon />}
+                isRound
+                fontSize="3xl"
+              />
+            </Flex>
+
+            <Flex flexDir="column">
+              <Flex flexDir="row" marginBottom="5">
+                <Avatar
+                  name="Dan Abrahmov"
+                  src="https://bit.ly/dan-abramov"
+                  marginRight="5"
+                  size="md"
                 />
+                <Text marginRight="5" alignSelf="center">
+                  {username}
+                </Text>
+              </Flex>
+              {/* =========================== End Heading ======================== */}
+              {/* =========================== Body ======================== */}
+              <Flex flexDir="column">
+                <Tag w="max">{pos.title}</Tag>
+                <Text
+                  fontSize="lg"
+                  paddingLeft="10"
+                  marginTop="2"
+                  wordBreak="break-word"
+                >
+                  {pos.body}
+                </Text>
               </Flex>
 
-              <Flex flexDir="column" w="100%">
-                <Flex flexDir="row" marginBottom="5">
-                  <Avatar
-                    name="Dan Abrahmov"
-                    src="https://bit.ly/dan-abramov"
-                    marginRight="5"
-                    size="md"
-                  />
-                  <Text marginRight="5" alignSelf="center">
-                    {username}
-                  </Text>
-                </Flex>
-                {/* =========================== End Heading ======================== */}
-                {/* =========================== Body ======================== */}
-                <Flex flexDir="column" w="100%">
-                  <Tag w="max">{pos.title}</Tag>
-                  <Flex
-                    flexDir="row"
-                    w="100%"
-                    borderWidth="0px"
-                    paddingLeft="10"
-                    marginTop="2"
-                  >
-                    <Text fontSize="xl">{pos.body}</Text>
-                  </Flex>
-                </Flex>
-
-                {/* <IconButton
+              {/* <IconButton
                   colorScheme="red"
                   aria-label="Search database"
                   marginTop="3"
@@ -283,10 +311,9 @@ export default function Content() {
                   isRound
                   w="10px"
                 /> */}
-              </Flex>
-              {/* =========================== End Body ======================== */}
             </Flex>
-          </Box>
+            {/* =========================== End Body ======================== */}
+          </Flex>
         ))}
       </Stack>
       {/* ===================== End Box =====================  */}

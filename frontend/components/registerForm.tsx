@@ -102,6 +102,9 @@ export default function registerForm() {
                     h="1.5rem"
                     size="sm"
                     onClick={handlePasswordVisibility}
+                    _focus={{
+                      outline: "none",
+                    }}
                   >
                     {showPassword ? <ViewOffIcon /> : <ViewIcon />}
                   </Button>
@@ -124,6 +127,9 @@ export default function registerForm() {
                     h="1.5rem"
                     size="sm"
                     onClick={handleCheckPasswordVisibility}
+                    _focus={{
+                      outline: "none",
+                    }}
                   >
                     {showCheckPassword ? <ViewOffIcon /> : <ViewIcon />}
                   </Button>
@@ -136,6 +142,9 @@ export default function registerForm() {
               type="submit"
               width="full"
               mt={4}
+              _focus={{
+                outline: "none",
+              }}
             >
               {isLoading ? (
                 <CircularProgress isIndeterminate size="24px" color="teal" />
