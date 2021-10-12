@@ -5,6 +5,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { Box, Flex, Heading } from "@chakra-ui/layout";
 import { CircularProgress } from "@chakra-ui/progress";
+import axios from "axios";
 import { useState } from "react";
 import { userLogin } from "../utils/Api";
 import ErrorMessage from "./ErrorMessage";
@@ -20,7 +21,7 @@ export default function registerForm() {
   const handlePasswordVisibility = () => setShowPassword(!showPassword);
   const [showCheckPassword, setShowCheckPassword] = useState(false);
   const handleCheckPasswordVisibility = () =>
-    setShowCheckPassword(!showPassword);
+    setShowCheckPassword(!showCheckPassword);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -31,34 +32,23 @@ export default function registerForm() {
       setShowPassword(false);
     } else {
       try {
-        const token = await userLogin({ username, password });
-        console.log(token);
-        console.log(token.data);
-        console.log(typeof token.data);
-        if (typeof token.data == typeof "asd") {
-          setError("Invalid username or password");
-          setIsLoading(false);
-          setEmail("");
-          setPassword("");
-          setShowPassword(false);
-        } else {
-          if (typeof window !== "undefined") {
-            console.log("we are running on the client");
-            localStorage.setItem("token", `${token.data}`);
-          } else {
-            console.log("we are running on the server");
-          }
-          setIsLoggedIn(true);
-          setIsLoading(false);
-          setShowPassword(false);
-          window.location.href = "/app";
-        }
+        const baseURL = process.env.NEXT_PUBLIC_API_URL;
+        const token = await axios.post(`${baseURL}/users`, {
+          username,
+          password,
+        });
+        // console.log(token);
+        // console.log(token.data);
+        // console.log(typeof token.data);else {
+        window.location.href = "/login";
       } catch (error) {
-        setError("Error");
+        setError(error);
         setIsLoading(false);
         setEmail("");
         setPassword("");
         setShowPassword(false);
+        setCheckPassword("");
+        setShowCheckPassword(false);
       }
     }
   };
@@ -81,7 +71,7 @@ export default function registerForm() {
               <FormLabel>Username</FormLabel>
               <Input
                 type="text"
-                placeholder="test@test.com"
+                placeholder="username"
                 size="lg"
                 onChange={(event) => setEmail(event.currentTarget.value)}
                 value={username}
@@ -97,7 +87,7 @@ export default function registerForm() {
                   onChange={(event) => setPassword(event.currentTarget.value)}
                   value={password}
                 />
-                <InputRightElement alignSelf="center" mr="8px">
+                <InputRightElement alignSelf="center" mr="8px" mt="1">
                   <Button
                     h="1.5rem"
                     size="sm"
@@ -122,7 +112,7 @@ export default function registerForm() {
                   }
                   value={checkPassword}
                 />
-                <InputRightElement alignSelf="center" mr="8px">
+                <InputRightElement alignSelf="center" mr="8px" mt="1">
                   <Button
                     h="1.5rem"
                     size="sm"
