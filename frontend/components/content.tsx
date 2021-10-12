@@ -52,12 +52,12 @@ export default function Content() {
     event.preventDefault();
     try {
       if (title && body) {
-        await axios.post(`${baseURL}/posts/${token}`, {
+        const newPost = await axios.post(`${baseURL}/posts/${token}`, {
           title: `${title}`,
           body: `${body}`,
         });
-        const { data } = await axios.get(`${baseURL}`);
-        setPost(data);
+        console.log(newPost.data);
+        setPost(newPost.data);
         setTitle("");
         setBody("");
       }
