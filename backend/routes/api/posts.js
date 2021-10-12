@@ -173,13 +173,21 @@ const postRoutes = (app, fs) => {
           }
         }
       }
-      //console.log(postjson);
+
+     // console.log(postjson);
 
       fs.writeFile('./data/post.json', JSON.stringify(postjson, null, '\t'), (error) => {
         if (error) {
           throw(error); return;
         }
       });
+
+      //console.log(postjson);
+      for (var key in postjson.data) {
+        if (postjson.data[key].likelist.includes(userid)) postjson.data[key]['status'] = "1";
+        else if(postjson.data[key].dislikelist.includes(userid)) postjson.data[key]['status'] = "-1";
+        else postjson.data[key]['status'] = 0;
+      }
 
       res.status(201).send(postjson.data);
       //res.status(201).send("Success");
