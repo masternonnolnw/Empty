@@ -231,11 +231,19 @@ const postRoutes = (app, fs) => {
         post.data[i] = post.data[i-1];
       }
       post.data[0] = temp;
-
       post.lastId = nextId;
+
+      for (var key in post.data) {
+        if (post.data[key].likelist.includes(userid)) post.data[key]['status'] = "1";
+        else if(post.data[key].dislikelist.includes(userid)) post.data[key]['status'] = "-1";
+        else post.data[key]['status'] = 0;
+      }
+
       writeFile(JSON.stringify(post, null, '\t'), () => {
         res.status(201).send(`Success`);
       });
+
+      res.status(206).send(post);
     }, true);
   });
 };
