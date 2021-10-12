@@ -60,23 +60,35 @@ export default function Content() {
     } else {
       curStatus = 1;
     }
-    await axios.put(
-      `${baseURL}/posts/${token}/${pos.id}/${pos.status}/${curStatus}`
-    );
-    axios.get(`${baseURL}/posts/${token}/${viewType}`).then((response) => {
-      setPost(response.data);
-      console.log(response.data);
-    });
+    try {
+      const newPost = await axios.put(
+        `${baseURL}/posts/${token}/${pos.id}/${pos.status}/${curStatus}`
+      );
+      setPost(newPost.data);
+      console.log(newPost.data);
+    } catch {
+      console.log(Error);
+    }
   }
 
   async function downLike(pos) {
-    await axios.put(`${baseURL}/posts/${pos.id}`, {
-      title: `${pos.title}`,
-      body: `${pos.body}`,
-      like: pos.like - 1,
-    });
-    const { data } = await axios.get(`${baseURL}`);
-    setPost(data);
+    var curStatus = 0;
+    if (pos.status == -1) {
+      curStatus = 0;
+    } else {
+      curStatus = -1;
+    }
+    try {
+      await axios.put(
+        `${baseURL}/posts/${token}/${pos.id}/${pos.status}/${curStatus}`
+      );
+      axios.get(`${baseURL}/posts/${token}/${viewType}`).then((response) => {
+        setPost(response.data);
+        console.log(response.data);
+      });
+    } catch {
+      console.log(Error);
+    }
   }
 
   async function deletePost(id) {
@@ -229,7 +241,7 @@ export default function Content() {
                   aria-label="Search database"
                   marginTop="3"
                   marginLeft="3"
-                  onClick={() => upLike(pos)}
+                  onClick={() => downLike(pos)}
                   icon={<ArrowDownIcon />}
                   isRound
                   fontSize="3xl"
