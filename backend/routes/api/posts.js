@@ -75,10 +75,10 @@ const postRoutes = (app, fs) => {
     // 1. check if user_id is correct
     const userdata = require('../../data/users.json');
     const userExists = userdata.hasOwnProperty(userid);
-    if (!userExists) {
+/*    if (!userExists) {
       res.status(402).send("You don't have permission");
       return;
-    }
+    } */
 
     // create json file of posts
     post_list = JSON.parse(post).data;
@@ -97,6 +97,9 @@ const postRoutes = (app, fs) => {
       }
       if (isDisliked) {
         thisStatus = -1
+      }
+      if (!userExists) {
+        thisStatus = 99;
       }
       post_list[key]["status"] = thisStatus;
     }
