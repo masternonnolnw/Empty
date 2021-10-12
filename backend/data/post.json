@@ -5,11 +5,13 @@
 			"title": "post1",
 			"body": "hello",
 			"date": "2021-10-09T16:51:21+07:00",
-			"like": 0,
+			"like": 1,
 			"dislike": 0,
-			"totallike": 0,
+			"totallike": 1,
 			"id": 1,
-			"likelist": [],
+			"likelist": [
+				"1633769155834"
+			],
 			"dislikelist": []
 		},
 		{
