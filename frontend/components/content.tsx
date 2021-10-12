@@ -63,8 +63,10 @@ export default function Content() {
     await axios.put(
       `${baseURL}/posts/${token}/${pos.id}/${pos.status}/${curStatus}`
     );
-    const { data } = await axios.get(`${baseURL}`);
-    setPost(data);
+    axios.get(`${baseURL}/posts/${token}/${viewType}`).then((response) => {
+      setPost(response.data);
+      console.log(response.data);
+    });
   }
 
   async function downLike(pos) {
