@@ -143,7 +143,7 @@ const postRoutes = (app, fs) => {
 
     fs.readFile(dataPath, "utf8", (err, post) => {
       if (err) {
-        throw err;
+        throw err; return;
       }
       // algorithm begin here
   
@@ -153,11 +153,11 @@ const postRoutes = (app, fs) => {
       const cur = req.params.cur;
       
       if (past != "1" && past != "-1" && past != "0") {
-        res.status(405).send("Wrong Liketype (past)");
+        res.status(222).send("Wrong Liketype (past)");
         return;
       }
       if (cur != "1" && cur != "-1" && cur != "0") {
-        res.status(405).send("Wrong Liketype (cur)");
+        res.status(222).send("Wrong Liketype (cur)");
         return;
       }
 
@@ -176,10 +176,13 @@ const postRoutes = (app, fs) => {
       //console.log(postjson);
 
       fs.writeFile('./data/post.json', JSON.stringify(postjson, null, '\t'), (error) => {
-        if (error) throw error;
+        if (error) {
+          throw(error); return;
+        }
       });
 
-      res.status(201).send("Success");
+      res.status(201).send(postjson);
+      //res.status(201).send("Success");
     });
   })
 
