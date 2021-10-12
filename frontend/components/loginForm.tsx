@@ -23,10 +23,10 @@ export default function LoginForm() {
     setIsLoading(true);
     try {
       const token = await userLogin({ username, password });
-      console.log(token);
-      console.log(token.data);
-      console.log(typeof token.data);
-      if (typeof token.data == typeof "asd") {
+      // console.log(token);
+      // console.log(token.data);
+      // console.log(typeof token.data);
+      if (typeof token.data == typeof "string") {
         setError("Invalid username or password");
         setIsLoading(false);
         setEmail("");
@@ -71,7 +71,7 @@ export default function LoginForm() {
               <FormLabel>Username</FormLabel>
               <Input
                 type="text"
-                placeholder="test@test.com"
+                placeholder="username"
                 size="lg"
                 onChange={(event) => setEmail(event.currentTarget.value)}
                 value={username}
