@@ -10,7 +10,7 @@ import { Box, Spacer } from "@chakra-ui/layout";
 import MainContent from "../components/content";
 import ThemeToggler from "../components/ThemeToggler";
 import { loadGetInitialProps } from "next/dist/shared/lib/utils";
-
+import SideBar from "../components/sideBar";
 export default function MyApp() {
   return (
     <>
@@ -29,7 +29,9 @@ export default function MyApp() {
         <ThemeToggler />
       </Flex>
       <Flex>
-        <Flex w="17%" h="90vh"></Flex>
+        <Flex w="17%" h="90vh">
+          <SideBar />
+        </Flex>
         <Flex w="58%" h="90vh">
           <MainContent />
         </Flex>
