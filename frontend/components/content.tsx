@@ -118,11 +118,11 @@ export default function Content() {
     viewType = type;
     //localhost:8000/posts/1633769155834/top?timeframe='day'
     var timeframe = "";
-    if (type == "topday") timeframe = "?timeframe='day'";
-    if (type == "topweek") timeframe = "?timeframe='week'";
-    if (type == "topmonth") timeframe = "?timeframe='month'";
-    if (type == "topyear") timeframe = "?timeframe='year'";
-    if (type == "topalltime") timeframe = "?timeframe='alltime'";
+    if (type == "topday") timeframe = "?timeframe=day";
+    if (type == "topweek") timeframe = "?timeframe=week";
+    if (type == "topmonth") timeframe = "?timeframe=month";
+    if (type == "topyear") timeframe = "?timeframe=year";
+    if (type == "topalltime") timeframe = "?timeframe=alltime";
     console.log(`${baseURL}/posts/${token}/${viewType}${timeframe}`);
     // axios
     //   .get(`${baseURL}/posts/${token}/${viewType}${timeframe}`)
