@@ -1,7 +1,17 @@
-path = require("path");
+var path = require("path");
 
-moment = require('moment') //date&time
+var moment = require('moment') //date&time
+const { strictEqual } = require("assert");
+const { stringify } = require("querystring");
 var tools = require('./myfunction.js');
+
+var lenoftime = {
+  day : 1,
+  week : 7,
+  month : 30,
+  year : 365,
+  alltime : 10000000000
+};
 
 const postRoutes = (app, fs) => {
   // variables
@@ -50,11 +60,11 @@ const postRoutes = (app, fs) => {
       console.log("Viewing by Hot");
 
       post_list.sort((x,y) => {
-        x_time = moment().diff(moment(x.date), 'seconds');
-        avgLike_x = parseInt(x.totallike) / x_time;
+        var x_time = moment().diff(moment(x.date), 'seconds');
+        var avgLike_x = parseInt(x.totallike) / x_time;
 
-        y_time = moment().diff(moment(y.date), 'seconds');
-        avgLike_y = parseInt(y.totallike) / y_time;
+        var y_time = moment().diff(moment(y.date), 'seconds');
+        var avgLike_y = parseInt(y.totallike) / y_time;
 
         return avgLike_y - avgLike_x;
       });
@@ -68,10 +78,10 @@ const postRoutes = (app, fs) => {
   function getpost(req, res, post) {
     // รับ userid, viewtype มา แล้วลิสต์ post ทุกอันที่จะเห็นตามลำดับ return เป็น json array
     // ฟังก์ชั่นนี้ทำการเช็ค permission แล้ว (userid, viewtype) + sort แล้ว + add status แล้ว
-
+    
     // algorithm begin here
     const userid = req.params.userid;
-      
+    
     // 1. check if user_id is correct
     const userdata = require('../../data/users.json');
     const userExists = userdata.hasOwnProperty(userid) && userid != "0";
@@ -81,7 +91,11 @@ const postRoutes = (app, fs) => {
     } */
 
     // create json file of posts
-    post_list = JSON.parse(post).data;
+    var post_list = JSON.parse(post).data;
+
+
+    //console.log(post_list_new);
+
     if (sortPost(post_list, req.params.viewtype) == -1) {
       res.status(401).send("Wrong viewtype");
       return;
@@ -103,22 +117,7 @@ const postRoutes = (app, fs) => {
       }
       post_list[key]["status"] = thisStatus;
     }
-    // !just for testing
-/*       var cnt = 0;
-      for (key in post_list) {
-        if(cnt == 0) post_list[key]["status"] = 1;
-        else if(cnt == 2) post_list[key]["status"] = -1;
-        else post_list[key]["status"] = 0;
-        cnt++;
-      } */
-    //end
 
-    // printing for checking
-    /*for(key in post_list) {
-      console.log(post_list[key]);
-    } */
-
-    // respond
     //res.send(post_list);
     return post_list;
   }
@@ -134,9 +133,25 @@ const postRoutes = (app, fs) => {
         throw err;
       }
       // getpost
-      lastuserID = JSON.parse(post).lastId;
-      post_list = getpost(req, res, post);
+      var lastuserID = JSON.parse(post).lastId;
+      var post_list = getpost(req, res, post);
       
+      var post_list_new = [];
+
+      if (req.params.viewtype == "top") {
+  
+        const timeframe = req.query.timeframe;
+  
+        for (var key in post_list) {
+          var diff = moment().diff(moment(post_list[key].date), 'days');
+          var timeLimit = lenoftime[timeframe];
+          //console.log(timeLimit);
+          const isOk = diff <= timeLimit;
+          if (isOk) post_list_new.push(post_list[key]);
+        }
+      }
+      else post_list_new = post_list;
+
       var post_real = {};
       post_real['lastId'] = lastuserID;
       post_real['data'] = post_list;
@@ -147,7 +162,7 @@ const postRoutes = (app, fs) => {
         }
       });
 
-      res.send(post_list);
+      res.send(post_list_new);
     });
   });
 
@@ -172,7 +187,7 @@ const postRoutes = (app, fs) => {
         return;
       }
 
-      postjson = JSON.parse(post);
+      var postjson = JSON.parse(post);
       //console.log(postjson);
       //console.log(typeof postjson);
       
