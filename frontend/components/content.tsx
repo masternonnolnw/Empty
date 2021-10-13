@@ -30,9 +30,12 @@ export default function Content() {
 
   const [post, setPost] = useState(null);
 
+  const [isTop, setIsTop] = useState(false);
+  const handleSetTopViewtype = (event) => typeLoad(event.target.value);
+
   const username = "MaStEr";
   var token = "0";
-  var viewType = "top";
+  var viewType = "hot";
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token") as string;
   }
@@ -42,22 +45,32 @@ export default function Content() {
       ttoken = "0";
     }
     console.log(ttoken);
-    axios.get(`${baseURL}/posts/${ttoken}/${viewType}`).then((response) => {
-      setPost(response.data);
-      console.log(response.data);
-    });
+
+    var timeframe = "";
+    if (viewType == "topday") timeframe = "day";
+    if (viewType == "topweek") timeframe = "week";
+    if (viewType == "topmonth") timeframe = "month";
+    if (viewType == "topyear") timeframe = "year";
+    if (viewType == "topalltime") timeframe = "alltime";
+    console.log(`${baseURL}/posts/${token}/${viewType}${timeframe}`);
+    axios
+      .get(`${baseURL}/posts/${token}/${viewType}${timeframe}`)
+      .then((response) => {
+        setPost(response.data);
+        console.log(response.data);
+      });
   }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       if (title && body) {
-        await axios.post(`${baseURL}/posts/${token}`, {
+        const newPost = await axios.post(`${baseURL}/posts/${token}`, {
           title: `${title}`,
           body: `${body}`,
         });
-        const { data } = await axios.get(`${baseURL}`);
-        setPost(data);
+        console.log(newPost.data);
+        setPost(newPost.data);
         setTitle("");
         setBody("");
       }
@@ -103,11 +116,20 @@ export default function Content() {
 
   async function typeLoad(type: string) {
     viewType = type;
-    console.log(`${baseURL}/posts/${token}/${viewType}`);
-    axios.get(`${baseURL}/posts/${token}/${viewType}`).then((response) => {
-      setPost(response.data);
-      console.log(response.data);
-    });
+    //localhost:8000/posts/1633769155834/top?timeframe='day'
+    var timeframe = "";
+    if (type == "topday") timeframe = "?timeframe=day";
+    if (type == "topweek") timeframe = "?timeframe=week";
+    if (type == "topmonth") timeframe = "?timeframe=month";
+    if (type == "topyear") timeframe = "?timeframe=year";
+    if (type == "topalltime") timeframe = "?timeframe=alltime";
+    console.log(`${baseURL}/posts/${token}/${viewType}${timeframe}`);
+    // axios
+    //   .get(`${baseURL}/posts/${token}/${viewType}${timeframe}`)
+    //   .then((response) => {
+    //     setPost(response.data);
+    //     console.log(response.data);
+    //   });
   }
 
   async function deletePost(id) {
@@ -231,6 +253,7 @@ export default function Content() {
               _active={{
                 bg: "none",
               }}
+              isDisabled={post[0].status == 99}
             >
               <Text>post</Text>
             </Button>
@@ -238,6 +261,32 @@ export default function Content() {
         </Box>
       </Flex>
       {/* ===================== End Post Part =====================  */}
+      {/* ===================== Please login =====================  */}
+      {post[0].status == 99 ? (
+        <Flex
+          p={5}
+          shadow="md"
+          borderWidth="1px"
+          borderRadius="xl"
+          w="95%"
+          mt="5"
+          alignItems="center"
+        >
+          <Text>Please</Text>
+          <Button margin="3">
+            <Text>Login</Text>
+          </Button>
+          <Text>or</Text>
+          <Button margin="3">
+            <Text>Sign up</Text>
+          </Button>
+          <Text> to post.</Text>
+        </Flex>
+      ) : (
+        ""
+      )}
+      {/* ===================== End please login =====================  */}
+
       {/* ===================== Sort Seleted =====================  */}
       <Box
         p={5}
@@ -267,11 +316,11 @@ export default function Content() {
             _active={{
               bg: "none",
             }}
-            onClick={() => typeLoad("top")}
+            onClick={() => typeLoad("new")}
             ml="10px"
           >
             <WarningTwoIcon />
-            <Text marginLeft="2">Top</Text>
+            <Text marginLeft="2">New</Text>
           </Button>
           <Button
             _focus={{
@@ -280,12 +329,40 @@ export default function Content() {
             _active={{
               bg: "none",
             }}
-            onClick={() => typeLoad("new")}
+            onClick={() => {
+              typeLoad("topday");
+              setIsTop(!isTop);
+            }}
             ml="10px"
           >
             <WarningTwoIcon />
-            <Text marginLeft="2">New</Text>
+            <Text marginLeft="2">Top</Text>
           </Button>
+          {isTop ? (
+            <Select
+              w="max"
+              onChange={handleSetTopViewtype}
+              variant="outline"
+              ml="3"
+              borderRadius="3xl"
+              _focus={{
+                outline: "none",
+              }}
+              _active={{
+                bg: "none",
+              }}
+              textAlign="center"
+            >
+              {/* day week month year alltime */}
+              <option value="topday">day</option>
+              <option value="topweek">week</option>
+              <option value="topmonth">month</option>
+              <option value="topyear">year</option>
+              <option value="topalltime">alltime</option>
+            </Select>
+          ) : (
+            ""
+          )}
         </Flex>
       </Box>
       {/* ===================== End Sort Seleted =====================  */}
@@ -360,7 +437,9 @@ export default function Content() {
                   {username}
                 </Text>
                 <Text marginRight="5" alignSelf="center">
-                  {moment(moment()).diff(pos.date, "minutes") <= 10
+                  {moment(moment()).diff(pos.date, "minutes") == 0
+                    ? "Just now"
+                    : moment(moment()).diff(pos.date, "minutes") <= 10
                     ? "posted " +
                       moment(moment()).diff(pos.date, "minutes") +
                       " minutes ago"
