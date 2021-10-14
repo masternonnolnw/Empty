@@ -50,8 +50,10 @@ const commentRoutes = (app, fs) => {
             return;
         }
         var foundPost = false;
+        var idx_post = 0;
         for (var key in postdata.data) {
             if (postdata.data[key].id == postid) {
+                idx_post = key;
                 var lastid = postdata.data[key].lastcommentid;
                 var commentBox = tools.createCommentBox(commentBody, commentDate, userid, lastid); 
                 postdata.data[key].lastcommentid += 1;
@@ -60,6 +62,10 @@ const commentRoutes = (app, fs) => {
             }
         }
         //console.log(postdata);
+        tools.getStatus(postdata.data[idx_post], userid, userdata);
+        for (var key in postdata.data[idx_post].comment) {
+            tools.getStatus(postdata.data[idx_post].comment[key], userid, userdata);
+        }
         if (foundPost) {
             fs.writeFile('./data/post.json', JSON.stringify(postdata, null, '\t'), (err) => {
                 if (err) {
@@ -67,7 +73,7 @@ const commentRoutes = (app, fs) => {
                     return;
                 }
             }); 
-            res.status(215).send('comment success');
+            res.status(215).send(postdata.data[idx_post]);
             return;
         }
 
