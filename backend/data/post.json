@@ -81,14 +81,12 @@
 					"date": "2021-10-14T17:09:53+07:00",
 					"userid": "1633779518242",
 					"id": 1,
-					"totallike": -1,
-					"dislike": 1,
+					"totallike": 0,
+					"dislike": 0,
 					"like": 0,
 					"likelist": [],
-					"dislikelist": [
-						"1633779518242"
-					],
-					"status": -1
+					"dislikelist": [],
+					"status": 0
 				}
 			],
 			"title": "hi",
