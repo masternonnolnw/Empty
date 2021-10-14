@@ -5,11 +5,12 @@ import { Flex, Link, Spacer, Text } from "@chakra-ui/layout";
 import { Tag } from "@chakra-ui/tag";
 import axios from "axios";
 import moment from "moment";
+import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
-import CommentForm from "../components/commentForm";
-import ThemeToggler from "../components/ThemeToggler";
+import CommentForm from "../../components/commentForm";
+import ThemeToggler from "../../components/ThemeToggler";
 
-export default function comments() {
+export default function Comments() {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
   const [commentData, setCommentData] = useState(null);
   var token = "0";
@@ -17,18 +18,66 @@ export default function comments() {
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token") as string;
   }
-  var postId = 1;
-  useEffect(() => {
-    if (token == "") {
-      token = "0";
+  async function upLike(pos) {
+    var curStatus = 0;
+    if (pos.status == 1) {
+      curStatus = 0;
+    } else {
+      curStatus = 1;
     }
-    console.log(token);
-    console.log(`${baseURL}/comments/${postId}/${token}`);
-    axios.get(`${baseURL}/comments/${postId}/${token}`).then((response) => {
+    try {
+      console.log(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
+      await axios.put(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
+      const response = await axios.get(
+        `${baseURL}/comments/${postId}/${token}`
+      );
+      console.log("asd");
       console.log(response.data);
       setCommentData(response.data);
-    });
-  }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function downLike(pos) {
+    var curStatus = 0;
+    if (pos.status == -1) {
+      curStatus = 0;
+    } else {
+      curStatus = -1;
+    }
+    try {
+      console.log(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
+      await axios.put(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
+      const response = await axios.get(
+        `${baseURL}/comments/${postId}/${token}`
+      );
+      console.log("asd");
+      console.log(response.data);
+      setCommentData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const router = useRouter();
+  const pathData = router.query;
+  // console.log(router.asPath);
+  // console.log(pathData.id);
+  var postId = pathData.id;
+  // console.log(pathData);
+  useEffect(() => {
+    if (postId) {
+      if (token == "") {
+        token = "0";
+      }
+      // console.log(token);
+      console.log(`${baseURL}/comments/${postId}/${token}`);
+      axios.get(`${baseURL}/comments/${postId}/${token}`).then((response) => {
+        // console.log(response.data);
+        setCommentData(response.data);
+      });
+    }
+  }, [postId]);
   if (!commentData) {
     return (
       <Flex
@@ -83,7 +132,7 @@ export default function comments() {
                 aria-label="Search database"
                 marginTop="3"
                 marginLeft="3"
-                // onClick={() => upLike(commentData)}
+                onClick={() => upLike(commentData)}
                 isDisabled={commentData.status == 99}
                 icon={<ArrowUpIcon />}
                 isRound
@@ -105,7 +154,7 @@ export default function comments() {
                 aria-label="Search database"
                 marginTop="3"
                 marginLeft="3"
-                // onClick={() => downLike(commentData)}
+                onClick={() => downLike(commentData)}
                 isDisabled={commentData.status == 99}
                 icon={<ArrowDownIcon />}
                 isRound

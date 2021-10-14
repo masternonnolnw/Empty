@@ -125,43 +125,47 @@ export default function Content() {
   }
 
   async function typeLoad(type: string) {
-    if (token == "") {
-      token = "0";
+    try {
+      if (token == "") {
+        token = "0";
+      }
+      console.log(token);
+      setViewType(type);
+      //localhost:8000/posts/1633769155834/top?timeframe='day'
+      var timeframe = "";
+      if (type == "topday") {
+        timeframe = "?timeframe=day";
+        type = "top";
+      } else if (type == "topweek") {
+        timeframe = "?timeframe=week";
+        type = "top";
+      } else if (type == "topmonth") {
+        timeframe = "?timeframe=month";
+        type = "top";
+      } else if (type == "topyear") {
+        timeframe = "?timeframe=year";
+        type = "top";
+      } else if (type == "topalltime") {
+        timeframe = "?timeframe=alltime";
+        type = "top";
+      }
+      console.log(`${baseURL}/posts/${token}/${type}${timeframe}`);
+      axios
+        .get(`${baseURL}/posts/${token}/${type}${timeframe}`)
+        .then((response) => {
+          setPost(response.data);
+          console.log(response.data);
+        });
+    } catch (error) {
+      console.log(error);
     }
-    console.log(token);
-    setViewType(type);
-    //localhost:8000/posts/1633769155834/top?timeframe='day'
-    var timeframe = "";
-    if (type == "topday") {
-      timeframe = "?timeframe=day";
-      type = "top";
-    } else if (type == "topweek") {
-      timeframe = "?timeframe=week";
-      type = "top";
-    } else if (type == "topmonth") {
-      timeframe = "?timeframe=month";
-      type = "top";
-    } else if (type == "topyear") {
-      timeframe = "?timeframe=year";
-      type = "top";
-    } else if (type == "topalltime") {
-      timeframe = "?timeframe=alltime";
-      type = "top";
-    }
-    console.log(`${baseURL}/posts/${token}/${type}${timeframe}`);
-    axios
-      .get(`${baseURL}/posts/${token}/${type}${timeframe}`)
-      .then((response) => {
-        setPost(response.data);
-        console.log(response.data);
-      });
   }
 
-  async function deletePost(id) {
-    await axios.delete(`${baseURL}/${id}`);
-    const { data } = await axios.get(`${baseURL}`);
-    setPost(data);
-  }
+  // async function deletePost(id) {
+  //   await axios.delete(`${baseURL}/${id}`);
+  //   const { data } = await axios.get(`${baseURL}`);
+  //   setPost(data);
+  // }
 
   {
     /*======================================================================*/
