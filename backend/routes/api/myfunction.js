@@ -8,6 +8,7 @@ module.exports = {
     ,findPostStatus
     ,isValidUser
     ,createCommentBox
+    ,getStatus
 };
 
 function removeItem(arr, val) {
@@ -180,4 +181,13 @@ function createCommentBox(commentBody, commentDate, userid, lastid) {
     commentBox['likelist'] = [];
     commentBox['dislikelist'] = [];
     return commentBox;
+}
+
+function getStatus(post, userid, userdata) {
+    //console.log(userdata);
+    if (post.likelist.includes(userid)) post['status'] = 1;
+    else if (post.dislikelist.includes(userid)) post['status'] = -1;
+    else if (userdata.hasOwnProperty(userid)) post['status'] = 0;
+    else post['status'] = 99;
+    return;
 }
