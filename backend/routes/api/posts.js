@@ -25,7 +25,8 @@ const postRoutes = (app, fs) => {
   ) => {
     fs.readFile(filePath, encoding, (err, data) => {
       if (err) {
-        throw err;
+        res.status(432).send('errror from reading (function)');
+        return;
       }
 
       callback(returnJson ? JSON.parse(data) : data);
@@ -40,7 +41,8 @@ const postRoutes = (app, fs) => {
   ) => {
     fs.writeFile(filePath, fileData, encoding, (err) => {
       if (err) {
-        throw err;
+        res.status(432).send('errror from writing (function)');
+        return;
       }
 
       callback();
@@ -130,7 +132,8 @@ const postRoutes = (app, fs) => {
     
     fs.readFile(dataPath, "utf8", (err, post) => {
       if (err) {
-        throw err;
+        res.status(412).send('error when reading');
+        return;
       }
       // getpost
       var lastuserID = JSON.parse(post).lastId;
@@ -158,7 +161,8 @@ const postRoutes = (app, fs) => {
 
       fs.writeFile('./data/post.json', JSON.stringify(post_real, null, '\t'), (error) => {
         if (error) {
-          throw(error); return;
+          res.status(456).send('error when writing');
+          return;
         }
       });
 
@@ -174,7 +178,8 @@ const postRoutes = (app, fs) => {
 
     fs.readFile(dataPath, "utf8", (err, post) => {
       if (err) {
-        throw err; return;
+        res.status(433).send('errror from reading');
+        return;
       }
       // algorithm begin here
   
@@ -203,7 +208,8 @@ const postRoutes = (app, fs) => {
 
       fs.writeFile('./data/post.json', JSON.stringify(postjson, null, '\t'), (error) => {
         if (error) {
-          throw(error); return;
+          res.status(429).send('error when writing');
+          return;
         }
       });
 
