@@ -38,7 +38,14 @@
 			"likelist": [],
 			"dislikelist": [],
 			"lastcommentid": 0,
-			"comment" : [],
+			"comment" : [
+				{
+					"body" : "test1"
+				},
+				{
+					"body" : "test2"
+				}
+			],
 			"title": "hi",
 			"body": "hello",
 			"status": 0
@@ -52,7 +59,14 @@
 			"likelist": [],
 			"dislikelist": [],
 			"lastcommentid": 0,
-			"comment" : [],
+			"comment" : [
+				{
+					"body" : "test1"
+				},
+				{
+					"body" : "test2"
+				}
+			],
 			"title": "non",
 			"body": "nonnon",
 			"status": 0
