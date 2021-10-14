@@ -68,6 +68,41 @@ const commentRoutes = (app, fs) => {
         res.status(412).send("wrong postid");
         return;
     });
+
+    //like&dislike comment
+    app.put("/comments/:postid/:userid/:commentid/:cur", (req, res) => {
+        // cur : {-1,0,1} = {dislike, none, like}
+        const postid = req.params.postid;
+        const userid = req.params.userid;
+        const commentid = req.params.commentid;
+        const cur = req.params.cur;
+
+        const validUser = tools.isValidUser(userid, userdata);
+        if (!validUser) {
+            res.status(408).send("permission required");
+            return;
+        }
+
+        for (var key in postdata.data) {
+            if (postdata.data[key].id == postid) {
+                for (var i in postdata.data[key].comment) {
+                    if (postdata.data[key].comment[i].id == commentid) {
+                        if (cur == "1") tools.justUpLike(postdata.data[key].comment[i], userid);
+                        else if (cur == "-1") tools.justDownLike(postdata.data[key].comment[i], userid);
+                        else if (cur == "0") tools.justNoLike(postdata.data[key].comment[i], userid); 
+                    }
+                }
+            }
+        }
+        fs.writeFile('./data/post.json', JSON.stringify(postdata, null, '\t'), (err) => {
+            if (err) {
+                res.status(442).send("error when writing");
+                return;
+            }
+        }); 
+        
+        res.status(214).send('success');
+    });
 };
 
 module.exports = commentRoutes;
