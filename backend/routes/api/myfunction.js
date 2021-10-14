@@ -5,6 +5,8 @@ module.exports = {
     ,justDownLike
     ,justNoLike
     ,justUpLike
+    ,findPostStatus
+    ,isValidUser
 };
 
 function removeItem(arr, val) {
@@ -152,4 +154,17 @@ function justNoLike(post, userid) {
         post.dislike--;
     }
     post.totallike = post.like - post.dislike;
+}
+
+function findPostStatus(postdata, userid) {
+    if (postdata.dislikelist.includes(userid)) return -1;
+    if (postdata.likelist.includes(userid)) return 1;
+    return 0;
+}
+
+function isValidUser(userid, userdata) {
+    for (var key in userdata) {
+        if (key == userid) return true;
+    }
+    return false;
 }
