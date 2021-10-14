@@ -7,6 +7,7 @@ import axios from "axios";
 import moment from "moment";
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
+import commentForm from "../../components/commentForm";
 import CommentForm from "../../components/commentForm";
 import ThemeToggler from "../../components/ThemeToggler";
 
@@ -32,8 +33,8 @@ export default function Comments() {
       const Commentsdata = await axios.put(
         `${baseURL}/comments/${token}/${posId}/${commentId}/${curStatus}`
       );
-      console.log(Commentsdata);
-      setCommentData(Commentsdata);
+      // console.log(Commentsdata.data);
+      setCommentData(Commentsdata.data);
     } catch (error) {
       console.log(error);
     }
@@ -53,8 +54,8 @@ export default function Comments() {
       const Commentsdata = await axios.put(
         `${baseURL}/comments/${token}/${posId}/${commentId}/${curStatus}`
       );
-      console.log(Commentsdata);
-      setCommentData(Commentsdata);
+      // console.log(Commentsdata.data);
+      setCommentData(Commentsdata.data);
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +74,7 @@ export default function Comments() {
       // console.log(token);
       console.log(`${baseURL}/comments/${postId}/${token}`);
       axios.get(`${baseURL}/comments/${postId}/${token}`).then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setCommentData(response.data);
       });
     }
@@ -223,7 +224,18 @@ export default function Comments() {
           {/* =========================== End Post ======================== */}
           {commentData.comment.map((comment) => (
             <>
-              <CommentForm comment={comment} />
+              <CommentForm
+                comment={comment}
+                postId={postId}
+                upLike={upLike}
+                downLike={downLike}
+              />
+              {/* <CommentForm
+                comment={comment}
+                postId={postId}
+                upLike={upLike}
+                downLike={downLike}
+              /> */}
             </>
           ))}
         </Flex>
