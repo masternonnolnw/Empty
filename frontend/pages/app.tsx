@@ -9,35 +9,11 @@ import {
 import { Box, Spacer } from "@chakra-ui/layout";
 import MainContent from "../components/content";
 import ThemeToggler from "../components/ThemeToggler";
-import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 import SideBar from "../components/sideBar";
+import { loadGetInitialProps } from "next/dist/shared/lib/utils";
 export default function MyApp() {
   return (
-    <>
-      <Flex h="10vh">
-        <Link
-          href="/login"
-          ml="7"
-          mt="5"
-          _focus={{
-            outline: "none",
-          }}
-        >
-          Login
-        </Link>
-        <Spacer />
-        <ThemeToggler />
-      </Flex>
-      <Flex>
-        <Flex w="17%" h="90vh">
-          <SideBar />
-        </Flex>
-        <Flex w="58%" h="90vh">
-          <MainContent />
-        </Flex>
-        <Flex w="25%" h="90vh"></Flex>
-      </Flex>
-    </>
+    <MainContent />
 
     // <Flex h="100vh" flexDir="column" overflow="hidden" w="100%">
     //   {/* Body */}
