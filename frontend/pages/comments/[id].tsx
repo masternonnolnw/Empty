@@ -18,43 +18,43 @@ export default function Comments() {
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token") as string;
   }
-  async function upLike(pos) {
+  async function upLike(status, posId, commentId) {
     var curStatus = 0;
-    if (pos.status == 1) {
+    if (status == 1) {
       curStatus = 0;
     } else {
       curStatus = 1;
     }
     try {
-      console.log(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
-      await axios.put(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
-      const response = await axios.get(
-        `${baseURL}/comments/${postId}/${token}`
+      console.log(
+        `${baseURL}/comments/${token}/${posId}/${commentId}/${curStatus}`
       );
-      console.log("asd");
-      console.log(response.data);
-      setCommentData(response.data);
+      const Commentsdata = await axios.put(
+        `${baseURL}/comments/${token}/${posId}/${commentId}/${curStatus}`
+      );
+      console.log(Commentsdata);
+      setCommentData(Commentsdata);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function downLike(pos) {
+  async function downLike(status, posId, commentId) {
     var curStatus = 0;
-    if (pos.status == -1) {
+    if (status == -1) {
       curStatus = 0;
     } else {
       curStatus = -1;
     }
     try {
-      console.log(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
-      await axios.put(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
-      const response = await axios.get(
-        `${baseURL}/comments/${postId}/${token}`
+      console.log(
+        `${baseURL}/comments/${token}/${posId}/${commentId}/${curStatus}`
       );
-      console.log("asd");
-      console.log(response.data);
-      setCommentData(response.data);
+      const Commentsdata = await axios.put(
+        `${baseURL}/comments/${token}/${posId}/${commentId}/${curStatus}`
+      );
+      console.log(Commentsdata);
+      setCommentData(Commentsdata);
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +73,7 @@ export default function Comments() {
       // console.log(token);
       console.log(`${baseURL}/comments/${postId}/${token}`);
       axios.get(`${baseURL}/comments/${postId}/${token}`).then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         setCommentData(response.data);
       });
     }
@@ -132,7 +132,7 @@ export default function Comments() {
                 aria-label="Search database"
                 marginTop="3"
                 marginLeft="3"
-                onClick={() => upLike(commentData)}
+                onClick={() => upLike(commentData.status, commentData.id, -1)}
                 isDisabled={commentData.status == 99}
                 icon={<ArrowUpIcon />}
                 isRound
@@ -154,7 +154,8 @@ export default function Comments() {
                 aria-label="Search database"
                 marginTop="3"
                 marginLeft="3"
-                onClick={() => downLike(commentData)}
+                //status, posId, commentId
+                onClick={() => downLike(commentData.status, commentData.id, -1)}
                 isDisabled={commentData.status == 99}
                 icon={<ArrowDownIcon />}
                 isRound

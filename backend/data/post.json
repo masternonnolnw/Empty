@@ -2,48 +2,6 @@
 	"lastId": 4,
 	"data": [
 		{
-<<<<<<< HEAD
-			"id": 1,
-			"like": 1,
-			"dislike": 0,
-			"totallike": 1,
-			"date": "2021-10-14T16:29:14+07:00",
-			"likelist": [
-				"1634033397427"
-			],
-			"dislikelist": [],
-			"lastcommentid": 0,
-			"comment": [
-				{
-					"body": "testtest",
-					"date": "2021-10-14T17:09:42+07:00",
-					"userid": "1633779518242",
-					"id": 0,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": []
-				},
-				{
-					"body": "testtest2",
-					"date": "2021-10-14T17:09:53+07:00",
-					"userid": "1633779518242",
-					"id": 1,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": []
-				}
-			],
-			"title": "non",
-			"body": "nonnon",
-			"status": 1
-		},
-		{
-=======
->>>>>>> 426653d0213bd0f2a4a91f17ea66df1e85b10da9
 			"id": 4,
 			"like": 0,
 			"dislike": 0,
@@ -136,8 +94,6 @@
 			"title": "hi",
 			"body": "hello",
 			"status": 0
-<<<<<<< HEAD
-=======
 		},
 		{
 			"id": 1,
@@ -175,7 +131,6 @@
 			"title": "non",
 			"body": "nonnon",
 			"status": 0
->>>>>>> 426653d0213bd0f2a4a91f17ea66df1e85b10da9
 		}
 	]
 }
