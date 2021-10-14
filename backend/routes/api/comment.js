@@ -21,6 +21,11 @@ const commentRoutes = (app, fs) => {
                     console.log("non-login user");
                     postdata.data[key].status = 99;
                 }
+                
+                tools.findPostStatus(postdata.data[key], userid);
+                for (var key2 in postdata.data[key].comment) {
+                    tools.findPostStatus(postdata.data[key].comment[key2], userid);
+                }
 
                 res.status(213).send(postdata.data[key]);
                 return;
