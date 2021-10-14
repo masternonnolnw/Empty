@@ -19,8 +19,8 @@ export default function sidebar({
       h="50vh"
       marginTop="2.5vh"
       boxShadow="0 4px 15px 0 rgba(0, 0, 0, 0.1)"
-      borderRadius={navSize == "small" ? "15px" : "30px"}
-      w={navSize == "small" ? "75px" : "150px"}
+      borderRadius={navSize == "small" ? "3px" : "5px"}
+      w={navSize == "small" ? "85px" : "150px"}
       flexDir="column"
       justifyContent="space-between"
       paddingLeft={navSize == "small" ? "1" : "5"}
@@ -44,13 +44,17 @@ export default function sidebar({
           }}
         />
         <Button
+          bg={viewType == "hot" ? "teal" : "none"}
           _focus={{
             outline: "none",
           }}
           _active={{
             bg: "none",
           }}
-          onClick={() => typeLoad("hot")}
+          onClick={() => {
+            typeLoad("hot");
+            setIsTop(false);
+          }}
           w="80%"
           colorScheme={viewType == "hot" ? "teal" : "gray"}
         >
@@ -58,13 +62,17 @@ export default function sidebar({
           {navSize == "small" ? "" : <Text marginLeft="2">Hot</Text>}
         </Button>
         <Button
+          bg={viewType == "new" ? "teal" : "none"}
           _focus={{
             outline: "none",
           }}
           _active={{
             bg: "none",
           }}
-          onClick={() => typeLoad("new")}
+          onClick={() => {
+            typeLoad("new");
+            setIsTop(false);
+          }}
           w="80%"
           colorScheme={viewType == "new" ? "teal" : "gray"}
         >
@@ -72,6 +80,7 @@ export default function sidebar({
           {navSize == "small" ? "" : <Text marginLeft="2">New</Text>}
         </Button>
         <Button
+          bg={viewType.length > 4 ? "teal" : "none"}
           _focus={{
             outline: "none",
           }}
@@ -90,7 +99,8 @@ export default function sidebar({
         </Button>
         {isTop ? (
           <Select
-            w="max"
+            size="xs"
+            w="auto"
             onChange={handleSetTopViewtype}
             variant="outline"
             borderRadius="3xl"

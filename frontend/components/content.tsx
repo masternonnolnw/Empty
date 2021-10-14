@@ -51,11 +51,10 @@ export default function Content() {
     token = localStorage.getItem("token") as string;
   }
   useEffect(() => {
-    var ttoken = token;
-    if (ttoken == "") {
-      ttoken = "0";
+    if (token == "") {
+      token = "0";
     }
-    console.log(ttoken);
+    console.log(token);
 
     var timeframe = "";
     if (viewType == "topday") timeframe = "day";
@@ -126,6 +125,10 @@ export default function Content() {
   }
 
   async function typeLoad(type: string) {
+    if (token == "") {
+      token = "0";
+    }
+    console.log(token);
     setViewType(type);
     //localhost:8000/posts/1633769155834/top?timeframe='day'
     var timeframe = "";
@@ -146,12 +149,12 @@ export default function Content() {
       type = "top";
     }
     console.log(`${baseURL}/posts/${token}/${type}${timeframe}`);
-    // axios
-    //   .get(`${baseURL}/posts/${token}/${type}${timeframe}`)
-    //   .then((response) => {
-    //     setPost(response.data);
-    //     console.log(response.data);
-    //   });
+    axios
+      .get(`${baseURL}/posts/${token}/${type}${timeframe}`)
+      .then((response) => {
+        setPost(response.data);
+        console.log(response.data);
+      });
   }
 
   async function deletePost(id) {
@@ -178,7 +181,7 @@ export default function Content() {
 
   return (
     <>
-      <Flex h="10vh">
+      <Flex h="10vh" shadow="md">
         <Link
           href="/login"
           ml="7"
@@ -327,12 +330,40 @@ export default function Content() {
                 alignItems="center"
               >
                 <Text>Please</Text>
-                <Button margin="3">
-                  <Text>Login</Text>
+                <Button
+                  margin="3"
+                  size="md"
+                  _focus={{
+                    outline: "none",
+                  }}
+                  onClick={() => (window.location.href = "/login")}
+                >
+                  <Link
+                    href="/login"
+                    _focus={{
+                      outline: "none",
+                    }}
+                  >
+                    Login
+                  </Link>
                 </Button>
                 <Text>or</Text>
-                <Button margin="3">
-                  <Text>Sign up</Text>
+                <Button
+                  margin="3"
+                  size="md"
+                  _focus={{
+                    outline: "none",
+                  }}
+                  onClick={() => (window.location.href = "/register")}
+                >
+                  <Link
+                    href="/register"
+                    _focus={{
+                      outline: "none",
+                    }}
+                  >
+                    Sign up
+                  </Link>
                 </Button>
                 <Text> to post.</Text>
               </Flex>
@@ -358,7 +389,10 @@ export default function Content() {
                   _active={{
                     bg: "none",
                   }}
-                  onClick={() => typeLoad("hot")}
+                  onClick={() => {
+                    typeLoad("hot");
+                    setIsTop(false);
+                  }}
                   colorScheme={viewType == "hot" ? "teal" : "gray"}
                 >
                   <WarningTwoIcon />
@@ -371,7 +405,10 @@ export default function Content() {
                   _active={{
                     bg: "none",
                   }}
-                  onClick={() => typeLoad("new")}
+                  onClick={() => {
+                    typeLoad("new");
+                    setIsTop(false);
+                  }}
                   colorScheme={viewType == "new" ? "teal" : "gray"}
                   ml="10px"
                 >
@@ -436,7 +473,7 @@ export default function Content() {
                   p={5}
                   shadow="md"
                   borderWidth="1px"
-                  borderRadius="xl"
+                  borderRadius="md"
                   w="100%"
                 >
                   {/* =========================== Heading ======================== */}
@@ -488,7 +525,7 @@ export default function Content() {
                     />
                   </Flex>
 
-                  <Flex flexDir="column">
+                  <Flex flexDir="column" w="100%">
                     <Flex flexDir="row" marginBottom="5">
                       <Avatar
                         name="Dan Abrahmov"
@@ -536,6 +573,9 @@ export default function Content() {
                   isRound
                   w="10px"
                 /> */}
+                    <Link href="./comments" alignSelf="flex-end" mr="3">
+                      Comment
+                    </Link>
                   </Flex>
                   {/* =========================== End Body ======================== */}
                 </Flex>

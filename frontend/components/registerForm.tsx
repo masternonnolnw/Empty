@@ -3,7 +3,7 @@ import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import Icon from "@chakra-ui/icon";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
-import { Box, Flex, Heading } from "@chakra-ui/layout";
+import { Box, Flex, Heading, Link, Spacer } from "@chakra-ui/layout";
 import { CircularProgress } from "@chakra-ui/progress";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
@@ -144,6 +144,19 @@ export default function registerForm() {
                 "Sign In"
               )}
             </Button>
+            <Flex>
+              <Spacer />
+              <Link
+                href="/login"
+                alignSelf="flex-end"
+                mt="3"
+                _focus={{
+                  outline: "none",
+                }}
+              >
+                Login
+              </Link>
+            </Flex>
           </form>
         </Box>
       </Box>
