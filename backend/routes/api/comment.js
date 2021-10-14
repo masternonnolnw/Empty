@@ -82,26 +82,38 @@ const commentRoutes = (app, fs) => {
             res.status(408).send("permission required");
             return;
         }
-
+        var idx_post = 0, idx_comment = 0;
         for (var key in postdata.data) {
             if (postdata.data[key].id == postid) {
+                idx_post = key;
                 for (var i in postdata.data[key].comment) {
                     if (postdata.data[key].comment[i].id == commentid) {
                         if (cur == "1") tools.justUpLike(postdata.data[key].comment[i], userid);
                         else if (cur == "-1") tools.justDownLike(postdata.data[key].comment[i], userid);
-                        else if (cur == "0") tools.justNoLike(postdata.data[key].comment[i], userid); 
+                        else if (cur == "0") tools.justNoLike(postdata.data[key].comment[i], userid);
+                        idx_comment = i;  
+                        // get status
+                        var isFirst = true;
+                        if (isFirst) {
+                            tools.getStatus(postdata.data[key], userid, userdata);
+                            isFirst = false;
+                        }
+                        tools.getStatus(postdata.data[key].comment[i], userid, userdata);
+                        break;
                     }
                 }
+                break;
             }
         }
+        
         fs.writeFile('./data/post.json', JSON.stringify(postdata, null, '\t'), (err) => {
             if (err) {
                 res.status(442).send("error when writing");
                 return;
             }
         }); 
-        
-        res.status(214).send('success');
+
+        res.status(214).send(postdata.data[idx_post]);
     });
 };
 
