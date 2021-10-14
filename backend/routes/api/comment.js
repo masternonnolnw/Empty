@@ -70,7 +70,7 @@ const commentRoutes = (app, fs) => {
     });
 
     //like&dislike comment
-    app.put("/comments/:postid/:userid/:commentid/:cur", (req, res) => {
+    app.put("/comments/:userid/:postid/:commentid/:cur", (req, res) => {
         // cur : {-1,0,1} = {dislike, none, like}
         const postid = req.params.postid;
         const userid = req.params.userid;
@@ -86,6 +86,14 @@ const commentRoutes = (app, fs) => {
         for (var key in postdata.data) {
             if (postdata.data[key].id == postid) {
                 idx_post = key;
+                if (commentid == -1) {
+                    if (cur == "1") tools.justUpLike(postdata.data[key], userid);
+                    else if (cur == "-1") tools.justDownLike(postdata.data[key], userid);
+                    else if (cur == "0") tools.justNoLike(postdata.data[key], userid);
+                    tools.getStatus(postdata.data[key], userid, userdata);
+                    break;
+                }
+
                 for (var i in postdata.data[key].comment) {
                     if (postdata.data[key].comment[i].id == commentid) {
                         if (cur == "1") tools.justUpLike(postdata.data[key].comment[i], userid);
