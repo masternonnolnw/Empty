@@ -51,29 +51,33 @@ export default function Content() {
     token = localStorage.getItem("token") as string;
   }
   useEffect(() => {
-    if (token == "") {
-      token = "0";
-    }
-    console.log(token);
+    try {
+      if (token == "") {
+        token = "0";
+      }
+      console.log(token);
 
-    var timeframe = "";
-    if (viewType == "topday") timeframe = "day";
-    if (viewType == "topweek") timeframe = "week";
-    if (viewType == "topmonth") timeframe = "month";
-    if (viewType == "topyear") timeframe = "year";
-    if (viewType == "topalltime") timeframe = "alltime";
-    console.log(`${baseURL}/posts/${token}/${viewType}${timeframe}`);
-    axios
-      .get(`${baseURL}/posts/${token}/${viewType}${timeframe}`)
-      .then((response) => {
-        setPost(response.data);
-        console.log(response.data);
-      });
+      var timeframe = "";
+      if (viewType == "topday") timeframe = "day";
+      if (viewType == "topweek") timeframe = "week";
+      if (viewType == "topmonth") timeframe = "month";
+      if (viewType == "topyear") timeframe = "year";
+      if (viewType == "topalltime") timeframe = "alltime";
+      console.log(`${baseURL}/posts/${token}/${viewType}${timeframe}`);
+      axios
+        .get(`${baseURL}/posts/${token}/${viewType}${timeframe}`)
+        .then((response) => {
+          setPost(response.data);
+          console.log(response.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
     try {
+      event.preventDefault();
       if (title && body) {
         const newPost = await axios.post(`${baseURL}/posts/${token}`, {
           title: `${title}`,
@@ -84,17 +88,19 @@ export default function Content() {
         setTitle("");
         setBody("");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   // app.put("/posts/:userid/:postid/:past/:cur"
   async function upLike(pos) {
-    var curStatus = 0;
-    if (pos.status == 1) {
-      curStatus = 0;
-    } else {
-      curStatus = 1;
-    }
     try {
+      var curStatus = 0;
+      if (pos.status == 1) {
+        curStatus = 0;
+      } else {
+        curStatus = 1;
+      }
       console.log(`${baseURL}/posts/${token}/${pos.id}/${curStatus}`);
       const newPost = await axios.put(
         `${baseURL}/posts/${token}/${pos.id}/${curStatus}`
@@ -107,13 +113,13 @@ export default function Content() {
   }
 
   async function downLike(pos) {
-    var curStatus = 0;
-    if (pos.status == -1) {
-      curStatus = 0;
-    } else {
-      curStatus = -1;
-    }
     try {
+      var curStatus = 0;
+      if (pos.status == -1) {
+        curStatus = 0;
+      } else {
+        curStatus = -1;
+      }
       const newPost = await axios.put(
         `${baseURL}/posts/${token}/${pos.id}/${curStatus}`
       );
@@ -577,7 +583,17 @@ export default function Content() {
                   isRound
                   w="10px"
                 /> */}
-                    <Link href="./comments" alignSelf="flex-end" mr="3">
+                    <Link
+                      href={"/comment/" + pos.id}
+                      alignSelf="flex-end"
+                      mr="3"
+                      _focus={{
+                        outline: "none",
+                      }}
+                      _active={{
+                        bg: "none",
+                      }}
+                    >
                       Comment
                     </Link>
                   </Flex>

@@ -1,6 +1,6 @@
 import { IconButton } from "@chakra-ui/button";
 import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
-import { Box, Flex, Link, Text } from "@chakra-ui/layout";
+import { Box, Flex, Link, Spacer, Text } from "@chakra-ui/layout";
 import moment from "moment";
 
 export default function commentForm({ comment, postId, upLike, downLike }) {
@@ -13,17 +13,10 @@ export default function commentForm({ comment, postId, upLike, downLike }) {
         w="70%"
         alignSelf="center"
         borderRadius="sm"
-        m="5"
+        m="3"
         flexDir="row"
-        alignItems="center"
       >
-        <Flex
-          flexDir="column"
-          alignItems="center"
-          alignSelf="center"
-          marginRight="10"
-          p="5"
-        >
+        <Flex flexDir="column" alignItems="center" alignSelf="center" p="2">
           <IconButton
             variant="ghost"
             colorScheme={comment.status == 1 ? "green" : "white"}
@@ -32,7 +25,7 @@ export default function commentForm({ comment, postId, upLike, downLike }) {
             isDisabled={comment.status == 99}
             icon={<ArrowUpIcon />}
             isRound
-            fontSize="3xl"
+            fontSize="xl"
             _focus={{
               outline: "none",
             }}
@@ -41,7 +34,7 @@ export default function commentForm({ comment, postId, upLike, downLike }) {
             }}
           />
 
-          <Text fontSize="2xl">{comment.totallike}</Text>
+          <Text fontSize="md">{comment.totallike}</Text>
           <IconButton
             variant="ghost"
             colorScheme={comment.status == -1 ? "red" : "white"}
@@ -50,7 +43,7 @@ export default function commentForm({ comment, postId, upLike, downLike }) {
             isDisabled={comment.status == 99}
             icon={<ArrowDownIcon />}
             isRound
-            fontSize="3xl"
+            fontSize="xl"
             _focus={{
               outline: "none",
             }}
@@ -59,9 +52,9 @@ export default function commentForm({ comment, postId, upLike, downLike }) {
             }}
           />
         </Flex>
-        <Flex flexDir="column" h="100%">
-          <Flex alignSelf="flex-start">
-            <Text marginRight="5" alignSelf="center">
+        <Flex flexDir="column" w="100%">
+          <Flex flexDir="row">
+            <Text alignSelf="center" mt="3">
               {moment(moment()).diff(comment.date, "minutes") == 0
                 ? "Just now"
                 : moment(moment()).diff(comment.date, "minutes") <= 10
@@ -71,8 +64,10 @@ export default function commentForm({ comment, postId, upLike, downLike }) {
                 : moment(comment.date).format("DD/MM/YYYY, h:mm:ss a")}
             </Text>
           </Flex>
-          <Flex alignSelf="center">
-            <Text>{comment.body}</Text>
+          <Flex>
+            <Text fontSize="xl" mt="3" ml="5">
+              {comment.body}
+            </Text>
           </Flex>
         </Flex>
       </Flex>
