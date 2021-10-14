@@ -221,6 +221,7 @@ const postRoutes = (app, fs) => {
 
   // CREATE
   app.post("/posts/:userid", (req, res) => {
+    // ใส่ title กับ body มา
     const userid = req.params.userid;
     const userPath = '../../data/users.json'
     var userData = require(userPath);
@@ -238,6 +239,8 @@ const postRoutes = (app, fs) => {
         date : moment().format(),
         likelist : [],
         dislikelist : [],
+        lastcommentid : 0,
+        comment : [],
         ...req.body,
       });
 
@@ -254,7 +257,11 @@ const postRoutes = (app, fs) => {
         else post.data[key]['status'] = 0;
       }
 
-      writeFile(JSON.stringify(post, null, '\t'), () => {
+      writeFile(JSON.stringify(post, null, '\t'), (error) => {
+        if (error) {
+          res.status(423).send('error when writing');
+          return;
+        }
         res.status(201).send(`Success`);
       });
 

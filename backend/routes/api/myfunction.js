@@ -7,6 +7,7 @@ module.exports = {
     ,justUpLike
     ,findPostStatus
     ,isValidUser
+    ,createCommentBox
 };
 
 function removeItem(arr, val) {
@@ -167,4 +168,14 @@ function isValidUser(userid, userdata) {
         if (key == userid) return true;
     }
     return false;
+}
+
+function createCommentBox(commentBody, commentDate, userid, lastid) {
+    var commentBox = {};
+    commentBox['body'] = commentBody;
+    commentBox['date'] = commentDate;
+    commentBox['userid'] = userid;
+    commentBox['id'] = lastid;
+    lastid = lastid + 1;
+    return commentBox;
 }
