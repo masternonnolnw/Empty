@@ -3,7 +3,7 @@ import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import { Box, Flex, Link, Text } from "@chakra-ui/layout";
 
 export default function commentForm(comment) {
-  console.log(comment);
+  // console.log(comment);
   return (
     <>
       <Flex
