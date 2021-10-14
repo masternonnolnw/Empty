@@ -9,6 +9,7 @@ module.exports = {
     ,isValidUser
     ,createCommentBox
     ,getStatus
+    ,getStatusValue
 };
 
 function removeItem(arr, val) {
@@ -190,4 +191,12 @@ function getStatus(post, userid, userdata) {
     else if (userdata.hasOwnProperty(userid)) post['status'] = 0;
     else post['status'] = 99;
     return;
+}
+
+function getStatusValue(post, userid, userdata) {
+    //console.log(userdata);
+    if (post.likelist.includes(userid)) return 1;
+    else if (post.dislikelist.includes(userid)) return -1;
+    else if (userdata.hasOwnProperty(userid)) return 0;
+    else return 99;
 }

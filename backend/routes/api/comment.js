@@ -14,6 +14,7 @@ const commentRoutes = (app, fs) => {
     app.get("/comments/:postid/:userid", (req, res) => {
         const postid = req.params.postid;
         const userid = req.params.userid;
+
         for (var key in postdata.data) {
             if (postdata.data[key].id == postid) {
                 if (tools.isValidUser(userid, userdata)) postdata.data[key].status = tools.findPostStatus(postdata.data[key], userid);
@@ -22,9 +23,9 @@ const commentRoutes = (app, fs) => {
                     postdata.data[key].status = 99;
                 }
                 
-                tools.findPostStatus(postdata.data[key], userid);
+                tools.getStatus(postdata.data[key], userid, userdata);
                 for (var key2 in postdata.data[key].comment) {
-                    tools.findPostStatus(postdata.data[key].comment[key2], userid);
+                    tools.getStatus(postdata.data[key].comment[key2], userid, userdata);
                 }
 
                 res.status(213).send(postdata.data[key]);
