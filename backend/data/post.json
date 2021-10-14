@@ -9,7 +9,7 @@
 			"date": "2021-10-14T16:32:10+07:00",
 			"likelist": [],
 			"dislikelist": [],
-			"lastcommentid": 1,
+			"lastcommentid": 2,
 			"comment": [
 				{
 					"body": "testtest",
@@ -44,7 +44,20 @@
 					"dislike": 0,
 					"like": 0,
 					"likelist": [],
-					"dislikelist": []
+					"dislikelist": [],
+					"status": 0
+				},
+				{
+					"body": "master",
+					"date": "2021-10-14T22:57:00+07:00",
+					"userid": "1634033397427",
+					"id": 1,
+					"totallike": 0,
+					"dislike": 0,
+					"like": 0,
+					"likelist": [],
+					"dislikelist": [],
+					"status": 0
 				}
 			],
 			"title": "eiei",
@@ -165,8 +178,6 @@
 					"likelist": [],
 					"dislikelist": [],
 					"status": 0
-<<<<<<< HEAD
-=======
 				},
 				{
 					"body": "testtest2",
@@ -191,7 +202,6 @@
 					"likelist": [],
 					"dislikelist": [],
 					"status": 0
->>>>>>> 064c4301bb2f8809efd428d267bc4fb49a13c510
 				}
 			],
 			"title": "hi",
