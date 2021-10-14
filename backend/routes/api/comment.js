@@ -36,7 +36,7 @@ const commentRoutes = (app, fs) => {
         const userid = req.params.userid;
 
         const commentBody = req.body.body;
-        const commentDate = moment();
+        const commentDate = moment().format();
 
         const validUser = tools.isValidUser(userid, userdata);
         if (!validUser) {
@@ -47,21 +47,22 @@ const commentRoutes = (app, fs) => {
         for (var key in postdata.data) {
             if (postdata.data[key].id == postid) {
                 var lastid = postdata.data[key].lastcommentid;
-                var commentBox = tools.createCommentBox(commentBody, commentDate, userid, lastid);
+                var commentBox = tools.createCommentBox(commentBody, commentDate, userid, lastid); 
+                postdata.data[key].lastcommentid += 1;
                 postdata.data[key].comment.push(commentBox);
                 foundPost = true; break;
             }
         }
-
+        //console.log(postdata);
         if (foundPost) {
-            writeFile(JSON.stringify(postdata, null, '\t'), (error) => {
-                if (error) {
-                  res.status(423).send('error when writing');
-                  return;
+            fs.writeFile('./data/post.json', JSON.stringify(postdata, null, '\t'), (err) => {
+                if (err) {
+                    res.status(442).send("error when writing");
+                    return;
                 }
-                res.status(201).send(`Success`);
-                return;
-            });
+            }); 
+            res.status(215).send('comment success');
+            return;
         }
 
         res.status(412).send("wrong postid");

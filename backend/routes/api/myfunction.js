@@ -176,6 +176,8 @@ function createCommentBox(commentBody, commentDate, userid, lastid) {
     commentBox['date'] = commentDate;
     commentBox['userid'] = userid;
     commentBox['id'] = lastid;
-    lastid = lastid + 1;
+    commentBox['like'] = commentBox['dislike'] = commentBox['totallike'] = 0;
+    commentBox['likelist'] = [];
+    commentBox['dislikelist'] = [];
     return commentBox;
 }
