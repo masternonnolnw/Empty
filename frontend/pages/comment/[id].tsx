@@ -1,8 +1,11 @@
 import { Avatar } from "@chakra-ui/avatar";
-import { IconButton } from "@chakra-ui/button";
+import { Button, IconButton } from "@chakra-ui/button";
+import { FormControl } from "@chakra-ui/form-control";
 import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
+import { Input } from "@chakra-ui/input";
 import { Flex, Link, Spacer, Text } from "@chakra-ui/layout";
 import { Tag } from "@chakra-ui/tag";
+import { Textarea } from "@chakra-ui/textarea";
 import axios from "axios";
 import moment from "moment";
 import { useRouter } from "next/dist/client/router";
@@ -14,6 +17,26 @@ import ThemeToggler from "../../components/ThemeToggler";
 export default function Comments() {
   const baseURL = process.env.NEXT_PUBLIC_API_URL;
   const [commentData, setCommentData] = useState(null);
+  const [body, setBody] = useState(null);
+  const handleChangeBody = (event) => setBody(event.target.value);
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      if (body) {
+        const newPost = await axios.post(
+          `${baseURL}/comments/${postId}/${token}`,
+          {
+            body: `${body}`,
+          }
+        );
+        console.log(newPost.data);
+        setCommentData(newPost.data);
+        setBody("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   var token = "0";
   var username = "MaStEr";
   if (typeof window !== "undefined") {
@@ -108,17 +131,51 @@ export default function Comments() {
       </Flex>
 
       <Flex h="90vh">
-        <Flex w="20%" h="90vh"></Flex>
-        <Flex w="60%" h="90vh" flexDir="column">
+        <Flex w="17%" h="90vh"></Flex>
+        <Flex
+          p="3"
+          w="58%"
+          h="90vh"
+          flexDir="column"
+          overflowY="auto"
+          css={{
+            "&::-webkit-scrollbar": {
+              width: "4px",
+            },
+            "&::-webkit-scrollbar-track": {
+              width: "4px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "#C9C9C9",
+              borderRadius: "24px",
+            },
+          }}
+        >
+          <Link
+            href="/app"
+            alignSelf="flex-end"
+            mt="3"
+            mr="8"
+            _focus={{
+              outline: "none",
+            }}
+            _active={{
+              bg: "none",
+            }}
+          >
+            Back
+          </Link>
           {/* =========================== Post ======================== */}
           <Flex
             p={5}
             shadow="md"
             borderWidth="1px"
             borderRadius="xl"
-            w="100%"
+            alignSelf="center"
+            w="80%"
             h="max"
             mt="8"
+            mb="3"
           >
             {/* =========================== Heading ======================== */}
             <Flex
@@ -222,6 +279,46 @@ export default function Comments() {
             {/* =========================== End Body ======================== */}
           </Flex>
           {/* =========================== End Post ======================== */}
+          <Flex w="70%" m="7" alignSelf="center" flexDir="column">
+            <form onSubmit={handleSubmit}>
+              <FormControl id="Body" isRequired>
+                <Textarea
+                  value={body}
+                  onChange={handleChangeBody}
+                  // isDisabled={post[0].status == 99}
+                  placeholder="Body"
+                  size="lg"
+                  overflowY="auto"
+                  padding="2"
+                  css={{
+                    "&::-webkit-scrollbar": {
+                      width: "5px",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                      width: "5px",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      background: "#C9C9C9",
+                      borderRadius: "24px",
+                    },
+                  }}
+                />
+                <Button
+                  type="submit"
+                  alignSelf="center"
+                  mt="3"
+                  _focus={{
+                    outline: "none",
+                  }}
+                  _active={{
+                    bg: "none",
+                  }}
+                >
+                  comment
+                </Button>
+              </FormControl>
+            </form>
+          </Flex>
           {commentData.comment.map((comment) => (
             <>
               <CommentForm
@@ -239,7 +336,7 @@ export default function Comments() {
             </>
           ))}
         </Flex>
-        <Flex w="20%" h="90vh"></Flex>
+        <Flex w="25%" h="90vh"></Flex>
       </Flex>
     </>
   );
