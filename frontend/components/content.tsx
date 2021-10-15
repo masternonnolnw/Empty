@@ -44,12 +44,28 @@ export default function Content() {
   const handleSetTopViewtype = (event) => typeLoad(event.target.value);
 
   const [viewType, setViewType] = useState("hot");
+  const [username, setUsername] = useState(null);
 
-  const username = "MaStEr";
+  const username1 = "MaStEr";
   var token = "0";
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token") as string;
   }
+  if (token == "") {
+    token = "0";
+  }
+  useEffect(() => {
+    try {
+      console.log(token);
+      console.log(`${baseURL}/users/${token}`);
+      axios.get(`${baseURL}/users/${token}`).then((response) => {
+        setUsername(response.data);
+        console.log(response.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [token]);
   useEffect(() => {
     try {
       if (token == "") {
@@ -192,16 +208,21 @@ export default function Content() {
   return (
     <>
       <Flex h="10vh" shadow="md">
-        <Link
-          href="/login"
-          ml="7"
-          mt="5"
-          _focus={{
-            outline: "none",
-          }}
-        >
-          Login
-        </Link>
+        {username == null ? (
+          <Link
+            href="/login"
+            ml="7"
+            mt="5"
+            _focus={{
+              outline: "none",
+            }}
+          >
+            Login
+          </Link>
+        ) : (
+          <Text>{username}</Text>
+        )}
+
         <Spacer />
         <ThemeToggler />
       </Flex>
@@ -252,7 +273,7 @@ export default function Content() {
                       marginRight="2"
                     />
                     <Text marginRight="5" alignSelf="center">
-                      {username}
+                      {username1}
                     </Text>
                     <FormControl id="Tiltle" isRequired>
                       <Select
