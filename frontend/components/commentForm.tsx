@@ -65,7 +65,14 @@ export default function commentForm({ comment, postId, upLike, downLike }) {
             </Text>
           </Flex>
           <Flex>
-            <Text fontSize="xl" mt="3" ml="5">
+            <Text
+              fontSize="xl"
+              mt="3"
+              ml="5"
+              wordBreak="break-word"
+              mr="5"
+              mb="5"
+            >
               {comment.body}
             </Text>
           </Flex>
