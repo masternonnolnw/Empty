@@ -38,7 +38,7 @@ const userRoutes = (app, fs) => {
                 return;
             }
         }
-        res.status(435).send('wrong token');
+        res.status(232).send(null);
         return;
     });
 
