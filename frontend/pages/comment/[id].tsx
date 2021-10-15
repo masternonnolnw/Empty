@@ -97,7 +97,7 @@ export default function Comments() {
       // console.log(token);
       console.log(`${baseURL}/comments/${postId}/${token}`);
       axios.get(`${baseURL}/comments/${postId}/${token}`).then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         setCommentData(response.data);
       });
     }
@@ -285,7 +285,7 @@ export default function Comments() {
                 <Textarea
                   value={body}
                   onChange={handleChangeBody}
-                  // isDisabled={post[0].status == 99}
+                  isDisabled={commentData.status == 99}
                   placeholder="Body"
                   size="lg"
                   overflowY="auto"
@@ -313,6 +313,7 @@ export default function Comments() {
                   _active={{
                     bg: "none",
                   }}
+                  isDisabled={commentData.status == 99}
                 >
                   comment
                 </Button>
