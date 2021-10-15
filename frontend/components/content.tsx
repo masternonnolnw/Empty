@@ -63,7 +63,7 @@ export default function Content() {
         console.log(response.data);
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, [token]);
   useEffect(() => {
@@ -87,7 +87,7 @@ export default function Content() {
           console.log(response.data);
         });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 
@@ -105,7 +105,7 @@ export default function Content() {
         setBody("");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   // app.put("/posts/:userid/:postid/:past/:cur"
@@ -123,8 +123,8 @@ export default function Content() {
       );
       setPost(newPost.data);
       console.log(newPost.data);
-    } catch {
-      console.log(Error);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -141,8 +141,8 @@ export default function Content() {
       );
       setPost(newPost.data);
       console.log(newPost.data);
-    } catch {
-      console.log(Error);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -179,7 +179,7 @@ export default function Content() {
           console.log(response.data);
         });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -220,7 +220,15 @@ export default function Content() {
             Login
           </Link>
         ) : (
-          <Text>{username}</Text>
+          <Flex flexDir="row" ml="7" alignItems="center">
+            <Avatar
+              name="Dan Abrahmov"
+              src="https://bit.ly/dan-abramov"
+              marginRight="4"
+              size="sm"
+            />
+            <Text>{username}</Text>
+          </Flex>
         )}
 
         <Spacer />
