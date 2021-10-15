@@ -446,6 +446,7 @@ export default function Content() {
                   <Select
                     w="max"
                     onChange={handleSetTopViewtype}
+                    value={viewType.length < 4 ? "topday" : viewType}
                     variant="outline"
                     ml="3"
                     borderRadius="3xl"

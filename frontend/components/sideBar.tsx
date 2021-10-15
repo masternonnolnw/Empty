@@ -102,6 +102,7 @@ export default function sidebar({
             size="xs"
             w="auto"
             onChange={handleSetTopViewtype}
+            value={viewType.length < 4 ? "topday" : viewType}
             variant="outline"
             borderRadius="3xl"
             _focus={{
