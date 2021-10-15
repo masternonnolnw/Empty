@@ -99,8 +99,8 @@ const postRoutes = (app, fs) => {
     //console.log(post_list_new);
 
     if (sortPost(post_list, req.params.viewtype) == -1) {
-      res.status(401).send("Wrong viewtype");
-      return;
+      console.log('wrong viewtype');
+      return post_list;
     }
 
     // add status for each post (like/dislike/unlike by userid)
