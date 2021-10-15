@@ -2,22 +2,6 @@
 	"lastId": 4,
 	"data": [
 		{
-			"id": 3,
-			"like": 1,
-			"dislike": 0,
-			"totallike": 1,
-			"date": "2021-01-10T16:29:42+07:00",
-			"likelist": [
-				"1634033397427"
-			],
-			"dislikelist": [],
-			"lastcommentid": 0,
-			"comment": [],
-			"title": "hahaha",
-			"body": "lollollol",
-			"status": 99
-		},
-		{
 			"id": 4,
 			"like": 0,
 			"dislike": 0,
@@ -25,20 +9,8 @@
 			"date": "2021-10-14T16:32:10+07:00",
 			"likelist": [],
 			"dislikelist": [],
-			"lastcommentid": 3,
+			"lastcommentid": 0,
 			"comment": [
-				{
-					"body": "MaStEr1465015219601561051Minim adipisicing officia et commodo exercitation tempor pariatur deserunt reprehenderit dolor ad. Ad id ad cillum laboris esse aute ipsum proident elit fugiat nulla nulla. Exercitation quis dolore irure id deserunt aliquip culpa quis ipsum minim enim. Proident amet id ad proident quis. Pariatur laboris ipsum labore do voluptate deserunt.dsadasdddddddadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-					"date": "2021-10-14T23:02:48+07:00",
-					"userid": "1634033397427",
-					"id": 2,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": [],
-					"status": 0
-				},
 				{
 					"body": "testtest",
 					"date": "2021-10-14T17:09:42+07:00",
@@ -48,8 +20,7 @@
 					"dislike": 0,
 					"like": 0,
 					"likelist": [],
-					"dislikelist": [],
-					"status": 0
+					"dislikelist": []
 				},
 				{
 					"body": "testtest2",
@@ -60,37 +31,26 @@
 					"dislike": 0,
 					"like": 0,
 					"likelist": [],
-					"dislikelist": [],
-					"status": 0
-				},
-				{
-					"body": "master",
-					"date": "2021-10-14T22:44:53+07:00",
-					"userid": "1634033397427",
-					"id": 0,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": [],
-					"status": 0
-				},
-				{
-					"body": "master",
-					"date": "2021-10-14T22:57:00+07:00",
-					"userid": "1634033397427",
-					"id": 1,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": [],
-					"status": 0
+					"dislikelist": []
 				}
 			],
 			"title": "eiei",
 			"body": "eiei",
-			"status": 99
+			"status": 0
+		},
+		{
+			"id": 3,
+			"like": 0,
+			"dislike": 0,
+			"totallike": 0,
+			"date": "2021-10-14T16:29:42+07:00",
+			"likelist": [],
+			"dislikelist": [],
+			"lastcommentid": 0,
+			"comment": [],
+			"title": "hahaha",
+			"body": "lollollol",
+			"status": 0
 		},
 		{
 			"id": 2,
@@ -133,7 +93,7 @@
 			],
 			"title": "hi",
 			"body": "hello",
-			"status": 99
+			"status": 0
 		},
 		{
 			"id": 1,
@@ -143,44 +103,8 @@
 			"date": "2021-10-14T16:29:14+07:00",
 			"likelist": [],
 			"dislikelist": [],
-			"lastcommentid": 8,
+			"lastcommentid": 3,
 			"comment": [
-				{
-					"body": "testtest3",
-					"date": "2021-10-14T22:59:52+07:00",
-					"userid": "1633779518242",
-					"id": 7,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": [],
-					"status": 0
-				},
-				{
-					"body": "testtest4",
-					"date": "2021-10-14T22:59:46+07:00",
-					"userid": "1633779518242",
-					"id": 6,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": [],
-					"status": 0
-				},
-				{
-					"body": "testtest2",
-					"date": "2021-10-14T22:59:38+07:00",
-					"userid": "1633779518242",
-					"id": 5,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": [],
-					"status": 0
-				},
 				{
 					"body": "testtest",
 					"date": "2021-10-14T17:09:42+07:00",
@@ -202,8 +126,7 @@
 					"dislike": 0,
 					"like": 0,
 					"likelist": [],
-					"dislikelist": [],
-					"status": 0
+					"dislikelist": []
 				},
 				{
 					"body": "testtest2",
@@ -214,8 +137,7 @@
 					"dislike": 0,
 					"like": 0,
 					"likelist": [],
-					"dislikelist": [],
-					"status": 0
+					"dislikelist": []
 				},
 				{
 					"body": "testtest2",
@@ -226,32 +148,7 @@
 					"dislike": 0,
 					"like": 0,
 					"likelist": [],
-					"dislikelist": [],
-					"status": 0
-				},
-				{
-					"body": "testtest2",
-					"date": "2021-10-14T22:47:00+07:00",
-					"userid": "1633779518242",
-					"id": 3,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": [],
-					"status": 0
-				},
-				{
-					"body": "testtest2",
-					"date": "2021-10-14T22:50:34+07:00",
-					"userid": "1633779518242",
-					"id": 4,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": [],
-					"status": 0
+					"dislikelist": []
 				}
 			],
 			"title": "hi",
@@ -259,274 +156,4 @@
 			"status": 99
 		}
 	]
-<<<<<<< HEAD
 }
-=======
-}
-=======
-			"status": 0
-		}
-	]
-}
-<<<<<<< HEAD
-=======
-=======
-  "lastId": 4,
-  "data": [
-    {
-      "id": 4,
-      "like": 0,
-      "dislike": 0,
-      "totallike": 0,
-      "date": "2021-10-14T16:32:10+07:00",
-      "likelist": [],
-      "dislikelist": [],
-      "lastcommentid": 3,
-      "comment": [
-        {
-          "body": "MaStEr1465015219601561051Minim adipisicing officia et commodo exercitation tempor pariatur deserunt reprehenderit dolor ad. Ad id ad cillum laboris esse aute ipsum proident elit fugiat nulla nulla. Exercitation quis dolore irure id deserunt aliquip culpa quis ipsum minim enim. Proident amet id ad proident quis. Pariatur laboris ipsum labore do voluptate deserunt.dsadasdddddddadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-          "date": "2021-10-14T23:02:48+07:00",
-          "userid": "1634033397427",
-          "id": 2,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "testtest",
-          "date": "2021-10-14T17:09:42+07:00",
-          "userid": "1633779518242",
-          "id": 0,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "testtest2",
-          "date": "2021-10-14T17:09:53+07:00",
-          "userid": "1633779518242",
-          "id": 1,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "master",
-          "date": "2021-10-14T22:44:53+07:00",
-          "userid": "1634033397427",
-          "id": 0,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "master",
-          "date": "2021-10-14T22:57:00+07:00",
-          "userid": "1634033397427",
-          "id": 1,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        }
-      ],
-      "title": "eiei",
-      "body": "eiei",
-      "status": 99
-    },
-    {
-      "id": 3,
-      "like": 0,
-      "dislike": 0,
-      "totallike": 0,
-      "date": "2021-10-14T16:29:42+07:00",
-      "likelist": [],
-      "dislikelist": [],
-      "lastcommentid": 0,
-      "comment": [],
-      "title": "hahaha",
-      "body": "lollollol",
-      "status": 99
-    },
-    {
-      "id": 2,
-      "like": 0,
-      "dislike": 0,
-      "totallike": 0,
-      "date": "2021-10-14T16:29:32+07:00",
-      "likelist": [],
-      "dislikelist": [],
-      "lastcommentid": 2,
-      "comment": [
-        {
-          "body": "testtest",
-          "date": "2021-10-14T17:09:42+07:00",
-          "userid": "1633779518242",
-          "id": 0,
-          "totallike": 1,
-          "dislike": 0,
-          "like": 1,
-          "likelist": ["1633779518242"],
-          "dislikelist": [],
-          "status": 1
-        },
-        {
-          "body": "testtest2",
-          "date": "2021-10-14T17:09:53+07:00",
-          "userid": "1633779518242",
-          "id": 1,
-          "totallike": -1,
-          "dislike": 1,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": ["1633779518242"],
-          "status": -1
-        }
-      ],
-      "title": "hi",
-      "body": "hello",
-      "status": 99
-    },
-    {
-      "id": 1,
-      "like": 0,
-      "dislike": 0,
-      "totallike": 0,
-      "date": "2021-10-14T16:29:14+07:00",
-      "likelist": [],
-      "dislikelist": [],
-      "lastcommentid": 8,
-      "comment": [
-        {
-          "body": "testtest3",
-          "date": "2021-10-14T22:59:52+07:00",
-          "userid": "1633779518242",
-          "id": 7,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "testtest4",
-          "date": "2021-10-14T22:59:46+07:00",
-          "userid": "1633779518242",
-          "id": 6,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "testtest2",
-          "date": "2021-10-14T22:59:38+07:00",
-          "userid": "1633779518242",
-          "id": 5,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "testtest",
-          "date": "2021-10-14T17:09:42+07:00",
-          "userid": "1633779518242",
-          "id": 0,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "testtest2",
-          "date": "2021-10-14T22:01:28+07:00",
-          "userid": "1633779518242",
-          "id": 0,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "testtest2",
-          "date": "2021-10-14T22:01:28+07:00",
-          "userid": "1633779518242",
-          "id": 1,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "testtest2",
-          "date": "2021-10-14T22:01:30+07:00",
-          "userid": "1633779518242",
-          "id": 2,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "testtest2",
-          "date": "2021-10-14T22:47:00+07:00",
-          "userid": "1633779518242",
-          "id": 3,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        },
-        {
-          "body": "testtest2",
-          "date": "2021-10-14T22:50:34+07:00",
-          "userid": "1633779518242",
-          "id": 4,
-          "totallike": 0,
-          "dislike": 0,
-          "like": 0,
-          "likelist": [],
-          "dislikelist": [],
-          "status": 0
-        }
-      ],
-      "title": "hi",
-      "body": "hello",
-      "status": 99
-    }
-  ]
-}
->>>>>>> 3443c9db877aa128bf273d42a73e225729d46b16
->>>>>>> 0b3a81cc4ca224ded7e411c97040ddb17700fcfe
->>>>>>> 024415b1bda8c23fda278bd749342319e3fdf35f
->>>>>>> 190c53e8cab2a82a4bcf1aa64febb54fc6ecaeb2
