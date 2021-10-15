@@ -30,14 +30,16 @@ const userRoutes = (app, fs) => {
     };
 
     // READ
-    app.get('/users', (req, res) => {
-        fs.readFile(dataPath, 'utf8', (err, data) => {
-            if (err) {
-                throw err;
+    app.get('/users/:id', (req, res) => {
+        var userdata = require('../../data/users.json');
+        for (var key in userdata) {
+            if (key == req.params.id) {
+                res.status(231).send(userdata[key].username);
+                return;
             }
-
-            res.send(JSON.parse(data));
-        });
+        }
+        res.status(435).send('wrong token');
+        return;
     });
 
     // CREATE
