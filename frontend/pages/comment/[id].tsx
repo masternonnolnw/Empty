@@ -279,47 +279,102 @@ export default function Comments() {
             {/* =========================== End Body ======================== */}
           </Flex>
           {/* =========================== End Post ======================== */}
-          <Flex w="70%" m="7" alignSelf="center" flexDir="column">
-            <form onSubmit={handleSubmit}>
-              <FormControl id="Body" isRequired>
-                <Textarea
-                  value={body}
-                  onChange={handleChangeBody}
-                  isDisabled={commentData.status == 99}
-                  placeholder="Body"
-                  size="lg"
-                  overflowY="auto"
-                  padding="2"
-                  css={{
-                    "&::-webkit-scrollbar": {
-                      width: "5px",
-                    },
-                    "&::-webkit-scrollbar-track": {
-                      width: "5px",
-                    },
-                    "&::-webkit-scrollbar-thumb": {
-                      background: "#C9C9C9",
-                      borderRadius: "24px",
-                    },
-                  }}
-                />
-                <Button
-                  type="submit"
-                  alignSelf="center"
-                  mt="3"
+          {commentData.status != 99 ? (
+            <Flex w="70%" m="7" alignSelf="center" flexDir="column">
+              <form onSubmit={handleSubmit}>
+                <FormControl id="Body" isRequired>
+                  <Textarea
+                    value={body}
+                    onChange={handleChangeBody}
+                    isDisabled={commentData.status == 99}
+                    placeholder="Body"
+                    size="lg"
+                    overflowY="auto"
+                    padding="2"
+                    css={{
+                      "&::-webkit-scrollbar": {
+                        width: "5px",
+                      },
+                      "&::-webkit-scrollbar-track": {
+                        width: "5px",
+                      },
+                      "&::-webkit-scrollbar-thumb": {
+                        background: "#C9C9C9",
+                        borderRadius: "24px",
+                      },
+                    }}
+                  />
+                  <Button
+                    type="submit"
+                    alignSelf="center"
+                    mt="3"
+                    _focus={{
+                      outline: "none",
+                    }}
+                    _active={{
+                      bg: "none",
+                    }}
+                  >
+                    comment
+                  </Button>
+                </FormControl>
+              </form>
+            </Flex>
+          ) : (
+            ""
+          )}
+          {commentData.status == 99 ? (
+            <Flex
+              p={5}
+              shadow="md"
+              borderWidth="1px"
+              borderRadius="xl"
+              w="95%"
+              mt="5"
+              alignItems="center"
+              mb="6"
+            >
+              <Text>Please</Text>
+              <Button
+                margin="3"
+                size="md"
+                _focus={{
+                  outline: "none",
+                }}
+                onClick={() => (window.location.href = "/login")}
+              >
+                <Link
+                  href="/login"
                   _focus={{
                     outline: "none",
                   }}
-                  _active={{
-                    bg: "none",
-                  }}
-                  isDisabled={commentData.status == 99}
                 >
-                  comment
-                </Button>
-              </FormControl>
-            </form>
-          </Flex>
+                  Login
+                </Link>
+              </Button>
+              <Text>or</Text>
+              <Button
+                margin="3"
+                size="md"
+                _focus={{
+                  outline: "none",
+                }}
+                onClick={() => (window.location.href = "/register")}
+              >
+                <Link
+                  href="/register"
+                  _focus={{
+                    outline: "none",
+                  }}
+                >
+                  Sign up
+                </Link>
+              </Button>
+              <Text> to post.</Text>
+            </Flex>
+          ) : (
+            ""
+          )}
           {commentData.comment.map((comment) => (
             <>
               <CommentForm
