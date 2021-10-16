@@ -27,7 +27,13 @@ const commentRoutes = (app, fs) => {
                 for (var key2 in postdata.data[key].comment) {
                     tools.getStatus(postdata.data[key].comment[key2], userid, userdata);
                 }
-
+                postdata.data[key].comment.sort((x,y) => parseInt(y.totallike) - parseInt(x.totallike));
+                fs.writeFile('./data/post.json', JSON.stringify(postdata, null, '\t'), (err) => {
+                    if (err) {
+                        res.status(442).send("error when writing");
+                        return;
+                    }
+                }); 
                 res.status(213).send(postdata.data[key]);
                 return;
             }
