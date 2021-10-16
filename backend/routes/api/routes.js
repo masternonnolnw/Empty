@@ -36,7 +36,7 @@ const appRouter = (app, fs) => {
       }
     }
     
-    //if (!login_success) res.status(401).send("Wrong username or passsword");
+    if (!login_success) res.status(401).send("Wrong username or passsword");
   });
 
   // // other routes
