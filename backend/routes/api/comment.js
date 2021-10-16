@@ -67,12 +67,13 @@ const commentRoutes = (app, fs) => {
             tools.getStatus(postdata.data[idx_post].comment[key], userid, userdata);
         }
 
-        var len = postdata.data[idx_post].comment.length;
+        postdata.data[idx_post].comment.sort((x,y) => parseInt(y.totallike) - parseInt(x.totallike));
+/*         var len = postdata.data[idx_post].comment.length;
         var temp = postdata.data[idx_post].comment[len-1];
         for (var i = len - 1; i > 0; i--) {
             postdata.data[idx_post].comment[i] = postdata.data[idx_post].comment[i-1];
         }
-        postdata.data[idx_post].comment[0] = temp;
+        postdata.data[idx_post].comment[0] = temp; */
 
         if (foundPost) {
             fs.writeFile('./data/post.json', JSON.stringify(postdata, null, '\t'), (err) => {
