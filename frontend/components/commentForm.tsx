@@ -20,7 +20,7 @@ export default function commentForm({ comment, postId, upLike, downLike }) {
         flexDir="row"
         bgColor={bgPost}
       >
-        <Flex flexDir="column" alignItems="center" alignSelf="center" p="2">
+        <Flex flexDir="column" alignItems="center" alignSelf="flex-start" p="2">
           <IconButton
             variant="ghost"
             colorScheme={comment.status == 1 ? "green" : "white"}
