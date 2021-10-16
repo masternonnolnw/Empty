@@ -159,12 +159,14 @@ const postRoutes = (app, fs) => {
       post_real['lastId'] = lastuserID;
       post_real['data'] = post_list;
 
-      fs.writeFile('./data/post.json', JSON.stringify(post_real, null, '\t'), (error) => {
-        if (error) {
-          res.status(456).send('error when writing');
-          return;
-        }
-      });
+      if (JSON.stringify(post_real) != "{}") {
+        fs.writeFile('./data/post.json', JSON.stringify(post_real, null, '\t'), (error) => {
+          if (error) {
+            res.status(456).send('error when writing');
+            return;
+          }
+        });
+      }
 
       res.send(post_list_new);
     });
@@ -205,14 +207,14 @@ const postRoutes = (app, fs) => {
       }
 
      // console.log(postjson);
-
-      fs.writeFile('./data/post.json', JSON.stringify(postjson, null, '\t'), (error) => {
-        if (error) {
-          res.status(429).send('error when writing');
-          return;
-        }
-      });
-
+      if (JSON.stringify(post_real) != "{}") {
+        fs.writeFile('./data/post.json', JSON.stringify(postjson, null, '\t'), (error) => {
+          if (error) {
+            res.status(429).send('error when writing');
+            return;
+          }
+        });
+      }
       //console.log(postjson);
       for (var key in postjson.data) {
         if (postjson.data[key].likelist.includes(userid)) postjson.data[key]['status'] = "1";
@@ -262,15 +264,15 @@ const postRoutes = (app, fs) => {
         else if(post.data[key].dislikelist.includes(userid)) post.data[key]['status'] = "-1";
         else post.data[key]['status'] = 0;
       }
-
-      writeFile(JSON.stringify(post, null, '\t'), (error) => {
-        if (error) {
-          res.status(423).send('error when writing');
-          return;
-        }
-        res.status(201).send(`Success`);
-      });
-
+      if (JSON.stringify(post_real) != "{}") {
+        writeFile(JSON.stringify(post, null, '\t'), (error) => {
+          if (error) {
+            res.status(423).send('error when writing');
+            return;
+          }
+          res.status(201).send(`Success`);
+        });
+      }
       res.status(206).send(post.data);
     }, true);
   });
