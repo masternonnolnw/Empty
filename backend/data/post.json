@@ -36,7 +36,7 @@
 			],
 			"title": "eiei",
 			"body": "eiei",
-			"status": 0
+			"status": 99
 		},
 		{
 			"id": 3,
@@ -50,7 +50,7 @@
 			"comment": [],
 			"title": "hahaha",
 			"body": "lollollol",
-			"status": 0
+			"status": 99
 		},
 		{
 			"id": 2,
@@ -93,7 +93,7 @@
 			],
 			"title": "hi",
 			"body": "hello",
-			"status": 0
+			"status": 99
 		},
 		{
 			"id": 1,
