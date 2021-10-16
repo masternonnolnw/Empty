@@ -207,7 +207,7 @@ const postRoutes = (app, fs) => {
       }
 
      // console.log(postjson);
-      if (JSON.stringify(post_real) != "{}") {
+      if (JSON.stringify(postjson) != "{}") {
         fs.writeFile('./data/post.json', JSON.stringify(postjson, null, '\t'), (error) => {
           if (error) {
             res.status(429).send('error when writing');
@@ -264,7 +264,7 @@ const postRoutes = (app, fs) => {
         else if(post.data[key].dislikelist.includes(userid)) post.data[key]['status'] = "-1";
         else post.data[key]['status'] = 0;
       }
-      if (JSON.stringify(post_real) != "{}") {
+      if (JSON.stringify(post) != "{}") {
         writeFile(JSON.stringify(post, null, '\t'), (error) => {
           if (error) {
             res.status(423).send('error when writing');
