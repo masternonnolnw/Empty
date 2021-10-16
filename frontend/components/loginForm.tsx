@@ -23,7 +23,7 @@ export default function LoginForm() {
     setIsLoading(true);
     try {
       const baseURL = process.env.NEXT_PUBLIC_API_URL;
-      console.log("1");
+      console.log(`${baseURL}/login`);
       const token = await axios.post(`${baseURL}/login`, {
         username,
         password,

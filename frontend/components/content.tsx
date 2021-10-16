@@ -196,15 +196,15 @@ export default function Content() {
     /*======================================================================*/
   }
 
-  const bgNavbar = useColorModeValue("#F4B4C4", "red.200");
+  const bgNavbar = useColorModeValue("#F4B4C4", "");
   /*
   E5B6C2
   C3A1C1
   F4B4C4
   */
-  const bgContent = useColorModeValue("#E4DBDB", "red.200");
-  const bgPost = useColorModeValue("#EFEFEF", "gray.200");
-  const postButton = useColorModeValue("#464F64", "red.200");
+  const bgContent = useColorModeValue("#E4DBDB", "");
+  const bgPost = useColorModeValue("#EFEFEF", "#1F2532");
+  const postButton = useColorModeValue("#464F64", "#394869");
   /*
   A299A0
   464F64
@@ -216,10 +216,10 @@ export default function Content() {
   70636D
   */
   const inactiveButton = useColorModeValue("#A299A0", "104B3B");
-  const fontButton = useColorModeValue("#FFFFFF", "#000000");
+  const fontButton = useColorModeValue("#FFFFFF", "#FFFFFF");
 
-  const fontTagPost = useColorModeValue("#FFFFFF", "#000000");
-  const tagPost = useColorModeValue("#E5B6C2", "#000000");
+  const fontTagPost = useColorModeValue("#FFFFFF", "#FFFFFF");
+  const tagPost = useColorModeValue("#E5B6C2", "#7D569D");
   //A798A3
 
   if (!post) {
