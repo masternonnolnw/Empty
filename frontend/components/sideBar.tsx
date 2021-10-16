@@ -186,11 +186,11 @@ export default function sidebar({
             textAlign="center"
           >
             {/* day week month year alltime */}
-            <option value="topday">day</option>
-            <option value="topweek">week</option>
-            <option value="topmonth">month</option>
-            <option value="topyear">year</option>
-            <option value="topalltime">alltime</option>
+            <option value="topday">Day</option>
+            <option value="topweek">Week</option>
+            <option value="topmonth">Month</option>
+            <option value="topyear">Year</option>
+            <option value="topalltime">Alltime</option>
           </Select>
         ) : (
           ""

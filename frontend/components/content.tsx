@@ -330,10 +330,10 @@ export default function Content() {
                           outline: "none",
                         }}
                       >
-                        <option value="study">Study</option>
-                        <option value="food">Food</option>
-                        <option value="facilities">Facilities</option>
-                        <option value="people">People</option>
+                        <option value="Study">Study</option>
+                        <option value="Food">Food</option>
+                        <option value="Facilities">Facilities</option>
+                        <option value="People">People</option>
                       </Select>
                     </FormControl>
                   </Flex>
@@ -544,11 +544,11 @@ export default function Content() {
                     textAlign="center"
                   >
                     {/* day week month year alltime */}
-                    <option value="topday">day</option>
-                    <option value="topweek">week</option>
-                    <option value="topmonth">month</option>
-                    <option value="topyear">year</option>
-                    <option value="topalltime">alltime</option>
+                    <option value="topday">Day</option>
+                    <option value="topweek">Week</option>
+                    <option value="topmonth">Month</option>
+                    <option value="topyear">Year</option>
+                    <option value="topalltime">Alltime</option>
                   </Select>
                 ) : (
                   ""
@@ -683,7 +683,8 @@ export default function Content() {
                         bg: "none",
                       }}
                     >
-                      Comment
+                      {pos.comment.length}{" "}
+                      {pos.comment.length > 1 ? "Comments" : "Comment"}
                     </Link>
                   </Flex>
                   {/* =========================== End Body ======================== */}
