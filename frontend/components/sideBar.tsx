@@ -36,9 +36,9 @@ export default function sidebar({
   70636D
   */
   const inactiveButton = useColorModeValue("", "");
-  const fontButton = useColorModeValue("#FFFFFF", "#000000");
+  const fontButton = useColorModeValue("#FFFFFF", "#FFFFFF");
 
-  const inFontButton = useColorModeValue("#111111", "#000000");
+  const inFontButton = useColorModeValue("#111111", "#FFFFFF");
 
   const fontTagPost = useColorModeValue("#FFFFFF", "#000000");
   const tagPost = useColorModeValue("#F4B4C4", "#000000");

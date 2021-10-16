@@ -222,6 +222,9 @@ export default function Content() {
   const tagPost = useColorModeValue("#E5B6C2", "#7D569D");
   //A798A3
 
+  const borderBox = useColorModeValue("blackAlpha.300", "#7D569D");
+  //blackAlpha.300
+
   if (!post) {
     return (
       <Flex
@@ -300,7 +303,6 @@ export default function Content() {
               <Box
                 p={5}
                 shadow="md"
-                borderWidth="1px"
                 borderRadius="2xl"
                 w="100%"
                 bgColor={bgPost}
@@ -318,7 +320,7 @@ export default function Content() {
                     <FormControl id="Tiltle" isRequired>
                       <Select
                         borderWidth="1px"
-                        borderColor="blackAlpha.400"
+                        borderColor={borderBox}
                         w="100%"
                         placeholder="Title"
                         size="lg"
@@ -339,7 +341,7 @@ export default function Content() {
                   </Flex>
                   <FormControl id="Body" isRequired>
                     <Textarea
-                      borderColor="blackAlpha.300"
+                      borderColor={borderBox}
                       value={body}
                       onChange={handleChangeBody}
                       isDisabled={post[0].status == 99}
@@ -399,7 +401,6 @@ export default function Content() {
               <Flex
                 p={5}
                 shadow="md"
-                borderWidth="1px"
                 borderRadius="xl"
                 w="95%"
                 mt="5"
@@ -454,7 +455,6 @@ export default function Content() {
               p={5}
               marginTop="5"
               shadow="md"
-              borderWidth="1px"
               borderRadius="xl"
               w="80%"
               bgColor={bgPost}
@@ -568,7 +568,6 @@ export default function Content() {
                 <Flex
                   p={5}
                   shadow="md"
-                  borderWidth="1px"
                   borderRadius="sm"
                   w="100%"
                   bgColor={bgPost}
