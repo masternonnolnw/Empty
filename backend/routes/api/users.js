@@ -38,7 +38,7 @@ const userRoutes = (app, fs) => {
                 return;
             }
         }
-        res.status(232).send(null);
+        res.status(232).send("-1");
         return;
     });
 
