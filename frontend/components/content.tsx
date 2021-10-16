@@ -5,7 +5,9 @@ import { FormControl } from "@chakra-ui/form-control";
 import {
   ArrowDownIcon,
   ArrowUpIcon,
+  ChatIcon,
   CheckIcon,
+  TimeIcon,
   WarningTwoIcon,
 } from "@chakra-ui/icons";
 import { Input } from "@chakra-ui/input";
@@ -28,7 +30,8 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import ThemeToggler from "../components/ThemeToggler";
 import SideBar from "../components/sideBar";
-
+import { AiFillFire, AiOutlineFire } from "react-icons/ai";
+import { IoTrophyOutline, IoTrophySharp } from "react-icons/io5";
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 // "https://jsonplaceholder.typicode.com/posts"
 export default function Content() {
@@ -44,7 +47,7 @@ export default function Content() {
   const handleSetTopViewtype = (event) => typeLoad(event.target.value);
 
   const [viewType, setViewType] = useState("hot");
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState("");
 
   const username1 = "MaStEr";
   var token = "0";
@@ -193,6 +196,32 @@ export default function Content() {
     /*======================================================================*/
   }
 
+  const bgNavbar = useColorModeValue("#F4B4C4", "red.200");
+  /*
+  E5B6C2
+  C3A1C1
+  F4B4C4
+  */
+  const bgContent = useColorModeValue("#E4DBDB", "red.200");
+  const bgPost = useColorModeValue("#EFEFEF", "gray.200");
+  const postButton = useColorModeValue("#464F64", "red.200");
+  /*
+  A299A0
+  464F64
+  */
+  const activeButton = useColorModeValue("#544B52", "#759089");
+  /*
+  7F7573
+  544B52
+  70636D
+  */
+  const inactiveButton = useColorModeValue("#A299A0", "104B3B");
+  const fontButton = useColorModeValue("#FFFFFF", "#000000");
+
+  const fontTagPost = useColorModeValue("#FFFFFF", "#000000");
+  const tagPost = useColorModeValue("#E5B6C2", "#000000");
+  //A798A3
+
   if (!post) {
     return (
       <Flex
@@ -207,8 +236,8 @@ export default function Content() {
 
   return (
     <>
-      <Flex h="10vh" shadow="md">
-        {username == null ? (
+      <Flex h="10vh" shadow="md" bgColor={bgNavbar}>
+        {username.length < 1 ? (
           <Link
             href="/login"
             ml="7"
@@ -227,14 +256,16 @@ export default function Content() {
               marginRight="4"
               size="sm"
             />
-            <Text>{username}</Text>
+            <Text color={fontButton} fontSize="lg">
+              {username}
+            </Text>
           </Flex>
         )}
 
         <Spacer />
         <ThemeToggler />
       </Flex>
-      <Flex>
+      <Flex bgColor={bgContent}>
         <Flex w="17%" h="90vh">
           <SideBar
             handleSetTopViewtype={handleSetTopViewtype}
@@ -272,6 +303,7 @@ export default function Content() {
                 borderWidth="1px"
                 borderRadius="2xl"
                 w="100%"
+                bgColor={bgPost}
               >
                 <form onSubmit={handleSubmit}>
                   <Flex marginBottom="8">
@@ -285,6 +317,8 @@ export default function Content() {
                     </Text>
                     <FormControl id="Tiltle" isRequired>
                       <Select
+                        borderWidth="1px"
+                        borderColor="blackAlpha.400"
                         w="100%"
                         placeholder="Title"
                         size="lg"
@@ -305,6 +339,7 @@ export default function Content() {
                   </Flex>
                   <FormControl id="Body" isRequired>
                     <Textarea
+                      borderColor="blackAlpha.300"
                       value={body}
                       onChange={handleChangeBody}
                       isDisabled={post[0].status == 99}
@@ -336,23 +371,25 @@ export default function Content() {
                 onChange={handleChangeBody}
               /> */}
                   </FormControl>
-
-                  <Button
-                    colorScheme="blue"
-                    aria-label="Post"
-                    marginLeft="10"
-                    type="submit"
-                    mt="15px"
-                    _focus={{
-                      outline: "none",
-                    }}
-                    _active={{
-                      bg: "none",
-                    }}
-                    isDisabled={post[0].status == 99}
-                  >
-                    <Text>post</Text>
-                  </Button>
+                  <Flex>
+                    <Spacer />
+                    <Button
+                      // colorScheme="blue"
+                      bgColor={postButton}
+                      aria-label="Post"
+                      type="submit"
+                      mt="15px"
+                      _focus={{
+                        outline: "none",
+                      }}
+                      _active={{
+                        bg: "none",
+                      }}
+                      isDisabled={post[0].status == 99}
+                    >
+                      <Text color={fontButton}>Post</Text>
+                    </Button>
+                  </Flex>
                 </form>
               </Box>
             </Flex>
@@ -367,6 +404,7 @@ export default function Content() {
                 w="95%"
                 mt="5"
                 alignItems="center"
+                bgColor={bgPost}
               >
                 <Text>Please</Text>
                 <Button
@@ -419,6 +457,7 @@ export default function Content() {
               borderWidth="1px"
               borderRadius="xl"
               w="80%"
+              bgColor={bgPost}
             >
               <Flex alignItems="center">
                 <Button
@@ -432,10 +471,17 @@ export default function Content() {
                     typeLoad("hot");
                     setIsTop(false);
                   }}
-                  colorScheme={viewType == "hot" ? "teal" : "gray"}
+                  bgColor={viewType == "hot" ? activeButton : inactiveButton}
+                  // bgColor={viewType == "hot" ? "blue" : "red"}
                 >
-                  <WarningTwoIcon />
-                  <Text marginLeft="2">Hot</Text>
+                  {viewType == "hot" ? (
+                    <AiFillFire color={fontButton} />
+                  ) : (
+                    <AiOutlineFire color={fontButton} />
+                  )}
+                  <Text marginLeft="2" color={fontButton}>
+                    Hot
+                  </Text>
                 </Button>
                 <Button
                   _focus={{
@@ -448,11 +494,14 @@ export default function Content() {
                     typeLoad("new");
                     setIsTop(false);
                   }}
-                  colorScheme={viewType == "new" ? "teal" : "gray"}
+                  // colorScheme={viewType == "new" ? "teal" : "gray"}
+                  bgColor={viewType == "new" ? activeButton : inactiveButton}
                   ml="10px"
                 >
-                  <WarningTwoIcon />
-                  <Text marginLeft="2">New</Text>
+                  <TimeIcon color={fontButton} />
+                  <Text marginLeft="2" color={fontButton}>
+                    New
+                  </Text>
                 </Button>
                 <Button
                   _focus={{
@@ -465,11 +514,18 @@ export default function Content() {
                     typeLoad("topday");
                     setIsTop(true);
                   }}
-                  colorScheme={viewType.length > 4 ? "teal" : "gray"}
+                  // colorScheme={viewType.length > 4 ? "teal" : "gray"}
+                  bgColor={viewType.length > 4 ? activeButton : inactiveButton}
                   ml="10px"
                 >
-                  <WarningTwoIcon />
-                  <Text marginLeft="2">Top</Text>
+                  {viewType.length > 4 ? (
+                    <IoTrophySharp color={fontButton} />
+                  ) : (
+                    <IoTrophyOutline color={fontButton} />
+                  )}
+                  <Text marginLeft="2" color={fontButton}>
+                    Top
+                  </Text>
                 </Button>
                 {isTop ? (
                   <Select
@@ -513,8 +569,9 @@ export default function Content() {
                   p={5}
                   shadow="md"
                   borderWidth="1px"
-                  borderRadius="md"
+                  borderRadius="sm"
                   w="100%"
+                  bgColor={bgPost}
                 >
                   {/* =========================== Heading ======================== */}
                   <Flex
@@ -574,7 +631,7 @@ export default function Content() {
                         size="md"
                       />
                       <Text marginRight="5" alignSelf="center">
-                        {username}
+                        {username1}
                       </Text>
                       <Text marginRight="5" alignSelf="center">
                         {moment(moment()).diff(pos.date, "minutes") == 0
@@ -592,7 +649,9 @@ export default function Content() {
                     {/* =========================== End Heading ======================== */}
                     {/* =========================== Body ======================== */}
                     <Flex flexDir="column">
-                      <Tag w="max">{pos.title}</Tag>
+                      <Tag w="max" color={fontTagPost} bgColor={tagPost}>
+                        {pos.title}
+                      </Tag>
                       <Text
                         fontSize="lg"
                         paddingLeft="10"

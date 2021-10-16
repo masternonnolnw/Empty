@@ -2,6 +2,7 @@ import { IconButton } from "@chakra-ui/button";
 import { useColorMode } from "@chakra-ui/color-mode";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Box } from "@chakra-ui/layout";
+import { FiMoon } from "react-icons/fi";
 
 export default function ThemeToggler() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -19,7 +20,7 @@ export default function ThemeToggler() {
           bg: "none",
         }}
         aria-label="Color Mode"
-        icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+        icon={colorMode === "light" ? <FiMoon /> : <SunIcon />}
         onClick={toggleColorMode}
         variant="ghost"
       />

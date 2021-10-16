@@ -1,5 +1,6 @@
 import { Avatar } from "@chakra-ui/avatar";
 import { Button, IconButton } from "@chakra-ui/button";
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import { FormControl } from "@chakra-ui/form-control";
 import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import { Input } from "@chakra-ui/input";
@@ -19,6 +20,7 @@ export default function Comments() {
   const [commentData, setCommentData] = useState(null);
   const [body, setBody] = useState(null);
   const handleChangeBody = (event) => setBody(event.target.value);
+  const [username, setUsername] = useState("");
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
@@ -38,9 +40,25 @@ export default function Comments() {
     }
   };
   var token = "0";
-  var username = "MaStEr";
+  useEffect(() => {
+    try {
+      console.log(token);
+      console.log(`${baseURL}/users/${token}`);
+      axios.get(`${baseURL}/users/${token}`).then((response) => {
+        setUsername(response.data);
+        console.log(response.data);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }, [token]);
+  var username1 = "MaStEr";
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token") as string;
+  }
+
+  if (token == "") {
+    token = "0";
   }
   async function upLike(status, posId, commentId) {
     var curStatus = 0;
@@ -102,6 +120,32 @@ export default function Comments() {
       });
     }
   }, [postId]);
+  const bgNavbar = useColorModeValue("#F4B4C4", "red.200");
+  /*
+  E5B6C2
+  C3A1C1
+  F4B4C4
+  */
+  const bgContent = useColorModeValue("#E4DBDB", "red.200");
+  const bgPost = useColorModeValue("#EFEFEF", "gray.200");
+  const postButton = useColorModeValue("#464F64", "red.200");
+  /*
+  A299A0
+  464F64
+  */
+  const activeButton = useColorModeValue("#544B52", "#759089");
+  /*
+  7F7573
+  544B52
+  70636D
+  */
+  const inactiveButton = useColorModeValue("#A299A0", "104B3B");
+  const fontButton = useColorModeValue("#FFFFFF", "#000000");
+
+  const fontTagPost = useColorModeValue("#FFFFFF", "#000000");
+  const tagPost = useColorModeValue("#E5B6C2", "#000000");
+
+  //A798A3
   if (!commentData) {
     return (
       <Flex
@@ -115,22 +159,41 @@ export default function Comments() {
   }
   return (
     <>
-      <Flex h="10vh" shadow="md">
-        <Link
-          href="/login"
-          ml="7"
-          mt="5"
-          _focus={{
-            outline: "none",
-          }}
-        >
-          Login
-        </Link>
+      <Flex h="10vh" shadow="md" bgColor={bgNavbar}>
+        {username.length < 1 ? (
+          <Link
+            href="/login"
+            ml="7"
+            mt="5"
+            _focus={{
+              outline: "none",
+            }}
+          >
+            Login
+          </Link>
+        ) : (
+          <Flex flexDir="row" ml="7" alignItems="center">
+            <Avatar
+              name="Dan Abrahmov"
+              src="https://bit.ly/dan-abramov"
+              marginRight="4"
+              size="sm"
+            />
+            <Text
+              marginRight="5"
+              alignSelf="center"
+              color={fontButton}
+              fontSize="lg"
+            >
+              {username}
+            </Text>
+          </Flex>
+        )}
         <Spacer />
         <ThemeToggler />
       </Flex>
 
-      <Flex h="90vh">
+      <Flex h="90vh" bgColor={bgContent}>
         <Flex w="17%" h="90vh"></Flex>
         <Flex
           p="3"
@@ -176,6 +239,7 @@ export default function Comments() {
             h="max"
             mt="8"
             mb="3"
+            bgColor={bgPost}
           >
             {/* =========================== Heading ======================== */}
             <Flex
@@ -236,7 +300,7 @@ export default function Comments() {
                   size="md"
                 />
                 <Text marginRight="5" alignSelf="center">
-                  {username}
+                  {username1}
                 </Text>
                 <Text marginRight="5" alignSelf="center">
                   {moment(moment()).diff(commentData.date, "minutes") == 0
@@ -254,7 +318,9 @@ export default function Comments() {
               {/* =========================== End Heading ======================== */}
               {/* =========================== Body ======================== */}
               <Flex flexDir="column">
-                <Tag w="max">{commentData.title}</Tag>
+                <Tag w="max" bgColor={tagPost} color={fontTagPost}>
+                  {commentData.title}
+                </Tag>
                 <Text
                   fontSize="lg"
                   paddingLeft="10"
@@ -280,10 +346,21 @@ export default function Comments() {
           </Flex>
           {/* =========================== End Post ======================== */}
           {commentData.status != 99 ? (
-            <Flex w="70%" m="7" alignSelf="center" flexDir="column">
+            <Flex
+              w="70%"
+              m="7"
+              alignSelf="center"
+              flexDir="column"
+              bgColor={bgPost}
+              p={5}
+              shadow="md"
+              borderWidth="1px"
+              borderRadius="2xl"
+            >
               <form onSubmit={handleSubmit}>
                 <FormControl id="Body" isRequired>
                   <Textarea
+                    borderColor="blackAlpha.300"
                     value={body}
                     onChange={handleChangeBody}
                     isDisabled={commentData.status == 99}
@@ -314,6 +391,8 @@ export default function Comments() {
                     _active={{
                       bg: "none",
                     }}
+                    bgColor={postButton}
+                    color={fontButton}
                   >
                     comment
                   </Button>
@@ -333,6 +412,7 @@ export default function Comments() {
               mt="5"
               alignItems="center"
               mb="6"
+              bgColor={bgPost}
             >
               <Text>Please</Text>
               <Button
