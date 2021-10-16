@@ -1,4 +1,5 @@
 import { IconButton } from "@chakra-ui/button";
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import { Box, Flex, Link, Spacer, Text } from "@chakra-ui/layout";
 import moment from "moment";
@@ -6,6 +7,8 @@ import moment from "moment";
 export default function commentForm({ comment, postId, upLike, downLike }) {
   console.log(comment);
   // console.log(postId);
+  const bgPost = useColorModeValue("#EFEFEF", "gray.200");
+  //bgColor={bgPost}
   return (
     <>
       <Flex
@@ -15,6 +18,7 @@ export default function commentForm({ comment, postId, upLike, downLike }) {
         borderRadius="sm"
         m="3"
         flexDir="row"
+        bgColor={bgPost}
       >
         <Flex flexDir="column" alignItems="center" alignSelf="center" p="2">
           <IconButton

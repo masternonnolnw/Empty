@@ -1,8 +1,11 @@
 import { Button, IconButton } from "@chakra-ui/button";
-import { HamburgerIcon, WarningTwoIcon } from "@chakra-ui/icons";
+import { useColorModeValue } from "@chakra-ui/color-mode";
+import { HamburgerIcon, TimeIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import { Box, Flex, Text } from "@chakra-ui/layout";
 import { Select } from "@chakra-ui/select";
 import { useState } from "react";
+import { AiFillFire, AiOutlineFire } from "react-icons/ai";
+import { IoTrophyOutline, IoTrophySharp } from "react-icons/io5";
 
 export default function sidebar({
   typeLoad,
@@ -12,14 +15,42 @@ export default function sidebar({
   handleSetTopViewtype,
 }) {
   const [navSize, setNavSize] = useState("small");
+
+  const bgNavbar = useColorModeValue("#F4B4C4", "red.200");
+  /*
+  E5B6C2
+  C3A1C1
+  F4B4C4
+  */
+  const bgContent = useColorModeValue("#E4DBDB", "red.200");
+  const bgPost = useColorModeValue("#EFEFEF", "gray.200");
+  const postButton = useColorModeValue("#464F64", "red.200");
+  /*
+  A299A0
+  464F64
+  */
+  const activeButton = useColorModeValue("#544B52", "#759089");
+  /*
+  7F7573
+  544B52
+  70636D
+  */
+  const inactiveButton = useColorModeValue("", "");
+  const fontButton = useColorModeValue("#FFFFFF", "#000000");
+
+  const inFontButton = useColorModeValue("#111111", "#000000");
+
+  const fontTagPost = useColorModeValue("#FFFFFF", "#000000");
+  const tagPost = useColorModeValue("#F4B4C4", "#000000");
   return (
     <Box
+      bgColor={bgPost}
       pos="sticky"
       left="5"
-      h="50vh"
+      h="230px"
       marginTop="2.5vh"
       boxShadow="0 4px 15px 0 rgba(0, 0, 0, 0.1)"
-      borderRadius={navSize == "small" ? "3px" : "5px"}
+      borderRadius={navSize == "small" ? "15px" : "15px"}
       w={navSize == "small" ? "85px" : "150px"}
       flexDir="column"
       justifyContent="space-between"
@@ -56,10 +87,25 @@ export default function sidebar({
             setIsTop(false);
           }}
           w="80%"
-          colorScheme={viewType == "hot" ? "teal" : "gray"}
+          bgColor={viewType == "hot" ? activeButton : inactiveButton}
         >
-          <WarningTwoIcon />
-          {navSize == "small" ? "" : <Text marginLeft="2">Hot</Text>}
+          {viewType == "hot" ? (
+            <AiFillFire color={viewType == "hot" ? fontButton : inFontButton} />
+          ) : (
+            <AiOutlineFire
+              color={viewType == "hot" ? fontButton : inFontButton}
+            />
+          )}
+          {navSize == "small" ? (
+            ""
+          ) : (
+            <Text
+              marginLeft="2"
+              color={viewType == "hot" ? fontButton : inFontButton}
+            >
+              Hot
+            </Text>
+          )}
         </Button>
         <Button
           bg={viewType == "new" ? "teal" : "none"}
@@ -74,10 +120,19 @@ export default function sidebar({
             setIsTop(false);
           }}
           w="80%"
-          colorScheme={viewType == "new" ? "teal" : "gray"}
+          bgColor={viewType == "new" ? activeButton : inactiveButton}
         >
-          <WarningTwoIcon />
-          {navSize == "small" ? "" : <Text marginLeft="2">New</Text>}
+          <TimeIcon color={viewType == "new" ? fontButton : inFontButton} />
+          {navSize == "small" ? (
+            ""
+          ) : (
+            <Text
+              marginLeft="2"
+              color={viewType == "new" ? fontButton : inFontButton}
+            >
+              New
+            </Text>
+          )}
         </Button>
         <Button
           bg={viewType.length > 4 ? "teal" : "none"}
@@ -91,11 +146,28 @@ export default function sidebar({
             typeLoad("topday");
             setIsTop(true);
           }}
-          colorScheme={viewType.length > 4 ? "teal" : "gray"}
+          bgColor={viewType.length > 4 ? activeButton : inactiveButton}
           w="80%"
         >
-          <WarningTwoIcon />
-          {navSize == "small" ? "" : <Text marginLeft="2">Top</Text>}
+          {viewType.length > 4 ? (
+            <IoTrophySharp
+              color={viewType.length > 4 ? fontButton : inFontButton}
+            />
+          ) : (
+            <IoTrophyOutline
+              color={viewType.length > 4 ? fontButton : inFontButton}
+            />
+          )}
+          {navSize == "small" ? (
+            ""
+          ) : (
+            <Text
+              marginLeft="2"
+              color={viewType.length > 4 ? fontButton : inFontButton}
+            >
+              Top
+            </Text>
+          )}
         </Button>
         {isTop ? (
           <Select

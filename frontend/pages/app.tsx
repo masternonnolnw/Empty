@@ -5,15 +5,19 @@ import {
   IconButton,
   Link,
   ChakraProvider,
+  Button,
 } from "@chakra-ui/react";
 import { Box, Spacer } from "@chakra-ui/layout";
 import MainContent from "../components/content";
 import ThemeToggler from "../components/ThemeToggler";
 import SideBar from "../components/sideBar";
 import { loadGetInitialProps } from "next/dist/shared/lib/utils";
+import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 export default function MyApp() {
   return (
-    <MainContent />
+    <>
+      <MainContent />
+    </>
 
     // <Flex h="100vh" flexDir="column" overflow="hidden" w="100%">
     //   {/* Body */}
