@@ -11,7 +11,7 @@
 				"1634398166579"
 			],
 			"dislikelist": [],
-			"lastcommentid": 1,
+			"lastcommentid": 2,
 			"comment": [
 				{
 					"body": "asd",
@@ -24,6 +24,20 @@
 					"likelist": [],
 					"dislikelist": [],
 					"status": 0
+				},
+				{
+					"body": "asddd",
+					"date": "2021-10-17T00:17:50+07:00",
+					"userid": "1634033397427",
+					"id": 1,
+					"totallike": -1,
+					"dislike": 1,
+					"like": 0,
+					"likelist": [],
+					"dislikelist": [
+						"1634033397427"
+					],
+					"status": -1
 				}
 			],
 			"title": "study",
@@ -181,27 +195,16 @@
 			"lastcommentid": 3,
 			"comment": [
 				{
-					"body": "asdsadsds",
-					"date": "2021-10-16T22:47:50+07:00",
-					"userid": "1634398166579",
-					"id": 2,
-					"totallike": 0,
-					"dislike": 0,
-					"like": 0,
-					"likelist": [],
-					"dislikelist": [],
-					"status": 0
-				},
-				{
 					"body": "MaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssssMaStEradlas;djk;nvoklvbaioahb['sdggssssssssssssssssssssssssssssssssssssssssssssssssss",
 					"date": "2021-10-16T22:46:30+07:00",
 					"userid": "1634398166579",
 					"id": 1,
-					"totallike": 1,
+					"totallike": 2,
 					"dislike": 0,
-					"like": 1,
+					"like": 2,
 					"likelist": [
-						"1634400128217"
+						"1634400128217",
+						"1634033397427"
 					],
 					"dislikelist": [],
 					"status": 1
@@ -211,12 +214,14 @@
 					"date": "2021-10-15T22:08:19+07:00",
 					"userid": "1633769155834",
 					"id": 0,
-					"totallike": 0,
+					"totallike": 1,
 					"dislike": 0,
-					"like": 0,
-					"likelist": [],
+					"like": 1,
+					"likelist": [
+						"1634033397427"
+					],
 					"dislikelist": [],
-					"status": 0
+					"status": 1
 				},
 				{
 					"body": "testtest",
@@ -241,6 +246,20 @@
 					"likelist": [],
 					"dislikelist": [],
 					"status": 0
+				},
+				{
+					"body": "asdsadsds",
+					"date": "2021-10-16T22:47:50+07:00",
+					"userid": "1634398166579",
+					"id": 2,
+					"totallike": -1,
+					"dislike": 1,
+					"like": 0,
+					"likelist": [],
+					"dislikelist": [
+						"1634033397427"
+					],
+					"status": -1
 				}
 			],
 			"title": "eiei",

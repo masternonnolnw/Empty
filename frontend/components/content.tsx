@@ -222,7 +222,7 @@ export default function Content() {
   const tagPost = useColorModeValue("#E5B6C2", "#7D569D");
   //A798A3
 
-  const borderBox = useColorModeValue("blackAlpha.300", "#7D569D");
+  const borderBox = useColorModeValue("blackAlpha.300", "gray.600");
   //blackAlpha.300
 
   if (!post) {
