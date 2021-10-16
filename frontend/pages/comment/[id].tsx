@@ -381,21 +381,24 @@ export default function Comments() {
                       },
                     }}
                   />
-                  <Button
-                    type="submit"
-                    alignSelf="center"
-                    mt="3"
-                    _focus={{
-                      outline: "none",
-                    }}
-                    _active={{
-                      bg: "none",
-                    }}
-                    bgColor={postButton}
-                    color={fontButton}
-                  >
-                    comment
-                  </Button>
+                  <Flex>
+                    <Spacer />
+                    <Button
+                      type="submit"
+                      alignSelf="flex-end"
+                      mt="3"
+                      _focus={{
+                        outline: "none",
+                      }}
+                      _active={{
+                        bg: "none",
+                      }}
+                      bgColor={postButton}
+                      color={fontButton}
+                    >
+                      comment
+                    </Button>
+                  </Flex>
                 </FormControl>
               </form>
             </Flex>
