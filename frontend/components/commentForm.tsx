@@ -7,7 +7,7 @@ import moment from "moment";
 export default function commentForm({ comment, postId, upLike, downLike }) {
   console.log(comment);
   // console.log(postId);
-  const bgPost = useColorModeValue("#EFEFEF", "gray.200");
+  const bgPost = useColorModeValue("#EFEFEF", "#1F2532");
   //bgColor={bgPost}
   return (
     <>

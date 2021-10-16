@@ -203,6 +203,7 @@ export default function Content() {
   F4B4C4
   */
   const bgContent = useColorModeValue("#E4DBDB", "");
+  //E4DBDB
   const bgPost = useColorModeValue("#EFEFEF", "#1F2532");
   const postButton = useColorModeValue("#464F64", "#394869");
   /*
