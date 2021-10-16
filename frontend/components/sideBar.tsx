@@ -22,8 +22,8 @@ export default function sidebar({
   C3A1C1
   F4B4C4
   */
-  const bgContent = useColorModeValue("#E4DBDB", "red.200");
-  const bgPost = useColorModeValue("#EFEFEF", "gray.200");
+  const bgContent = useColorModeValue("#E4DBDB", "");
+  const bgPost = useColorModeValue("#EFEFEF", "#1F2532");
   const postButton = useColorModeValue("#464F64", "red.200");
   /*
   A299A0
