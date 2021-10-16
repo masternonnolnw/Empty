@@ -23,10 +23,12 @@ export default function LoginForm() {
     setIsLoading(true);
     try {
       const baseURL = process.env.NEXT_PUBLIC_API_URL;
+      console.log("1");
       const token = await axios.post(`${baseURL}/login`, {
         username,
         password,
       });
+      console.log("2");
       if (typeof window !== "undefined") {
         console.log("we are running on the client");
         localStorage.setItem("token", `${token.data}`);
