@@ -270,7 +270,6 @@ const postRoutes = (app, fs) => {
             res.status(423).send('error when writing');
             return;
           }
-          res.status(201).send(`Success`);
         });
       }
       res.status(206).send(post.data);
