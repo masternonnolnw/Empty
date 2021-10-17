@@ -23,7 +23,7 @@
 					"like": 0,
 					"likelist": [],
 					"dislikelist": [],
-					"status": 0
+					"status": 99
 				},
 				{
 					"body": "asddd",
@@ -37,7 +37,7 @@
 					"dislikelist": [
 						"1634033397427"
 					],
-					"status": 0
+					"status": 99
 				}
 			],
 			"title": "study",

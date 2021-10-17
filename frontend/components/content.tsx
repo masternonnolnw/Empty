@@ -59,12 +59,14 @@ export default function Content() {
   }
   useEffect(() => {
     try {
-      console.log(token);
-      console.log(`${baseURL}/users/${token}`);
-      axios.get(`${baseURL}/users/${token}`).then((response) => {
-        setUsername(response.data);
-        console.log(response.data);
-      });
+      if (token != "0" && token != "") {
+        console.log(token);
+        console.log(`${baseURL}/users/${token}`);
+        axios.get(`${baseURL}/users/${token}`).then((response) => {
+          setUsername(response.data);
+          console.log(response.data);
+        });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -241,7 +243,7 @@ export default function Content() {
   return (
     <>
       <Flex h="10vh" shadow="md" bgColor={bgNavbar}>
-        {username.length < 1 ? (
+        {username.length < 1 || username === "-1" ? (
           <Link
             href="/login"
             ml="7"
